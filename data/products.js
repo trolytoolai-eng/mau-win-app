@@ -2273,6 +2273,859 @@ window.APP_DATA = {
     },
     "g": 67094608
    }
+  },
+  {
+   "id": "1738223311574173278",
+   "title": "Áo thun tay dài cotton mịn 2 chiều in số 07",
+   "shop": "DMON Mẹ & Bé",
+   "cat": "Áo thun",
+   "price": 65323,
+   "total": 1965,
+   "days": [
+    0,
+    277,
+    259,
+    205,
+    169,
+    255,
+    187
+   ],
+   "prev": 0,
+   "found": "13/11",
+   "creators": 5,
+   "vids": 24,
+   "ads": "Chưa quét ads (cần quét video riêng)",
+   "insight": "Bán từ 13/11, mới lên. Video bán được 442 đơn (~28.9 triệu). Rating 4.5.",
+   "videos": [
+    {
+     "handle": "meo1605086",
+     "name": "meo1605086",
+     "id": "7706882631425805588",
+     "url": "https://www.tiktok.com/@meo1605086/video/7706882631425805588",
+     "views": 101737,
+     "orders": 228,
+     "date": "2026-11-11",
+     "followers": null,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    },
+    {
+     "handle": "meo1605086",
+     "name": "meo1605086",
+     "id": "7706419228680654100",
+     "url": "https://www.tiktok.com/@meo1605086/video/7706419228680654100",
+     "views": 90160,
+     "orders": 187,
+     "date": "2026-11-10",
+     "followers": null,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    },
+    {
+     "handle": "xuongmaythoitrangcaocap",
+     "name": "xuongmaythoitrangcaocap",
+     "id": "7707137160163511572",
+     "url": "https://www.tiktok.com/@xuongmaythoitrangcaocap/video/7707137160163511572",
+     "views": 11216,
+     "orders": 16,
+     "date": "2026-11-11",
+     "followers": null,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    }
+   ],
+   "img": "https://cdn.tabcut.com/dataservice/media/item/1738223311574173278/17382233115741732780.webp?x-oss-process=image/resize,w_640,h_640/format,jpg/quality,q_85",
+   "videoTotal": 24,
+   "rating": 4.5,
+   "reviews": 82,
+   "growth7": 1.0,
+   "mix": {
+    "v": {
+     "r": 0.3269,
+     "o": 442,
+     "g": 28872766
+    },
+    "l": {
+     "r": 0.0148,
+     "o": 30,
+     "g": 1306460
+    },
+    "c": {
+     "r": 0.6583,
+     "o": 880,
+     "g": 58137470
+    },
+    "g": 88316696
+   }
+  },
+  {
+   "id": "1738372168250655771",
+   "title": "Váy jum kaki trễ vai dài tay dây rút eo váy nữ xinh nhẹ nhàng váy vibe nàng thơ váy vibe tiểu thư váy xinh đi tiệc",
+   "shop": "Mĩm Clothing 203",
+   "cat": "Váy đầm",
+   "price": 273598,
+   "total": 199,
+   "days": [
+    0,
+    0,
+    54,
+    21,
+    21,
+    47,
+    35
+   ],
+   "prev": 21,
+   "found": "04/11",
+   "creators": 16,
+   "vids": 35,
+   "ads": "Chưa quét ads (cần quét video riêng)",
+   "insight": "Đơn 7 ngày tăng x7.5. Video bán được 68 đơn (~18.6 triệu). Rating 5.0.",
+   "videos": [
+    {
+     "handle": "thanhhuyenne26",
+     "name": "thanhhuyenne26",
+     "id": "7706847432025328917",
+     "url": "https://www.tiktok.com/@thanhhuyenne26/video/7706847432025328917",
+     "views": 27554,
+     "orders": 41,
+     "date": "2026-11-11",
+     "followers": null,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    },
+    {
+     "handle": "mayemxinh1",
+     "name": "mayemxinh1",
+     "id": "7706145349773036806",
+     "url": "https://www.tiktok.com/@mayemxinh1/video/7706145349773036806",
+     "views": 29303,
+     "orders": 15,
+     "date": "2026-11-09",
+     "followers": null,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    },
+    {
+     "handle": "mie2k6min",
+     "name": "mie2k6min",
+     "id": "7706743052970315026",
+     "url": "https://www.tiktok.com/@mie2k6min/video/7706743052970315026",
+     "views": 3630,
+     "orders": 6,
+     "date": "2026-11-10",
+     "followers": null,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    }
+   ],
+   "img": "https://cdn.tabcut.com/dataservice/media/item/1738372168250655771/17383721682506557710.webp?x-oss-process=image/resize,w_640,h_640/format,jpg/quality,q_85",
+   "videoTotal": 35,
+   "rating": 5.0,
+   "reviews": 0,
+   "growth7": 7.4762,
+   "mix": {
+    "v": {
+     "r": 0.382,
+     "o": 68,
+     "g": 18604664
+    },
+    "l": {
+     "r": 0,
+     "o": 0,
+     "g": 0
+    },
+    "c": {
+     "r": 0.618,
+     "o": 110,
+     "g": 30095780
+    },
+    "g": 48700444
+   }
+  },
+  {
+   "id": "1738376209569907714",
+   "title": "Đầm Body Ren Tay Nhí Cổ Tàu Cúp Tim Có Mút Dáng Ngắn Dự Tiệc Sang Chảnh CATCHYstore",
+   "shop": "Catchy.Store",
+   "cat": "Đầm",
+   "price": 211200,
+   "total": 225,
+   "days": [
+    0,
+    69,
+    0,
+    0,
+    58,
+    12,
+    33
+   ],
+   "prev": 53,
+   "found": "05/11",
+   "creators": 5,
+   "vids": 17,
+   "ads": "Chưa quét ads (cần quét video riêng)",
+   "insight": "Đơn 7 ngày tăng x2.2. Video bán được 54 đơn (~11.4 triệu). Rating 5.0.",
+   "videos": [
+    {
+     "handle": "myhyn._",
+     "name": "myhyn._",
+     "id": "7706878375507348757",
+     "url": "https://www.tiktok.com/@myhyn._/video/7706878375507348757",
+     "views": 48363,
+     "orders": 29,
+     "date": "2026-11-11",
+     "followers": null,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    },
+    {
+     "handle": "_thuys.ngaan312",
+     "name": "_thuys.ngaan312",
+     "id": "7707316702362471700",
+     "url": "https://www.tiktok.com/@_thuys.ngaan312/video/7707316702362471700",
+     "views": 24335,
+     "orders": 19,
+     "date": "2026-11-12",
+     "followers": null,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    },
+    {
+     "handle": "myhyn._",
+     "name": "myhyn._",
+     "id": "7709099263896063252",
+     "url": "https://www.tiktok.com/@myhyn._/video/7709099263896063252",
+     "views": 1431,
+     "orders": 3,
+     "date": "2026-11-17",
+     "followers": null,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    }
+   ],
+   "img": "https://cdn.tabcut.com/dataservice/media/item/1738376209569907714/17383762095699077140.webp?x-oss-process=image/resize,w_640,h_640/format,jpg/quality,q_85",
+   "videoTotal": 17,
+   "rating": 5.0,
+   "reviews": 0,
+   "growth7": 2.2453,
+   "mix": {
+    "v": {
+     "r": 0.314,
+     "o": 54,
+     "g": 11404800
+    },
+    "l": {
+     "r": 0,
+     "o": 0,
+     "g": 0
+    },
+    "c": {
+     "r": 0.686,
+     "o": 118,
+     "g": 24921600
+    },
+    "g": 36326400
+   }
+  },
+  {
+   "id": "1731429076497827059",
+   "title": "Quần xuông bigsize ,HÌN FASHION với thiết kế trẻ trung ,ống đứng rộng rãi,chất cotton nỉ",
+   "shop": "Hìn Meoo 95",
+   "cat": "Quần nữ",
+   "price": 209792,
+   "total": 344,
+   "days": [
+    0,
+    25,
+    43,
+    37,
+    55,
+    62,
+    91
+   ],
+   "prev": 0,
+   "found": "14/11",
+   "creators": 12,
+   "vids": 12,
+   "ads": "Chưa quét ads (cần quét video riêng)",
+   "insight": "Bán từ 14/11, mới lên. Video bán được 38 đơn (~8.0 triệu). Chưa có rating (cần xem kỹ chất lượng).",
+   "videos": [
+    {
+     "handle": "_diepverse",
+     "name": "_diepverse",
+     "id": "7707845091649522952",
+     "url": "https://www.tiktok.com/@_diepverse/video/7707845091649522952",
+     "views": 32026,
+     "orders": 28,
+     "date": "2026-11-13",
+     "followers": null,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    },
+    {
+     "handle": "thengctran",
+     "name": "thengctran",
+     "id": "7708698636456152326",
+     "url": "https://www.tiktok.com/@thengctran/video/7708698636456152326",
+     "views": 4006,
+     "orders": 8,
+     "date": "2026-11-16",
+     "followers": null,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    },
+    {
+     "handle": "thengctran",
+     "name": "thengctran",
+     "id": "7707267526324948242",
+     "url": "https://www.tiktok.com/@thengctran/video/7707267526324948242",
+     "views": 7553,
+     "orders": 2,
+     "date": "2026-11-12",
+     "followers": null,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    }
+   ],
+   "img": "https://cdn.tabcut.com/dataservice/media/item/1731429076497827059/17314290764978270590.webp?x-oss-process=image/resize,w_640,h_640/format,jpg/quality,q_85",
+   "videoTotal": 12,
+   "rating": null,
+   "reviews": 0,
+   "growth7": 1.0,
+   "mix": {
+    "v": {
+     "r": 0.1214,
+     "o": 38,
+     "g": 7972096
+    },
+    "l": {
+     "r": 0.0927,
+     "o": 29,
+     "g": 6083968
+    },
+    "c": {
+     "r": 0.7859,
+     "o": 246,
+     "g": 51608832
+    },
+    "g": 65664896
+   }
+  },
+  {
+   "id": "1738561505355662765",
+   "title": "_[ 23 ]_Váy Xoè Phối Ren Nhún Body Xoè By CEM",
+   "shop": "By CEM .Design",
+   "cat": "Váy đầm",
+   "price": 212711,
+   "total": 261,
+   "days": [
+    0,
+    0,
+    126,
+    24,
+    13,
+    25,
+    55
+   ],
+   "prev": 0,
+   "found": "15/11",
+   "creators": 12,
+   "vids": 5,
+   "ads": "Chưa quét ads (cần quét video riêng)",
+   "insight": "Bán từ 15/11, mới lên. Video bán được 32 đơn (~6.0 triệu). Chưa có rating (cần xem kỹ chất lượng).",
+   "videos": [
+    {
+     "handle": "lethanhnhan.203",
+     "name": "lethanhnhan.203",
+     "id": "7708339943227067668",
+     "url": "https://www.tiktok.com/@lethanhnhan.203/video/7708339943227067668",
+     "views": 9803,
+     "orders": 26,
+     "date": "2026-11-15",
+     "followers": null,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    },
+    {
+     "handle": "dinhi__",
+     "name": "dinhi__",
+     "id": "7709513642877766933",
+     "url": "https://www.tiktok.com/@dinhi__/video/7709513642877766933",
+     "views": 2136,
+     "orders": 6,
+     "date": "2026-11-18",
+     "followers": null,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    }
+   ],
+   "img": "https://cdn.tabcut.com/dataservice/media/item/1738561505355662765/17385615053556627650.webp?x-oss-process=image/resize,w_640,h_640/format,jpg/quality,q_85",
+   "videoTotal": 5,
+   "rating": null,
+   "reviews": 0,
+   "growth7": 1.0,
+   "mix": {
+    "v": {
+     "r": 0.1152,
+     "o": 32,
+     "g": 5955908
+    },
+    "l": {
+     "r": 0.0453,
+     "o": 12,
+     "g": 2339821
+    },
+    "c": {
+     "r": 0.8395,
+     "o": 199,
+     "g": 43393044
+    },
+    "g": 51688773
+   }
+  },
+  {
+   "id": "1738341688155473201",
+   "title": "(HÀNG QCCC)M165_Set Len Nơ Dây Dệt Vân Hồng Tiểu Thư.",
+   "shop": "Chip Shop Chuyên Sỉ",
+   "cat": "Set bộ",
+   "price": 383070,
+   "total": 236,
+   "days": [
+    3,
+    4,
+    12,
+    26,
+    35,
+    30,
+    64
+   ],
+   "prev": 60,
+   "found": "04/11",
+   "creators": 16,
+   "vids": 15,
+   "ads": "Chưa quét ads (cần quét video riêng)",
+   "insight": "Đơn 7 ngày tăng x1.9. Video bán được 15 đơn (~5.7 triệu). Chưa có rating (cần xem kỹ chất lượng).",
+   "videos": [
+    {
+     "handle": "embebess",
+     "name": "embebess",
+     "id": "7704585843918376213",
+     "url": "https://www.tiktok.com/@embebess/video/7704585843918376213",
+     "views": 23453,
+     "orders": 15,
+     "date": "2026-11-05",
+     "followers": null,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    }
+   ],
+   "img": "https://cdn.tabcut.com/dataservice/media/item/1738341688155473201/17383416881554732010.webp?x-oss-process=image/resize,w_640,h_640/format,jpg/quality,q_85",
+   "videoTotal": 15,
+   "rating": null,
+   "reviews": 0,
+   "growth7": 1.9,
+   "mix": {
+    "v": {
+     "r": 0.0862,
+     "o": 15,
+     "g": 5746050
+    },
+    "l": {
+     "r": 0.2644,
+     "o": 46,
+     "g": 17621220
+    },
+    "c": {
+     "r": 0.6494,
+     "o": 113,
+     "g": 43286910
+    },
+    "g": 66654180
+   }
+  },
+  {
+   "id": "1738369618952423106",
+   "title": "BỘ ĐỒ NỮ ÁO BORIP DẺO PHỐI QUẦN LỤA MANGO  MP2041",
+   "shop": "Xưởng May Kim Phượng-Minh",
+   "cat": "Set bộ",
+   "price": 181780,
+   "total": 359,
+   "days": [
+    52,
+    6,
+    60,
+    17,
+    41,
+    0,
+    40
+   ],
+   "prev": 80,
+   "found": "11/11",
+   "creators": 6,
+   "vids": 18,
+   "ads": "Chưa quét ads (cần quét video riêng)",
+   "insight": "Đơn 7 ngày tăng x1.7. Video bán được 25 đơn (~4.5 triệu). Chưa có rating (cần xem kỹ chất lượng).",
+   "videos": [
+    {
+     "handle": "hongnhungdobo",
+     "name": "hongnhungdobo",
+     "id": "7706094680420748552",
+     "url": "https://www.tiktok.com/@hongnhungdobo/video/7706094680420748552",
+     "views": 19976,
+     "orders": 25,
+     "date": "2026-11-09",
+     "followers": null,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    }
+   ],
+   "img": "https://cdn.tabcut.com/dataservice/media/item/1738369618952423106/17383696189524231060.webp?x-oss-process=image/resize,w_640,h_640/format,jpg/quality,q_85",
+   "videoTotal": 18,
+   "rating": null,
+   "reviews": 0,
+   "growth7": 1.7,
+   "mix": {
+    "v": {
+     "r": 0.1157,
+     "o": 25,
+     "g": 4544500
+    },
+    "l": {
+     "r": 0.037,
+     "o": 8,
+     "g": 1454240
+    },
+    "c": {
+     "r": 0.8473,
+     "o": 183,
+     "g": 33265740
+    },
+    "g": 39264480
+   }
+  },
+  {
+   "id": "1738519057052435845",
+   "title": "[DEAL MỞ BÁN] Đầm Body Nơ 2 Lớp Xoè Nhún Tầng - BY PHENI",
+   "shop": "By Pheni",
+   "cat": "Váy đầm",
+   "price": 230580,
+   "total": 377,
+   "days": [
+    21,
+    78,
+    51,
+    35,
+    51,
+    53,
+    86
+   ],
+   "prev": 0,
+   "found": "14/11",
+   "creators": 15,
+   "vids": 13,
+   "ads": "Chưa quét ads (cần quét video riêng)",
+   "insight": "Bán từ 14/11, mới lên. Video bán được 18 đơn (~4.2 triệu). Chưa có rating (cần xem kỹ chất lượng).",
+   "videos": [
+    {
+     "handle": "dinhi__",
+     "name": "dinhi__",
+     "id": "7709439792529919253",
+     "url": "https://www.tiktok.com/@dinhi__/video/7709439792529919253",
+     "views": 2649,
+     "orders": 7,
+     "date": "2026-11-18",
+     "followers": null,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    },
+    {
+     "handle": "nguyn_ngc_kym",
+     "name": "nguyn_ngc_kym",
+     "id": "7708564377095523605",
+     "url": "https://www.tiktok.com/@nguyn_ngc_kym/video/7708564377095523605",
+     "views": 2163,
+     "orders": 6,
+     "date": "2026-11-15",
+     "followers": null,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    },
+    {
+     "handle": "dinhi__",
+     "name": "dinhi__",
+     "id": "7709514450667277588",
+     "url": "https://www.tiktok.com/@dinhi__/video/7709514450667277588",
+     "views": 939,
+     "orders": 2,
+     "date": "2026-11-19",
+     "followers": null,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    }
+   ],
+   "img": "https://cdn.tabcut.com/dataservice/media/item/1738519057052435845/17385190570524358450.webp?x-oss-process=image/resize,w_640,h_640/format,jpg/quality,q_85",
+   "videoTotal": 13,
+   "rating": null,
+   "reviews": 0,
+   "growth7": 1.0,
+   "mix": {
+    "v": {
+     "r": 0.048,
+     "o": 18,
+     "g": 4150440
+    },
+    "l": {
+     "r": 0.0507,
+     "o": 19,
+     "g": 4381020
+    },
+    "c": {
+     "r": 0.9013,
+     "o": 338,
+     "g": 77936040
+    },
+    "g": 86467500
+   }
+  },
+  {
+   "id": "1738516970244900544",
+   "title": "(DEAL MỞ BÁN) Séc bộ dài tay,chất vải lụa mango,quần có túi 2size 40-80kg !",
+   "shop": "Nguyễn vy hiền",
+   "cat": "Set bộ",
+   "price": 89496,
+   "total": 695,
+   "days": [
+    129,
+    0,
+    0,
+    305,
+    104,
+    0,
+    112
+   ],
+   "prev": 0,
+   "found": "13/11",
+   "creators": 4,
+   "vids": 8,
+   "ads": "Chưa quét ads (cần quét video riêng)",
+   "insight": "Bán từ 13/11, mới lên. Video bán được 42 đơn (~3.8 triệu). Chưa có rating (cần xem kỹ chất lượng).",
+   "videos": [
+    {
+     "handle": "khenhem220423",
+     "name": "khenhem220423",
+     "id": "7707978934155087111",
+     "url": "https://www.tiktok.com/@khenhem220423/video/7707978934155087111",
+     "views": 24915,
+     "orders": 42,
+     "date": "2026-11-14",
+     "followers": null,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    }
+   ],
+   "img": "https://cdn.tabcut.com/dataservice/media/item/1738516970244900544/17385169702449005440.webp?x-oss-process=image/resize,w_640,h_640/format,jpg/quality,q_85",
+   "videoTotal": 8,
+   "rating": null,
+   "reviews": 0,
+   "growth7": 1.0,
+   "mix": {
+    "v": {
+     "r": 0.0646,
+     "o": 42,
+     "g": 3758832
+    },
+    "l": {
+     "r": 0.0092,
+     "o": 9,
+     "g": 536976
+    },
+    "c": {
+     "r": 0.9262,
+     "o": 599,
+     "g": 53876592
+    },
+    "g": 58172400
+   }
+  },
+  {
+   "id": "1738363959786571393",
+   "title": "SET Áo Lụa Nữ Kiểu Lệch Vai Kèm Chân Váy Eo Thấp PINKSTORE29 Style Bánh Bèo S128",
+   "shop": "PinkStore29",
+   "cat": "Set bộ",
+   "price": 56350,
+   "total": 181,
+   "days": [
+    0,
+    33,
+    8,
+    29,
+    28,
+    64,
+    0
+   ],
+   "prev": 0,
+   "found": "14/11",
+   "creators": 5,
+   "vids": 6,
+   "ads": "Chưa quét ads (cần quét video riêng)",
+   "insight": "Bán từ 14/11, mới lên. Video bán được 57 đơn (~3.2 triệu). Chưa có rating (cần xem kỹ chất lượng).",
+   "videos": [
+    {
+     "handle": "outfitcungmeow",
+     "name": "outfitcungmeow",
+     "id": "7707487792598699284",
+     "url": "https://www.tiktok.com/@outfitcungmeow/video/7707487792598699284",
+     "views": 65618,
+     "orders": 53,
+     "date": "2026-11-12",
+     "followers": null,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    },
+    {
+     "handle": "outfitcungmeow",
+     "name": "outfitcungmeow",
+     "id": "7708411352729144597",
+     "url": "https://www.tiktok.com/@outfitcungmeow/video/7708411352729144597",
+     "views": 4213,
+     "orders": 4,
+     "date": "2026-11-15",
+     "followers": null,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    }
+   ],
+   "img": "https://cdn.tabcut.com/dataservice/media/item/1738363959786571393/17383639597865713930.webp?x-oss-process=image/resize,w_640,h_640/format,jpg/quality,q_85",
+   "videoTotal": 6,
+   "rating": null,
+   "reviews": 0,
+   "growth7": 1.0,
+   "mix": {
+    "v": {
+     "r": 0.3519,
+     "o": 57,
+     "g": 3211950
+    },
+    "l": {
+     "r": 0.0123,
+     "o": 9,
+     "g": 112700
+    },
+    "c": {
+     "r": 0.6358,
+     "o": 96,
+     "g": 5804050
+    },
+    "g": 9128700
+   }
+  },
+  {
+   "id": "1738345318704973115",
+   "title": "SAD008 Set áo cổ vuông tay phồng chấm bi LƯNG CHUN tôn dánh cùng chân váy dài thành lịch NyNy Boutique",
+   "shop": "NyNy Boutique Sg",
+   "cat": "Set bộ",
+   "price": 259000,
+   "total": 550,
+   "days": [
+    65,
+    51,
+    96,
+    90,
+    61,
+    52,
+    11
+   ],
+   "prev": 92,
+   "found": "03/11",
+   "creators": 4,
+   "vids": 8,
+   "ads": "Chưa quét ads (cần quét video riêng)",
+   "insight": "Đơn 7 ngày tăng x3.6. Video bán được 12 đơn (~3.1 triệu). Chưa có rating (cần xem kỹ chất lượng).",
+   "videos": [
+    {
+     "handle": "traxinh2001",
+     "name": "traxinh2001",
+     "id": "7707513250849541397",
+     "url": "https://www.tiktok.com/@traxinh2001/video/7707513250849541397",
+     "views": 3237,
+     "orders": 7,
+     "date": "2026-11-12",
+     "followers": null,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    },
+    {
+     "handle": "traxinh2001",
+     "name": "traxinh2001",
+     "id": "7706131745598442773",
+     "url": "https://www.tiktok.com/@traxinh2001/video/7706131745598442773",
+     "views": 4987,
+     "orders": 3,
+     "date": "2026-11-09",
+     "followers": null,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    },
+    {
+     "handle": "traxinh2001",
+     "name": "traxinh2001",
+     "id": "7703816354050100501",
+     "url": "https://www.tiktok.com/@traxinh2001/video/7703816354050100501",
+     "views": 10395,
+     "orders": 2,
+     "date": "2026-11-03",
+     "followers": null,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    }
+   ],
+   "img": "https://cdn.tabcut.com/dataservice/media/item/1738345318704973115/17383453187049731150.webp?x-oss-process=image/resize,w_640,h_640/format,jpg/quality,q_85",
+   "videoTotal": 8,
+   "rating": null,
+   "reviews": 0,
+   "growth7": 3.6304,
+   "mix": {
+    "v": {
+     "r": 0.0282,
+     "o": 12,
+     "g": 3108000
+    },
+    "l": {
+     "r": 0.1737,
+     "o": 74,
+     "g": 19166000
+    },
+    "c": {
+     "r": 0.7981,
+     "o": 340,
+     "g": 88060000
+    },
+    "g": 110334000
+   }
   }
  ]
 };

@@ -7,10 +7,10 @@ var D = window.APP_DATA, P = D.products, DAYS = D.days;
 var TABS = ['tong-quan', 'hang-mau', 'win-video', 'kenh', 'menu'];
 var VIEW = { 'tong-quan': 'v-home', 'hang-mau': 'v-sample', 'win-video': 'v-win', 'kenh': 'v-kenh', 'menu': 'v-menu' };
 var ST = ['Mới quét', 'Đã nhận mẫu', 'KOCs đang quay', 'Đã quay xong'];
-var KEY = 'qlmau-v2';
+var KEY = 'qlmau-v3';
 var S = {}, tab = 'tong-quan', openId = null, lastUndo = null, toastT = null;
 var segSample = 'chua', todayOnly = true, sortA = 'vg', query = '';
-var VKEY = 'qlmau-vmin', VOPTS = [[0, 'Tất cả'], [5e6, 'Video ≥ 5tr'], [10e6, 'Video ≥ 10tr'], [20e6, 'Video ≥ 20tr']], vmin = 5e6;
+var VKEY = 'qlmau-vmin2', VOPTS = [[0, 'Tất cả'], [3e6, 'Video ≥ 3tr'], [5e6, 'Video ≥ 5tr'], [10e6, 'Video ≥ 10tr'], [20e6, 'Video ≥ 20tr']], vmin = 0;
 
 var I = 'fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"';
 var SHOPICON = '<svg viewBox="0 0 24 24" ' + I + '><path d="M3 9l1.5-5h15L21 9"/><path d="M3 9a3 3 0 006 0 3 3 0 006 0 3 3 0 006 0"/><path d="M5 12v8h14v-8"/></svg>';
@@ -51,17 +51,7 @@ P.forEach(function (p) {
 function V() { return P.filter(function (p) { return p.vg >= vmin; }); }
 
 /* ---------- trạng thái (demo có seed) ---------- */
-function seed() {
-  var now = Date.now(), m = 60000, h = 3600000, o = {}, ids = P.filter(function (p) { return p.vg >= 5e6; }).sort(function (x, y) { return y.rev - x.rev; }).map(function (p) { return p.id; });
-  /* demo: 5 mẫu đã nhận (3 hôm nay, 1 hôm qua), 1 đang quay, 1 đã quay xong; còn lại là mới quét */
-  o[ids[3]] = { s: 1, rcv: now - 50 * m };
-  o[ids[5]] = { s: 1, rcv: now - 35 * m };
-  o[ids[8]] = { s: 1, rcv: now - 20 * m };
-  o[ids[11]] = { s: 1, rcv: now - 26 * h };
-  o[ids[1]] = { s: 2, rcv: now - 3 * h, asg: now - 2 * h };
-  o[ids[0]] = { s: 3, rcv: now - 5 * h, asg: now - 4 * h, done: now - h };
-  return o;
-}
+function seed() { return {}; } /* mọi mẫu đều bắt đầu ở trạng thái Chưa nhận */
 function load() {
   var r = null;
   try { r = JSON.parse(lsGet(KEY) || 'null'); } catch (e) { r = null; }
@@ -148,7 +138,7 @@ function mixText(p) {
 }
 function thumb(p) {
   var t = trend(p);
-  return '<div class="thumb"><img alt="" src="' + p.img + '" loading="lazy"><span class="badge ' + t.c + '">' + t.tx + '</span></div>';
+  return '<div class="thumb"><img alt="" src="' + p.img + '" loading="lazy" referrerpolicy="no-referrer"><span class="badge ' + t.c + '">' + t.tx + '</span></div>';
 }
 function info(p, showState) {
   var s = st(p);
@@ -172,7 +162,7 @@ function winRow(p) {
   var tag = p.winDate ? '<span class="tg win">🎬 Win ' + dm(p.winDate) + '</span>' : '<span class="tg nowin">Chưa có video ra đơn</span>';
   var num = p.videos.length ? p.vOrders : '—';
   return '<article class="wrow" data-id="' + p.id + '" tabindex="0" role="button" aria-label="' + esc(p.shop) + ': video tốt nhất ' + num + ' đơn. Mở chi tiết">' +
-    '<div class="wthumb"><img alt="" src="' + p.img + '" loading="lazy"></div>' +
+    '<div class="wthumb"><img alt="" src="' + p.img + '" loading="lazy" referrerpolicy="no-referrer"></div>' +
     '<div class="winfo"><h2 class="nm">' + esc(p.title) + '</h2><p class="shopn">' + esc(p.shop) + '</p>' + mixBar(p) + mixText(p) +
     '<div class="tags">' + tag + growTag(p) + refTag(p) + (p.roas ? '<span class="tg roas">ROAS ' + p.roas.toLocaleString('vi-VN', { maximumFractionDigits: 1 }) + '</span>' : '') + '</div></div>' +
     '<div class="wnum"><b>' + num + '</b><span>đơn video</span></div></article>';
@@ -352,7 +342,7 @@ function detailHTML(p) {
   var kpi = '<div class="kpis"><div><b>' + p.creators + '</b><span>creator</span></div><div><b>' + p.vids + '</b><span>video gắn link</span></div><div><b>' + (p.prev <= 5 ? 'Mới' : '×' + mult) + '</b><span>kỳ trước chỉ ~' + nf(p.prev) + ' đơn</span></div></div>';
   var line = ST[s.s] + (s.s >= 1 && s.rcv ? ' · nhận ' + when(s.rcv) : '');
   var k = risk(p);
-  return '<div class="photos one"><img alt="Ảnh sản phẩm" src="' + p.img + '"><span class="badge ' + t.c + '">' + t.full + '</span></div>' +
+  return '<div class="photos one"><img alt="Ảnh sản phẩm" src="' + p.img + '" referrerpolicy="no-referrer"><span class="badge ' + t.c + '">' + t.full + '</span></div>' +
     '<span class="stat s' + s.s + '">' + esc(line) + '</span>' +
     '<h2 class="t">' + esc(p.title) + '</h2>' +
     '<div class="chips"><span class="chip shop">' + SHOPICON + esc(p.shop) + '</span><span class="chip cat">' + CATICON + esc(p.cat) + '</span></div>' +

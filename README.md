@@ -62,8 +62,8 @@ Ads/ROAS chỉ có cho vài sản phẩm cũ; sản phẩm mới ghi "Chưa qué
 
 ## Doanh thu theo nguồn (video / live / thẻ sản phẩm)
 - Mỗi sản phẩm có `mix`: `{v, l, c, g}` = doanh thu 7 ngày (15–21/11) từ video, live, thẻ sản phẩm (đơn không qua video/live) và tổng. Mỗi nguồn có `r` (tỉ lệ), `o` (đơn), `g` (₫). Nguồn: Topview `td_item_v2_sales_mode_distribution`.
-- App chỉ hiển thị sản phẩm có doanh thu video >= ngưỡng (mặc định 5tr, chọn 10tr / 20tr / Tất cả ở Hàng mẫu và Win Video).
-- 32 sản phẩm trong dữ liệu, 12 sản phẩm đạt ngưỡng 5tr. Ảnh lấy 640px từ Tabcut (nguồn tối đa 500px).
+- App chỉ hiển thị sản phẩm có doanh thu video >= ngưỡng (mặc định Tất cả, chọn 3tr / 5tr / 10tr / 20tr ở Hàng mẫu và Win Video).
+- 43 sản phẩm trong dữ liệu (18 đạt ngưỡng 5tr, 25 đạt 3tr), tất cả mở ở trạng thái Chưa nhận. Ảnh lấy 640px từ Tabcut (nguồn tối đa 500px).
 
 ## Tab Kênh (đơn affiliate của bạn)
 - Tab "Kênh" đọc file `affiliate_orders_*.xlsx` xuất từ Trung tâm Affiliate (nút "Tải file đơn affiliate"). File được đọc ngay trên trình duyệt (SheetJS từ cdnjs), lưu trong localStorage, không gửi đi đâu.
