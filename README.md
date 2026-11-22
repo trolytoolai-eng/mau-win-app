@@ -68,5 +68,5 @@ Ads/ROAS chỉ có cho vài sản phẩm cũ; sản phẩm mới ghi "Chưa qué
 ## Tab Kênh (đơn affiliate của bạn)
 - Tab "Kênh" đọc file `affiliate_orders_*.xlsx` xuất từ Trung tâm Affiliate (nút "Tải file đơn affiliate"). File được đọc ngay trên trình duyệt (SheetJS từ cdnjs), lưu trong localStorage, không gửi đi đâu.
 - Hiển thị theo sản phẩm: tên + link TikTok Shop, doanh thu (GMV), số đơn, đơn từ video, đơn từ live, số món hoàn tiền, hoa hồng đã nhận.
-- Hoàn hủy chỉ tính được khi file có đơn hoàn/hủy. Nếu file chỉ gồm đơn "Đã quyết toán" thì app báo "chưa có dữ liệu hoàn".
+- Nạp được nhiều file cùng lúc (gộp, bỏ đơn trùng). "Đơn mất" = đơn có trạng thái khác "Đã quyết toán" (ví dụ "Không đủ điều kiện": hủy, hoàn, hoặc chưa hợp lệ). Tỉ lệ đơn mất = đơn mất / tổng đơn; sản phẩm dưới 20 đơn ghi "chưa đủ mẫu".
 - `data/channel.js` là dữ liệu mẫu (73 đơn, 01-14/11/2026).
