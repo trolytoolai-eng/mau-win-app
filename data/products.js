@@ -126,7 +126,25 @@ window.APP_DATA = {
    "videoTotal": 7,
    "rating": 4.1,
    "reviews": 21,
-   "growth7": 1219.0
+   "growth7": 1219.0,
+   "mix": {
+    "v": {
+     "r": 0.0008,
+     "o": 1,
+     "g": 99000
+    },
+    "l": {
+     "r": 0.5639,
+     "o": 688,
+     "g": 68112000
+    },
+    "c": {
+     "r": 0.4353,
+     "o": 531,
+     "g": 52569000
+    },
+    "g": 120780000
+   }
   },
   {
    "id": "1738384433092986077",
@@ -182,7 +200,25 @@ window.APP_DATA = {
    "videoTotal": 2,
    "rating": 5.0,
    "reviews": 1,
-   "growth7": 330.0
+   "growth7": 330.0,
+   "mix": {
+    "v": {
+     "r": 0,
+     "o": 0,
+     "g": 0
+    },
+    "l": {
+     "r": 0.0846,
+     "o": 28,
+     "g": 2492000
+    },
+    "c": {
+     "r": 0.9154,
+     "o": 303,
+     "g": 26967000
+    },
+    "g": 29459000
+   }
   },
   {
    "id": "1738338776050141167",
@@ -211,7 +247,25 @@ window.APP_DATA = {
    "videoTotal": 0,
    "rating": 5.0,
    "reviews": 20,
-   "growth7": 169.4
+   "growth7": 169.4,
+   "mix": {
+    "v": {
+     "r": 0,
+     "o": 0,
+     "g": 0
+    },
+    "l": {
+     "r": 0.0282,
+     "o": 24,
+     "g": 4056000
+    },
+    "c": {
+     "r": 0.9718,
+     "o": 828,
+     "g": 139932000
+    },
+    "g": 143988000
+   }
   },
   {
    "id": "1738303884505548673",
@@ -254,7 +308,25 @@ window.APP_DATA = {
    "videoTotal": 1,
    "rating": 4.3,
    "reviews": 37,
-   "growth7": 34.64
+   "growth7": 34.64,
+   "mix": {
+    "v": {
+     "r": 0,
+     "o": 0,
+     "g": 0
+    },
+    "l": {
+     "r": 0.009,
+     "o": 8,
+     "g": 1099688
+    },
+    "c": {
+     "r": 0.991,
+     "o": 883,
+     "g": 121378063
+    },
+    "g": 122477751
+   }
   },
   {
    "id": "1738352982226601303",
@@ -323,7 +395,25 @@ window.APP_DATA = {
    "videoTotal": 20,
    "rating": 4.7,
    "reviews": 73,
-   "growth7": 21.4639
+   "growth7": 21.4639,
+   "mix": {
+    "v": {
+     "r": 0.0895,
+     "o": 195,
+     "g": 6655155
+    },
+    "l": {
+     "r": 0.3043,
+     "o": 663,
+     "g": 22627527
+    },
+    "c": {
+     "r": 0.6062,
+     "o": 1321,
+     "g": 45084409
+    },
+    "g": 74367091
+   }
   },
   {
    "id": "1738384500919010503",
@@ -352,7 +442,25 @@ window.APP_DATA = {
    "videoTotal": 0,
    "rating": 4.7,
    "reviews": 30,
-   "growth7": 18.2174
+   "growth7": 18.2174,
+   "mix": {
+    "v": {
+     "r": 0,
+     "o": 0,
+     "g": 0
+    },
+    "l": {
+     "r": 0.0271,
+     "o": 12,
+     "g": 1006896
+    },
+    "c": {
+     "r": 0.9729,
+     "o": 430,
+     "g": 36080440
+    },
+    "g": 37087336
+   }
   },
   {
    "id": "1738394448044655816",
@@ -395,7 +503,25 @@ window.APP_DATA = {
    "videoTotal": 5,
    "rating": 4.8,
    "reviews": 22,
-   "growth7": 14.3418
+   "growth7": 14.3418,
+   "mix": {
+    "v": {
+     "r": 0.0017,
+     "o": 2,
+     "g": 92500
+    },
+    "l": {
+     "r": 0.3432,
+     "o": 416,
+     "g": 19240000
+    },
+    "c": {
+     "r": 0.6551,
+     "o": 794,
+     "g": 36722500
+    },
+    "g": 56055000
+   }
   },
   {
    "id": "1738157116181743060",
@@ -451,7 +577,25 @@ window.APP_DATA = {
    "videoTotal": 4,
    "rating": 4.0,
    "reviews": 0,
-   "growth7": 10.9063
+   "growth7": 10.9063,
+   "mix": {
+    "v": {
+     "r": 0.0341,
+     "o": 13,
+     "g": 1394562
+    },
+    "l": {
+     "r": 0.0131,
+     "o": 5,
+     "g": 536370
+    },
+    "c": {
+     "r": 0.9528,
+     "o": 363,
+     "g": 38940462
+    },
+    "g": 40871394
+   }
   },
   {
    "id": "1738319545120687686",
@@ -480,7 +624,25 @@ window.APP_DATA = {
    "videoTotal": 8,
    "rating": 4.5,
    "reviews": 13,
-   "growth7": 9.25
+   "growth7": 9.25,
+   "mix": {
+    "v": {
+     "r": 0,
+     "o": 0,
+     "g": 0
+    },
+    "l": {
+     "r": 0.4634,
+     "o": 209,
+     "g": 41978486
+    },
+    "c": {
+     "r": 0.5366,
+     "o": 242,
+     "g": 48606668
+    },
+    "g": 90585154
+   }
   },
   {
    "id": "1737187369294333873",
@@ -523,7 +685,25 @@ window.APP_DATA = {
    "videoTotal": 23,
    "rating": 4.2,
    "reviews": 31,
-   "growth7": 8.8333
+   "growth7": 8.8333,
+   "mix": {
+    "v": {
+     "r": 0.1332,
+     "o": 165,
+     "g": 12581250
+    },
+    "l": {
+     "r": 0.0081,
+     "o": 10,
+     "g": 762500
+    },
+    "c": {
+     "r": 0.8587,
+     "o": 1064,
+     "g": 81130000
+    },
+    "g": 94473750
+   }
   },
   {
    "id": "1738406492928902752",
@@ -566,7 +746,25 @@ window.APP_DATA = {
    "videoTotal": 3,
    "rating": 4.4,
    "reviews": 51,
-   "growth7": 6.9551
+   "growth7": 6.9551,
+   "mix": {
+    "v": {
+     "r": 0.0145,
+     "o": 18,
+     "g": 1960200
+    },
+    "l": {
+     "r": 0.3183,
+     "o": 395,
+     "g": 43015500
+    },
+    "c": {
+     "r": 0.6672,
+     "o": 828,
+     "g": 90169200
+    },
+    "g": 135144900
+   }
   },
   {
    "id": "1738489859543041826",
@@ -635,7 +833,25 @@ window.APP_DATA = {
    "videoTotal": 19,
    "rating": 4.7,
    "reviews": 0,
-   "growth7": 6.6957
+   "growth7": 6.6957,
+   "mix": {
+    "v": {
+     "r": 0.3559,
+     "o": 126,
+     "g": 19051200
+    },
+    "l": {
+     "r": 0.3418,
+     "o": 121,
+     "g": 18295200
+    },
+    "c": {
+     "r": 0.3023,
+     "o": 107,
+     "g": 16178400
+    },
+    "g": 53524800
+   }
   },
   {
    "id": "1737997843935757617",
@@ -704,7 +920,25 @@ window.APP_DATA = {
    "videoTotal": 6,
    "rating": 4.3,
    "reviews": 0,
-   "growth7": 6.6735
+   "growth7": 6.6735,
+   "mix": {
+    "v": {
+     "r": 0.0293,
+     "o": 11,
+     "g": 3314080
+    },
+    "l": {
+     "r": 0.4016,
+     "o": 151,
+     "g": 45493280
+    },
+    "c": {
+     "r": 0.5691,
+     "o": 214,
+     "g": 64473920
+    },
+    "g": 113281280
+   }
   },
   {
    "id": "1738407353061705663",
@@ -747,7 +981,25 @@ window.APP_DATA = {
    "videoTotal": 9,
    "rating": 4.7,
    "reviews": 0,
-   "growth7": 3.775
+   "growth7": 3.775,
+   "mix": {
+    "v": {
+     "r": 0.0812,
+     "o": 31,
+     "g": 9189330
+    },
+    "l": {
+     "r": 0.2094,
+     "o": 80,
+     "g": 23714400
+    },
+    "c": {
+     "r": 0.7094,
+     "o": 271,
+     "g": 80332530
+    },
+    "g": 113236260
+   }
   },
   {
    "id": "1738193489943430427",
@@ -816,7 +1068,25 @@ window.APP_DATA = {
    "videoTotal": 26,
    "rating": 4.7,
    "reviews": 0,
-   "growth7": 3.5913
+   "growth7": 3.5913,
+   "mix": {
+    "v": {
+     "r": 0.048,
+     "o": 157,
+     "g": 12032637
+    },
+    "l": {
+     "r": 0.0936,
+     "o": 306,
+     "g": 23452146
+    },
+    "c": {
+     "r": 0.8584,
+     "o": 2806,
+     "g": 215054646
+    },
+    "g": 250539429
+   }
   },
   {
    "id": "1738204240096953405",
@@ -845,7 +1115,25 @@ window.APP_DATA = {
    "videoTotal": 11,
    "rating": 4.5,
    "reviews": 35,
-   "growth7": 3.2727
+   "growth7": 3.2727,
+   "mix": {
+    "v": {
+     "r": 0,
+     "o": 0,
+     "g": 0
+    },
+    "l": {
+     "r": 0.026,
+     "o": 22,
+     "g": 2526480
+    },
+    "c": {
+     "r": 0.974,
+     "o": 824,
+     "g": 94628160
+    },
+    "g": 97154640
+   }
   },
   {
    "id": "1733039907328853343",
@@ -901,7 +1189,25 @@ window.APP_DATA = {
    "videoTotal": 2,
    "rating": 4.9,
    "reviews": 63,
-   "growth7": 3.1784
+   "growth7": 3.1784,
+   "mix": {
+    "v": {
+     "r": 0.1343,
+     "o": 151,
+     "g": 17800182
+    },
+    "l": {
+     "r": 0,
+     "o": 0,
+     "g": 0
+    },
+    "c": {
+     "r": 0.8657,
+     "o": 973,
+     "g": 114699186
+    },
+    "g": 132499368
+   }
   },
   {
    "id": "1738447907152758674",
@@ -930,7 +1236,25 @@ window.APP_DATA = {
    "videoTotal": 1,
    "rating": 4.6,
    "reviews": 35,
-   "growth7": 3.0727
+   "growth7": 3.0727,
+   "mix": {
+    "v": {
+     "r": 0,
+     "o": 0,
+     "g": 0
+    },
+    "l": {
+     "r": 0.0915,
+     "o": 41,
+     "g": 4849726
+    },
+    "c": {
+     "r": 0.9085,
+     "o": 407,
+     "g": 48142402
+    },
+    "g": 52992128
+   }
   },
   {
    "id": "1738230546390878204",
@@ -999,7 +1323,25 @@ window.APP_DATA = {
    "videoTotal": 18,
    "rating": 4.7,
    "reviews": 0,
-   "growth7": 2.8621
+   "growth7": 2.8621,
+   "mix": {
+    "v": {
+     "r": 0.0756,
+     "o": 125,
+     "g": 75318750
+    },
+    "l": {
+     "r": 0.706,
+     "o": 1167,
+     "g": 703175850
+    },
+    "c": {
+     "r": 0.2184,
+     "o": 361,
+     "g": 217520550
+    },
+    "g": 996015150
+   }
   },
   {
    "id": "1737976079110145941",
@@ -1028,7 +1370,25 @@ window.APP_DATA = {
    "videoTotal": 20,
    "rating": null,
    "reviews": 0,
-   "growth7": 2.6729
+   "growth7": 2.6729,
+   "mix": {
+    "v": {
+     "r": 0,
+     "o": 0,
+     "g": 0
+    },
+    "l": {
+     "r": 0.0374,
+     "o": 37,
+     "g": 4552850
+    },
+    "c": {
+     "r": 0.9626,
+     "o": 951,
+     "g": 117020550
+    },
+    "g": 121573400
+   }
   },
   {
    "id": "1738347723181033363",
@@ -1097,7 +1457,25 @@ window.APP_DATA = {
    "videoTotal": 13,
    "rating": 4.6,
    "reviews": 26,
-   "growth7": 2.3161
+   "growth7": 2.3161,
+   "mix": {
+    "v": {
+     "r": 0.0564,
+     "o": 29,
+     "g": 4948908
+    },
+    "l": {
+     "r": 0.1206,
+     "o": 62,
+     "g": 10580424
+    },
+    "c": {
+     "r": 0.823,
+     "o": 423,
+     "g": 72185796
+    },
+    "g": 87715128
+   }
   },
   {
    "id": "1738199112048215896",
@@ -1166,7 +1544,25 @@ window.APP_DATA = {
    "videoTotal": 33,
    "rating": 4.4,
    "reviews": 79,
-   "growth7": 2.084
+   "growth7": 2.084,
+   "mix": {
+    "v": {
+     "r": 0.0058,
+     "o": 13,
+     "g": 2737800
+    },
+    "l": {
+     "r": 0.0916,
+     "o": 205,
+     "g": 43173000
+    },
+    "c": {
+     "r": 0.9026,
+     "o": 2021,
+     "g": 425622600
+    },
+    "g": 471533400
+   }
   },
   {
    "id": "1738473973502215680",
@@ -1195,7 +1591,25 @@ window.APP_DATA = {
    "videoTotal": 0,
    "rating": 4.9,
    "reviews": 90,
-   "growth7": 1.0
+   "growth7": 1.0,
+   "mix": {
+    "v": {
+     "r": 0,
+     "o": 0,
+     "g": 0
+    },
+    "l": {
+     "r": 0.5174,
+     "o": 3350,
+     "g": 195583050
+    },
+    "c": {
+     "r": 0.4826,
+     "o": 3125,
+     "g": 182446875
+    },
+    "g": 378029925
+   }
   },
   {
    "id": "1738531944775714627",
@@ -1224,7 +1638,25 @@ window.APP_DATA = {
    "videoTotal": 2,
    "rating": 3.7,
    "reviews": 42,
-   "growth7": 1.0
+   "growth7": 1.0,
+   "mix": {
+    "v": {
+     "r": 0,
+     "o": 0,
+     "g": 0
+    },
+    "l": {
+     "r": 0.1388,
+     "o": 335,
+     "g": 21925750
+    },
+    "c": {
+     "r": 0.8612,
+     "o": 2079,
+     "g": 136070550
+    },
+    "g": 157996300
+   }
   },
   {
    "id": "1738440124676605854",
@@ -1253,7 +1685,25 @@ window.APP_DATA = {
    "videoTotal": 0,
    "rating": 4.4,
    "reviews": 14,
-   "growth7": 1.0
+   "growth7": 1.0,
+   "mix": {
+    "v": {
+     "r": 0,
+     "o": 0,
+     "g": 0
+    },
+    "l": {
+     "r": 0.0564,
+     "o": 33,
+     "g": 7022598
+    },
+    "c": {
+     "r": 0.9436,
+     "o": 552,
+     "g": 117468912
+    },
+    "g": 124491510
+   }
   },
   {
    "id": "1738407596945147460",
@@ -1282,7 +1732,25 @@ window.APP_DATA = {
    "videoTotal": 1,
    "rating": 4.0,
    "reviews": 1,
-   "growth7": 1.0
+   "growth7": 1.0,
+   "mix": {
+    "v": {
+     "r": 0,
+     "o": 0,
+     "g": 0
+    },
+    "l": {
+     "r": 0.4376,
+     "o": 221,
+     "g": 34561527
+    },
+    "c": {
+     "r": 0.5624,
+     "o": 284,
+     "g": 44413908
+    },
+    "g": 78975435
+   }
   },
   {
    "id": "1738455077384521687",
@@ -1351,7 +1819,460 @@ window.APP_DATA = {
    "videoTotal": 11,
    "rating": null,
    "reviews": 0,
-   "growth7": 1.0
+   "growth7": 1.0,
+   "mix": {
+    "v": {
+     "r": 0.0205,
+     "o": 9,
+     "g": 441000
+    },
+    "l": {
+     "r": 0.1295,
+     "o": 57,
+     "g": 2793000
+    },
+    "c": {
+     "r": 0.85,
+     "o": 374,
+     "g": 18326000
+    },
+    "g": 21560000
+   }
+  },
+  {
+   "id": "1738373334792701035",
+   "title": "Quần Tất BT10 BEBECHIC Đáy Quần Chữ T Hạn Chế Lộ Viền, Tàng Hình, Che Khuyết Điểm (5D/10D/15D)",
+   "shop": "BEBE CHIC",
+   "cat": "Quần tất",
+   "price": 31250,
+   "total": 238,
+   "days": [
+    0,
+    0,
+    45,
+    31,
+    0,
+    96,
+    12
+   ],
+   "prev": 40,
+   "found": "10/11",
+   "creators": 2,
+   "vids": 5,
+   "ads": "Chưa quét ads (cần quét video riêng)",
+   "insight": "Bán lẻ tẻ từ 11/11, 7 ngày 184 đơn. Gần như toàn bộ đơn đến từ 5 video của 2 creator, gần như không có live.",
+   "videos": [
+    {
+     "handle": "bebelembem",
+     "name": "bebelembem",
+     "id": "7707608782729186578",
+     "url": "https://www.tiktok.com/@bebelembem/video/7707608782729186578",
+     "views": 75672,
+     "orders": 81,
+     "date": "2026-11-13",
+     "followers": null,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    },
+    {
+     "handle": "bebelembem",
+     "name": "bebelembem",
+     "id": "7709370031640972562",
+     "url": "https://www.tiktok.com/@bebelembem/video/7709370031640972562",
+     "views": 19459,
+     "orders": 40,
+     "date": "2026-11-17",
+     "followers": null,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    },
+    {
+     "handle": "bebelembem",
+     "name": "bebelembem",
+     "id": "7709416682288139528",
+     "url": "https://www.tiktok.com/@bebelembem/video/7709416682288139528",
+     "views": 13737,
+     "orders": 28,
+     "date": "2026-11-18",
+     "followers": null,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    }
+   ],
+   "img": "img/1738373334792701035.jpg",
+   "videoTotal": 5,
+   "rating": 4.8,
+   "reviews": 0,
+   "growth7": 3.6,
+   "mix": {
+    "v": {
+     "r": 0.9293,
+     "o": 171,
+     "g": 5343750
+    },
+    "l": {
+     "r": 0.0054,
+     "o": 1,
+     "g": 31250
+    },
+    "c": {
+     "r": 0.0653,
+     "o": 12,
+     "g": 375000
+    },
+    "g": 5750000
+   }
+  },
+  {
+   "id": "1738393729229948486",
+   "title": "[Tặng kèm áo 3 lỗ] Sét áo khoác mũ quần ống loe chất liệu tăm thỏ cao cấp",
+   "shop": "Mộc Trà Boutiquee",
+   "cat": "Set bộ",
+   "price": 600000,
+   "total": 294,
+   "days": [
+    27,
+    22,
+    5,
+    14,
+    51,
+    55,
+    63
+   ],
+   "prev": 57,
+   "found": "06/11",
+   "creators": 14,
+   "vids": 3,
+   "ads": "Chưa quét ads (cần quét video riêng)",
+   "insight": "Mới bán từ 12/11, 7 ngày 237 đơn, đang tăng mạnh (63 đơn ngày 21/11). Video bán được 103 đơn (~62 triệu), live 74 phiên.",
+   "videos": [
+    {
+     "handle": "huyenzenda02",
+     "name": "huyenzenda02",
+     "id": "7707162236854209793",
+     "url": "https://www.tiktok.com/@huyenzenda02/video/7707162236854209793",
+     "views": 76286,
+     "orders": 55,
+     "date": "2026-11-12",
+     "followers": null,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    },
+    {
+     "handle": "thaithisangsang",
+     "name": "thaithisangsang",
+     "id": "7709464659102928149",
+     "url": "https://www.tiktok.com/@thaithisangsang/video/7709464659102928149",
+     "views": 11911,
+     "orders": 34,
+     "date": "2026-11-18",
+     "followers": null,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    },
+    {
+     "handle": "thaithisangsang",
+     "name": "thaithisangsang",
+     "id": "7709449259501784341",
+     "url": "https://www.tiktok.com/@thaithisangsang/video/7709449259501784341",
+     "views": 5547,
+     "orders": 14,
+     "date": "2026-11-18",
+     "followers": null,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    }
+   ],
+   "img": "img/1738393729229948486.jpg",
+   "videoTotal": 3,
+   "rating": 4.9,
+   "reviews": 7,
+   "growth7": 3.1579,
+   "mix": {
+    "v": {
+     "r": 0.4346,
+     "o": 103,
+     "g": 61800000
+    },
+    "l": {
+     "r": 0.308,
+     "o": 73,
+     "g": 43800000
+    },
+    "c": {
+     "r": 0.2574,
+     "o": 61,
+     "g": 36600000
+    },
+    "g": 142200000
+   }
+  },
+  {
+   "id": "1737813921675510965",
+   "title": "LYNA - D105 - Set váy dáng dài mix áo ren hoa nổi",
+   "shop": "LYNA DAILY",
+   "cat": "Set bộ",
+   "price": 356998,
+   "total": 752,
+   "days": [
+    112,
+    85,
+    78,
+    52,
+    82,
+    116,
+    40
+   ],
+   "prev": 153,
+   "found": "01/11",
+   "creators": 11,
+   "vids": 16,
+   "ads": "Chưa quét ads (cần quét video riêng)",
+   "insight": "Bán đều 50–110 đơn mỗi ngày, 7 ngày 565 đơn. Video bán được 88 đơn (~31 triệu), còn lại chủ yếu từ thẻ sản phẩm và live.",
+   "videos": [
+    {
+     "handle": "mai.phng.mc.g",
+     "name": "mai.phng.mc.g",
+     "id": "7708020928034229525",
+     "url": "https://www.tiktok.com/@mai.phng.mc.g/video/7708020928034229525",
+     "views": 18212,
+     "orders": 52,
+     "date": "2026-11-14",
+     "followers": null,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    },
+    {
+     "handle": "ng.huyen99",
+     "name": "ng.huyen99",
+     "id": "7704513625582505223",
+     "url": "https://www.tiktok.com/@ng.huyen99/video/7704513625582505223",
+     "views": 12941,
+     "orders": 16,
+     "date": "2026-11-04",
+     "followers": null,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    },
+    {
+     "handle": "huonghayho1986",
+     "name": "huonghayho1986",
+     "id": "7704868977926868244",
+     "url": "https://www.tiktok.com/@huonghayho1986/video/7704868977926868244",
+     "views": 15155,
+     "orders": 13,
+     "date": "2026-11-06",
+     "followers": null,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    }
+   ],
+   "img": "img/1737813921675510965.jpg",
+   "videoTotal": 16,
+   "rating": 4.9,
+   "reviews": 0,
+   "growth7": 2.6928,
+   "mix": {
+    "v": {
+     "r": 0.1558,
+     "o": 88,
+     "g": 31415824
+    },
+    "l": {
+     "r": 0.1009,
+     "o": 57,
+     "g": 20348886
+    },
+    "c": {
+     "r": 0.7433,
+     "o": 420,
+     "g": 149939160
+    },
+    "g": 201703870
+   }
+  },
+  {
+   "id": "1738430544430007564",
+   "title": "Đầm Lụa Đi Tiệc Sang Trọng Thanh Lịch- Lụa Tráng Gương - Váy Tiệc Tôn Dáng - Nữ",
+   "shop": "Thai Kim Ngoc shop",
+   "cat": "Đầm",
+   "price": 374633,
+   "total": 295,
+   "days": [
+    0,
+    0,
+    28,
+    44,
+    24,
+    89,
+    100
+   ],
+   "prev": 0,
+   "found": "16/11",
+   "creators": 5,
+   "vids": 3,
+   "ads": "Chưa quét ads (cần quét video riêng)",
+   "insight": "Bán từ 17/11, tăng nhanh (100 đơn ngày 21/11). Video bán được 60 đơn (~22 triệu), chỉ 5 creator.",
+   "videos": [
+    {
+     "handle": "kenhcuabae",
+     "name": "kenhcuabae",
+     "id": "7708958638844448020",
+     "url": "https://www.tiktok.com/@kenhcuabae/video/7708958638844448020",
+     "views": 48024,
+     "orders": 54,
+     "date": "2026-11-16",
+     "followers": null,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    },
+    {
+     "handle": "kenhcuabae",
+     "name": "kenhcuabae",
+     "id": "7709432003937963285",
+     "url": "https://www.tiktok.com/@kenhcuabae/video/7709432003937963285",
+     "views": 1279,
+     "orders": 3,
+     "date": "2026-11-18",
+     "followers": null,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    },
+    {
+     "handle": "kenhcuabae",
+     "name": "kenhcuabae",
+     "id": "7709699566261521684",
+     "url": "https://www.tiktok.com/@kenhcuabae/video/7709699566261521684",
+     "views": 1314,
+     "orders": 3,
+     "date": "2026-11-18",
+     "followers": null,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    }
+   ],
+   "img": "img/1738430544430007564.jpg",
+   "videoTotal": 3,
+   "rating": 5.0,
+   "reviews": 0,
+   "growth7": 1.0,
+   "mix": {
+    "v": {
+     "r": 0.2105,
+     "o": 60,
+     "g": 22477980
+    },
+    "l": {
+     "r": 0.0035,
+     "o": 11,
+     "g": 374633
+    },
+    "c": {
+     "r": 0.786,
+     "o": 214,
+     "g": 83917792
+    },
+    "g": 106770405
+   }
+  },
+  {
+   "id": "1738531199276124104",
+   "title": "Vibigsize86| ÁO 2 TRONG 1 ĐŨI PHỐI REN bigsize 40-90kg",
+   "shop": "Vibigsize86",
+   "cat": "Áo",
+   "price": 158242,
+   "total": 426,
+   "days": [
+    0,
+    9,
+    11,
+    29,
+    92,
+    130,
+    153
+   ],
+   "prev": 0,
+   "found": "14/11",
+   "creators": 16,
+   "vids": 4,
+   "ads": "Chưa quét ads (cần quét video riêng)",
+   "insight": "Bán từ 16/11, tăng liên tục (153 đơn ngày 21/11). Video bán được 88 đơn (~14 triệu). Rating 4.3 nên cần xem kỹ chất lượng.",
+   "videos": [
+    {
+     "handle": "bancathegioi021",
+     "name": "bancathegioi021",
+     "id": "7708553899828940052",
+     "url": "https://www.tiktok.com/@bancathegioi021/video/7708553899828940052",
+     "views": 15318,
+     "orders": 41,
+     "date": "2026-11-15",
+     "followers": null,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    },
+    {
+     "handle": "bancathegioi021",
+     "name": "bancathegioi021",
+     "id": "7709837587136924949",
+     "url": "https://www.tiktok.com/@bancathegioi021/video/7709837587136924949",
+     "views": 12408,
+     "orders": 37,
+     "date": "2026-11-19",
+     "followers": null,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    },
+    {
+     "handle": "bancathegioi021",
+     "name": "bancathegioi021",
+     "id": "7709067077176315157",
+     "url": "https://www.tiktok.com/@bancathegioi021/video/7709067077176315157",
+     "views": 3500,
+     "orders": 10,
+     "date": "2026-11-17",
+     "followers": null,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    }
+   ],
+   "img": "img/1738531199276124104.jpg",
+   "videoTotal": 4,
+   "rating": 4.3,
+   "reviews": 5,
+   "growth7": 1.0,
+   "mix": {
+    "v": {
+     "r": 0.2075,
+     "o": 88,
+     "g": 13925296
+    },
+    "l": {
+     "r": 0.1627,
+     "o": 78,
+     "g": 10918698
+    },
+    "c": {
+     "r": 0.6298,
+     "o": 258,
+     "g": 42250614
+    },
+    "g": 67094608
+   }
   }
  ]
 };

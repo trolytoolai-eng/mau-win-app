@@ -59,3 +59,8 @@ Danh sách là 27 sản phẩm thời trang nữ (Topview, VN, 22/11/2026) qua c
 3. Loại sản phẩm đã nguội (đơn 2 ngày gần nhất < 35% đỉnh) hoặc chỉ có 1-3 ngày có đơn.
 4. Loại sản phẩm giá dưới 30.000đ.
 Ads/ROAS chỉ có cho vài sản phẩm cũ; sản phẩm mới ghi "Chưa quét ads".
+
+## Doanh thu theo nguồn (video / live / thẻ sản phẩm)
+- Mỗi sản phẩm có `mix`: `{v, l, c, g}` = doanh thu 7 ngày (15–21/11) từ video, live, thẻ sản phẩm (đơn không qua video/live) và tổng. Mỗi nguồn có `r` (tỉ lệ), `o` (đơn), `g` (₫). Nguồn: Topview `td_item_v2_sales_mode_distribution`.
+- App chỉ hiển thị sản phẩm có doanh thu video >= ngưỡng (mặc định 5tr, chọn 10tr / 20tr / Tất cả ở Hàng mẫu và Win Video).
+- 32 sản phẩm trong dữ liệu, 12 sản phẩm đạt ngưỡng 5tr. Ảnh lấy 640px từ Tabcut (nguồn tối đa 500px).

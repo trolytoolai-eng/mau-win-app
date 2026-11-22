@@ -15,17 +15,19 @@
     <div class="stats" id="stats"></div>
     <h3 class="sec">Việc cần làm</h3>
     <div id="todo"></div>
-    <h3 class="sec">Doanh thu 7 ngày cao nhất</h3>
+    <h3 class="sec">Doanh thu video cao nhất</h3>
     <div class="list" id="topList"></div>
   </section>
 
   <section class="view" id="v-sample" hidden>
     <header class="top"><h1>Hàng mẫu</h1><p>Nhận mẫu, giao KOCs quay</p></header>
     <div class="searchbox"><input id="q" type="search" inputmode="search" placeholder="Tìm tên sản phẩm hoặc shop" aria-label="Tìm sản phẩm"></div>
+    <div class="segs vmin" id="vminS" role="group" aria-label="Lọc doanh thu video"></div>
     <div class="segs" id="segSample" role="group" aria-label="Lọc theo trạng thái"></div>
     <div class="opts" id="optsSample" hidden>
       <button type="button" class="seg" id="todayBtn" aria-pressed="true">Nhận hôm nay</button>
       <select id="sortA" aria-label="Sắp xếp">
+        <option value="vg">Doanh thu video</option>
         <option value="rev">Doanh thu 7 ngày</option>
         <option value="o7">Đơn 7 ngày</option>
         <option value="last">Đơn ngày gần nhất</option>
@@ -39,6 +41,7 @@
   <section class="view" id="v-win" hidden>
     <header class="top"><h1>Win Video</h1><p>Video ra đơn nhất</p></header>
     <p class="lead">Với mỗi sản phẩm, đây là video bán được nhiều đơn nhất. Con số bên phải là số đơn của video đó, “Win” là ngày video đăng. KOCs xem để biết nên quay theo kiểu nào.</p>
+    <div class="segs vmin" id="vminW" role="group" aria-label="Lọc doanh thu video"></div>
     <p class="cnt" id="cntWin"></p>
     <div class="wlist" id="winList"></div>
   </section>
@@ -47,12 +50,12 @@
     <header class="top"><h1>Menu</h1><p>Bản demo</p></header>
     <h3 class="sec">Luồng làm việc</h3>
     <ol class="steps">
-      <li><b>00:00</b> Hệ thống quét danh sách sản phẩm đủ tiêu chí (demo: 10 sản phẩm lấy từ Topview).</li>
+      <li><b>00:00</b> Hệ thống quét danh sách sản phẩm đủ tiêu chí (demo: sản phẩm lấy từ Topview, chỉ giữ mẫu có doanh thu video cao).</li>
       <li><b>08:00</b> Nhân viên kiểm hàng, tìm sản phẩm và bấm “Đã nhận mẫu”.</li>
       <li><b>Trợ lý</b> lọc “Chờ giao” và “Nhận hôm nay”, ưu tiên theo doanh thu, bấm “Giao KOCs quay”.</li>
       <li><b>KOCs</b> quay xong thì bấm “Đã quay xong”.</li>
     </ol>
-    <div class="note">Đây là bản demo. Một số trạng thái ban đầu là giả lập và chỉ lưu trong trình duyệt này, chưa dùng chung giữa các máy. Số bán hàng là ước tính từ Topview (Tabcut). Topview không có tỉ lệ hoàn hủy thật, nên app ước tính mức rủi ro hoàn hủy từ rating, review, danh mục và giá.</div>
+    <div class="note">Đây là bản demo. Một số trạng thái ban đầu là giả lập và chỉ lưu trong trình duyệt này, chưa dùng chung giữa các máy. Số bán hàng là ước tính từ Topview (Tabcut). Doanh thu chia theo video, live, thẻ sản phẩm lấy từ Topview. Topview không có tỉ lệ hoàn hủy thật, nên app ước tính mức rủi ro hoàn hủy từ rating, review, danh mục và giá.</div>
     <button type="button" class="btn ghost" id="reset" style="width:100%">Đặt lại dữ liệu demo</button>
   </section>
 </main>

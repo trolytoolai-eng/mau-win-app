@@ -9,7 +9,8 @@ var VIEW = { 'tong-quan': 'v-home', 'hang-mau': 'v-sample', 'win-video': 'v-win'
 var ST = ['Mới quét', 'Đã nhận mẫu', 'KOCs đang quay', 'Đã quay xong'];
 var KEY = 'qlmau-v2';
 var S = {}, tab = 'tong-quan', openId = null, lastUndo = null, toastT = null;
-var segSample = 'chua', todayOnly = true, sortA = 'rev', query = '';
+var segSample = 'chua', todayOnly = true, sortA = 'vg', query = '';
+var VKEY = 'qlmau-vmin', VOPTS = [[0, 'Tất cả'], [5e6, 'Video ≥ 5tr'], [10e6, 'Video ≥ 10tr'], [20e6, 'Video ≥ 20tr']], vmin = 5e6;
 
 var I = 'fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"';
 var SHOPICON = '<svg viewBox="0 0 24 24" ' + I + '><path d="M3 9l1.5-5h15L21 9"/><path d="M3 9a3 3 0 006 0 3 3 0 006 0 3 3 0 006 0"/><path d="M5 12v8h14v-8"/></svg>';
@@ -44,11 +45,14 @@ P.forEach(function (p) {
   p.winDate = p.best && p.best.orders > 0 ? p.best.date : null;
   p.roas = p.videos.reduce(function (m, v) { return v.roas > m ? v.roas : m; }, 0) || null;
   p.vsorted = vs;
+  p.vg = p.mix.v.g; p.lg = p.mix.l.g; p.cg = p.mix.c.g; p.tg = p.mix.g;
 });
+/* Danh sách đang hiển thị: chỉ sản phẩm có doanh thu video 7 ngày >= ngưỡng */
+function V() { return P.filter(function (p) { return p.vg >= vmin; }); }
 
 /* ---------- trạng thái (demo có seed) ---------- */
 function seed() {
-  var now = Date.now(), m = 60000, h = 3600000, o = {}, ids = P.slice().sort(function (x, y) { return y.rev - x.rev; }).map(function (p) { return p.id; });
+  var now = Date.now(), m = 60000, h = 3600000, o = {}, ids = P.filter(function (p) { return p.vg >= 5e6; }).sort(function (x, y) { return y.rev - x.rev; }).map(function (p) { return p.id; });
   /* demo: 5 mẫu đã nhận (3 hôm nay, 1 hôm qua), 1 đang quay, 1 đã quay xong; còn lại là mới quét */
   o[ids[3]] = { s: 1, rcv: now - 50 * m };
   o[ids[5]] = { s: 1, rcv: now - 35 * m };
@@ -63,6 +67,7 @@ function load() {
   try { r = JSON.parse(lsGet(KEY) || 'null'); } catch (e) { r = null; }
   S = (r && typeof r === 'object') ? r : seed();
 }
+function loadV() { var n = parseFloat(lsGet(VKEY)); if (VOPTS.some(function (o) { return o[0] === n; })) vmin = n; }
 function save() { lsSet(KEY, JSON.stringify(S)); }
 function st(p) { return S[p.id] || { s: 0 }; }
 /* Ước tính rủi ro hoàn hủy từ rating, review, danh mục, giá (Topview không có số hoàn hủy thật). 0-1 Thấp, 2-3 Vừa, 4+ Cao */
@@ -133,6 +138,14 @@ function refTag(p) {
   var k = risk(p);
   return '<span class="tg risk ' + k.lv + '">↩ Rủi ro hoàn hủy: ' + k.label + '</span>';
 }
+function pc(r) { return Math.round(r * 100) + '%'; }
+function mixBar(p) {
+  var m = p.mix;
+  return '<div class="mixbar" role="img" aria-label="Doanh thu: video ' + pc(m.v.g / p.tg) + ', live ' + pc(m.l.g / p.tg) + ', thẻ sản phẩm ' + pc(m.c.g / p.tg) + '"><i class="mv" style="flex:' + m.v.g + '"></i><i class="ml" style="flex:' + m.l.g + '"></i><i class="mc" style="flex:' + m.c.g + '"></i></div>';
+}
+function mixText(p) {
+  return '<p class="mixt"><span class="v">Video <b>' + tr(p.vg) + '</b></span><span class="l">Live ' + tr(p.lg) + '</span><span class="c">Thẻ SP ' + tr(p.cg) + '</span></p>';
+}
 function thumb(p) {
   var t = trend(p);
   return '<div class="thumb"><img alt="" src="' + p.img + '" loading="lazy"><span class="badge ' + t.c + '">' + t.tx + '</span></div>';
@@ -140,7 +153,7 @@ function thumb(p) {
 function info(p, showState) {
   var s = st(p);
   return '<div class="info"><h2 class="nm">' + esc(p.title) + '</h2><p class="shopn">' + esc(p.shop) + ' · ' + esc(p.cat) + '</p>' +
-    '<p class="big"><b>' + nf(p.o7) + '</b> đơn · ' + tr(p.rev) + '</p>' +
+    '<p class="big"><b>' + nf(p.o7) + '</b> đơn · ' + tr(p.rev) + '</p>' + mixBar(p) + mixText(p) +
     (showState ? '<span class="chipst s' + s.s + '">' + ST[s.s] + '</span>' : '<div class="mini">' + spark(p) + '<span>' + p.creators + ' creator · ' + p.vids + ' video</span></div>') +
     '<div class="tags">' + growTag(p) + refTag(p) + (p.roas ? '<span class="tg roas">ROAS ' + p.roas.toLocaleString('vi-VN', { maximumFractionDigits: 1 }) + '</span>' : '') + '</div></div>';
 }
@@ -160,19 +173,22 @@ function winRow(p) {
   var num = p.videos.length ? p.vOrders : '—';
   return '<article class="wrow" data-id="' + p.id + '" tabindex="0" role="button" aria-label="' + esc(p.shop) + ': video tốt nhất ' + num + ' đơn. Mở chi tiết">' +
     '<div class="wthumb"><img alt="" src="' + p.img + '" loading="lazy"></div>' +
-    '<div class="winfo"><h2 class="nm">' + esc(p.title) + '</h2><p class="shopn">' + esc(p.shop) + '</p>' +
+    '<div class="winfo"><h2 class="nm">' + esc(p.title) + '</h2><p class="shopn">' + esc(p.shop) + '</p>' + mixBar(p) + mixText(p) +
     '<div class="tags">' + tag + growTag(p) + refTag(p) + (p.roas ? '<span class="tg roas">ROAS ' + p.roas.toLocaleString('vi-VN', { maximumFractionDigits: 1 }) + '</span>' : '') + '</div></div>' +
     '<div class="wnum"><b>' + num + '</b><span>đơn video</span></div></article>';
+}
+function vminHTML() {
+  return VOPTS.map(function (o) { return '<button type="button" class="seg" data-vmin="' + o[0] + '" aria-pressed="' + (vmin === o[0]) + '">' + o[1] + '</button>'; }).join('');
 }
 function empty(msg) { return '<div class="empty">' + msg + '</div>'; }
 function sortBy(a, k) { return a.sort(function (x, y) { return y[k] - x[k]; }); }
 
 /* ---------- các màn ---------- */
 function renderHome() {
-  var c = [0, 0, 0, 0], wait = 0;
-  P.forEach(function (p) { var s = st(p); c[s.s]++; if (s.s === 1 && isToday(s.rcv)) wait++; });
+  var c = [0, 0, 0, 0], wait = 0, L = V();
+  L.forEach(function (p) { var s = st(p); c[s.s]++; if (s.s === 1 && isToday(s.rcv)) wait++; });
   var d = new Date();
-  $('homesub').textContent = 'Demo · ' + P.length + ' sản phẩm tăng trưởng ≥ ×2 · ' + p2(d.getDate()) + '/' + p2(d.getMonth() + 1);
+  $('homesub').textContent = 'Demo · ' + L.length + ' sản phẩm' + (vmin ? ' có doanh thu video ≥ ' + tr(vmin) : '') + ', tăng trưởng ≥ ×2 · ' + p2(d.getDate()) + '/' + p2(d.getMonth() + 1);
   var tiles = [['Mới quét', c[0], '', 'chua'], ['Đã nhận mẫu', c[1], wait + ' nhận hôm nay', 'cho'], ['KOCs đang quay', c[2], '', 'quay'], ['Đã quay xong', c[3], '', 'xong']];
   $('stats').innerHTML = tiles.map(function (t) {
     return '<button type="button" class="tile" data-go="hang-mau" data-seg="' + t[3] + '"><b>' + t[1] + '</b><span>' + t[0] + '</span>' + (t[2] ? '<small>' + t[2] + '</small>' : '') + '</button>';
@@ -182,7 +198,7 @@ function renderHome() {
   if (wait) todo += '<button type="button" class="todo" data-go="hang-mau" data-seg="cho"><span class="n">' + wait + '</span>mẫu nhận hôm nay, chờ giao KOCs quay<span class="go">›</span></button>';
   if (c[2]) todo += '<button type="button" class="todo" data-go="hang-mau" data-seg="quay"><span class="n">' + c[2] + '</span>mẫu KOCs đang quay, chờ cập nhật<span class="go">›</span></button>';
   $('todo').innerHTML = todo || empty('Không có việc cần làm.');
-  $('topList').innerHTML = sortBy(P.slice(), 'rev').slice(0, 3).map(function (p) { return rowHTML(p, 'home'); }).join('');
+  $('topList').innerHTML = sortBy(L.slice(), 'vg').slice(0, 3).map(function (p) { return rowHTML(p, 'home'); }).join('');
 }
 function segBtns(el, defs, cur, counts) {
   el.innerHTML = defs.map(function (d, i) {
@@ -190,13 +206,14 @@ function segBtns(el, defs, cur, counts) {
   }).join('');
 }
 function renderSample() {
-  var cnt = [0, 0, 0, 0]; P.forEach(function (p) { cnt[st(p).s]++; });
-  segBtns($('segSample'), [['chua', 'Chưa nhận'], ['cho', 'Chờ giao'], ['quay', 'Đang quay'], ['xong', 'Đã xong'], ['all', 'Tất cả']], segSample, [cnt[0], cnt[1], cnt[2], cnt[3], P.length]);
+  var L = V(), cnt = [0, 0, 0, 0]; L.forEach(function (p) { cnt[st(p).s]++; });
+  $('vminS').innerHTML = vminHTML();
+  segBtns($('segSample'), [['chua', 'Chưa nhận'], ['cho', 'Chờ giao'], ['quay', 'Đang quay'], ['xong', 'Đã xong'], ['all', 'Tất cả']], segSample, [cnt[0], cnt[1], cnt[2], cnt[3], L.length]);
   var q = norm(query.trim()), want = { chua: 0, cho: 1, quay: 2, xong: 3 }[segSample];
   var showOpts = segSample === 'cho' && !q;
   $('optsSample').hidden = !showOpts;
   $('todayBtn').setAttribute('aria-pressed', String(todayOnly));
-  var items = P.filter(function (p) {
+  var items = L.filter(function (p) {
     var s = st(p);
     if (!q) {
       if (want !== undefined && s.s !== want) return false;
@@ -204,20 +221,21 @@ function renderSample() {
     }
     return !q || norm(p.title + ' ' + p.shop + ' ' + p.id).indexOf(q) >= 0;
   });
-  sortBy(items, showOpts ? sortA : 'rev');
-  var label = q ? 'tìm trong tất cả' : (segSample === 'cho' ? 'chờ giao' + (todayOnly ? ', nhận hôm nay' : '') + ' · ưu tiên theo ' + $('sortA').selectedOptions[0].text.toLowerCase() : 'sắp theo doanh thu 7 ngày');
+  sortBy(items, showOpts ? sortA : 'vg');
+  var label = q ? 'tìm trong tất cả' : (segSample === 'cho' ? 'chờ giao' + (todayOnly ? ', nhận hôm nay' : '') + ' · ưu tiên theo ' + $('sortA').selectedOptions[0].text.toLowerCase() : 'sắp theo doanh thu video 7 ngày');
   $('cntSample').textContent = items.length + ' sản phẩm · ' + label;
   var hint = { chua: 'Không còn sản phẩm nào chờ nhận mẫu.', cho: 'Chưa có mẫu nào chờ giao. Nhân viên bấm “Đã nhận mẫu” ở mục Chưa nhận, hoặc tắt lọc “Nhận hôm nay”.', quay: 'Chưa có mẫu nào đang quay.', xong: 'Chưa có video nào quay xong.', all: 'Không có sản phẩm.' }[segSample];
   $('sampleList').innerHTML = items.length ? items.map(function (p) { return rowHTML(p, 'sample'); }).join('') : empty(q ? 'Không tìm thấy sản phẩm nào.' : hint);
 }
 function renderWin() {
-  var items = P.slice().sort(function (a, b) { return b.vOrders - a.vOrders || b.o7 - a.o7; });
+  var items = V().sort(function (a, b) { return b.vOrders - a.vOrders || b.o7 - a.o7; });
   var n = items.filter(function (p) { return p.vOrders > 0; }).length;
-  $('cntWin').textContent = P.length + ' sản phẩm · ' + n + ' có video ra đơn';
+  $('vminW').innerHTML = vminHTML();
+  $('cntWin').textContent = items.length + ' sản phẩm · ' + n + ' có video ra đơn';
   $('winList').innerHTML = items.map(winRow).join('');
 }
 function renderBadge() {
-  var n = P.filter(function (p) { return st(p).s === 0; }).length, b = $('bdg');
+  var n = V().filter(function (p) { return st(p).s === 0; }).length, b = $('bdg');
   b.hidden = !n; b.textContent = n;
 }
 
@@ -230,6 +248,13 @@ function videoRows(p) {
       '<span class="o' + (v.orders > 0 ? ' win' : '') + '">' + nf(v.orders) + ' đơn</span>' +
       '<span class="s">' + esc(meta) + '</span><span class="s roas" style="text-align:right">' + (v.roas ? 'ROAS ' + v.roas.toLocaleString('vi-VN', { maximumFractionDigits: 1 }) : '') + '</span></div>';
   }).join('');
+}
+function mixHTML(p) {
+  var m = p.mix, rows = [['v', 'Video', m.v], ['l', 'Live', m.l], ['c', 'Thẻ sản phẩm', m.c]];
+  return '<section class="mixsec"><h3>Doanh thu 7 ngày theo nguồn <small>(' + tr(p.tg) + ')</small></h3>' + mixBar(p) +
+    rows.map(function (r) {
+      return '<div class="mrow ' + r[0] + '"><i></i><b>' + r[1] + '</b><span class="mo">' + nf(r[2].o) + ' đơn</span><span class="mg">' + tr(r[2].g) + '</span><span class="mp">' + pc(r[2].g / p.tg) + '</span></div>';
+    }).join('') + '<small>Thẻ sản phẩm = đơn không qua video hay live (thẻ sản phẩm, trang shop, tìm kiếm và nguồn khác). Doanh thu video ' + (p.vg >= vmin || !vmin ? 'đạt' : 'chưa đạt') + ' ngưỡng ' + (vmin ? tr(vmin) : 'lọc') + '.</small></section>';
 }
 function detailHTML(p) {
   var t = trend(p), s = st(p), peak = Math.max.apply(null, p.days) || 1, bars = '', labels = '';
@@ -248,6 +273,7 @@ function detailHTML(p) {
     '<div class="chips"><span class="chip shop">' + SHOPICON + esc(p.shop) + '</span><span class="chip cat">' + CATICON + esc(p.cat) + '</span></div>' +
     '<p class="sum">7 ngày: <b>' + nf(p.o7) + ' đơn</b> · ' + tr(p.rev) + '</p>' +
     '<div><div class="bars" role="img" aria-label="Đơn mỗi ngày: ' + p.days.join(', ') + '">' + bars + '</div><div class="labels">' + labels + '</div></div>' +
+    mixHTML(p) +
     '<section class="mix"><h3>Chỉ số lọc</h3>' + kpi + '<p class="ads" style="margin-top:10px"><b>Ads:</b> ' + esc(p.ads) + '<br><b>ROAS:</b> ' + (p.roas ? p.roas.toLocaleString('vi-VN', { maximumFractionDigits: 1 }) : 'chưa có') + ' · Ra mắt ' + esc(p.found) + '</p></section>' +
     '<section class="riskbox ' + k.lv + '"><h3>Rủi ro hoàn hủy: ' + k.label + ' <small>(' + k.score + ' điểm)</small></h3><ul>' + k.f.map(function (x) { return '<li class="' + (x.pts ? 'bad' : 'ok') + '"><b>' + (x.pts ? '+' + x.pts : '0') + '</b><span>' + esc(x.t) + '</span></li>'; }).join('') + '</ul><small>Ước tính từ chỉ số Topview, không phải số hoàn hủy thật của TikTok. Dùng để ưu tiên chọn mẫu.</small></section>' +
     '<section><h3 class="sec" style="margin:4px 0 8px">Video ra đơn (' + p.videos.length + '/' + p.videoTotal + ' video)</h3>' + videoRows(p) + '</section>' +
@@ -314,6 +340,7 @@ document.addEventListener('click', function (e) {
   var n = e.target.closest('.nav button[data-tab]'); if (n) { go(n.dataset.tab); return; }
   if (e.target.closest('#fab')) { query = ''; $('q').value = ''; go('hang-mau', 'all'); setTimeout(function () { $('q').focus(); }, 80); return; }
   var g = e.target.closest('[data-go]'); if (g) { go(g.dataset.go, g.dataset.seg); return; }
+  var vb = e.target.closest('[data-vmin]'); if (vb) { vmin = parseFloat(vb.dataset.vmin); lsSet(VKEY, String(vmin)); render(); return; }
   var sg = e.target.closest('#segSample .seg'); if (sg) { segSample = sg.dataset.seg; render(); return; }
   if (e.target.closest('#todayBtn')) { todayOnly = !todayOnly; render(); return; }
   var r = e.target.closest('.row, .wrow'); if (r && r.dataset.id) { openProduct(r.dataset.id); return; }
@@ -343,5 +370,5 @@ $('reset').addEventListener('click', function () {
 });
 window.addEventListener('hashchange', route);
 
-load(); route();
+loadV(); load(); route();
 })();
