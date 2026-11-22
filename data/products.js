@@ -1,0 +1,639 @@
+/* Dữ liệu demo lấy từ Topview (Tabcut) ngày 22/11/2026. Cửa sổ 7 ngày: 15/11-21/11.
+   Doanh thu = số đơn x giá niêm yết. "refund" (hoàn hủy) Topview không trả về nên để null. */
+window.APP_DATA = {
+ "asOf": "2026-11-22",
+ "days": [
+  {
+   "d": "CN",
+   "n": "15/11"
+  },
+  {
+   "d": "T2",
+   "n": "16/11"
+  },
+  {
+   "d": "T3",
+   "n": "17/11"
+  },
+  {
+   "d": "T4",
+   "n": "18/11"
+  },
+  {
+   "d": "T5",
+   "n": "19/11"
+  },
+  {
+   "d": "T6",
+   "n": "20/11"
+  },
+  {
+   "d": "T7",
+   "n": "21/11"
+  }
+ ],
+ "products": [
+  {
+   "id": "1738367783340639579",
+   "title": "[ Deal Hot ] Quần Ống Loe Cạp Cao Vải Co Giãn Chất Len Lông Thỏ Mềm Mịn Siêu Tôn Dáng",
+   "shop": "Nhà LaLa",
+   "cat": "Quần nữ",
+   "price": 99000,
+   "total": 1221,
+   "days": [
+    0,
+    0,
+    87,
+    278,
+    257,
+    333,
+    265
+   ],
+   "prev": 1,
+   "found": "06/11",
+   "creators": 19,
+   "vids": 7,
+   "ads": "Chưa thấy video chạy ads (5 video top)",
+   "insight": "Bắt đầu bán từ 17/11, đang giữ 250–330 đơn mỗi ngày. Chủ yếu bán qua live (70 phiên live), video mới có 1 đơn mỗi video.",
+   "videos": [
+    {
+     "handle": "duonganhpham22",
+     "name": "duonganhpham22",
+     "id": "7709339531069246727",
+     "url": "https://www.tiktok.com/@duonganhpham22/video/7709339531069246727",
+     "views": 458,
+     "orders": 1,
+     "date": "2026-11-18",
+     "followers": 8351,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    },
+    {
+     "handle": "lacloset59",
+     "name": "lacloset59",
+     "id": "7709305860727541013",
+     "url": "https://www.tiktok.com/@lacloset59/video/7709305860727541013",
+     "views": 54,
+     "orders": 0,
+     "date": "2026-11-18",
+     "followers": 1273,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    },
+    {
+     "handle": "lacloset59",
+     "name": "lacloset59",
+     "id": "7709380567250259220",
+     "url": "https://www.tiktok.com/@lacloset59/video/7709380567250259220",
+     "views": 96,
+     "orders": 0,
+     "date": "2026-11-18",
+     "followers": 1273,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    },
+    {
+     "handle": "duonganhpham22",
+     "name": "duonganhpham22",
+     "id": "7709677385196522770",
+     "url": "https://www.tiktok.com/@duonganhpham22/video/7709677385196522770",
+     "views": 230,
+     "orders": 0,
+     "date": "2026-11-19",
+     "followers": 8351,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    },
+    {
+     "handle": "lacloset59",
+     "name": "lacloset59",
+     "id": "7709811245788007700",
+     "url": "https://www.tiktok.com/@lacloset59/video/7709811245788007700",
+     "views": 17,
+     "orders": 0,
+     "date": "2026-11-19",
+     "followers": 1273,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    }
+   ],
+   "img": "img/1738367783340639579.jpg",
+   "videoTotal": 7,
+   "refund": null
+  },
+  {
+   "id": "1738384433092986077",
+   "title": "[TST-09] Váy ngủ 2 dây Lụa Latin đính nơ siêu xinh",
+   "shop": "Trend Store - Đồ Bộ Xinh",
+   "cat": "Đồ ngủ",
+   "price": 89000,
+   "total": 332,
+   "days": [
+    0,
+    7,
+    13,
+    49,
+    73,
+    74,
+    115
+   ],
+   "prev": 1,
+   "found": "12/11",
+   "creators": 7,
+   "vids": 2,
+   "ads": "Chưa thấy video chạy ads",
+   "insight": "Tăng đều mỗi ngày, ngày cuối cao nhất (115 đơn). Còn rất ít video nên còn chỗ để làm content.",
+   "videos": [
+    {
+     "handle": "trang20072022",
+     "name": "trang20072022",
+     "id": "7709410884572957960",
+     "url": "https://www.tiktok.com/@trang20072022/video/7709410884572957960",
+     "views": 181,
+     "orders": 0,
+     "date": "2026-11-18",
+     "followers": 4750,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    },
+    {
+     "handle": "quyenquyen2411",
+     "name": "quyenquyen2411",
+     "id": "7710561484870372616",
+     "url": "https://www.tiktok.com/@quyenquyen2411/video/7710561484870372616",
+     "views": 3,
+     "orders": 0,
+     "date": "2026-11-21",
+     "followers": 2116,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    }
+   ],
+   "img": "img/1738384433092986077.jpg",
+   "videoTotal": 2,
+   "refund": null
+  },
+  {
+   "id": "1738338776050141167",
+   "title": "[DEAL SOCK] Chân Váy Kaki Chữ A Nữ Phối Cúc Phong Cách Hàn Quốc Siêu Hot",
+   "shop": "Nhà Ngọc Clothing",
+   "cat": "Chân váy",
+   "price": 169000,
+   "total": 857,
+   "days": [
+    0,
+    31,
+    15,
+    60,
+    160,
+    396,
+    190
+   ],
+   "prev": 5,
+   "found": "03/11",
+   "creators": 7,
+   "vids": 0,
+   "ads": "Chưa có video",
+   "insight": "Đỉnh 396 đơn ngày 20/11, hôm sau còn 190. Chưa có video nào gắn link, toàn bộ bán từ live: cơ hội cho video đầu tiên.",
+   "videos": [],
+   "img": "img/1738338776050141167.jpg",
+   "videoTotal": 0,
+   "refund": null
+  },
+  {
+   "id": "1738188027509179732",
+   "title": "[ Hàng L1 ]Sét Bộ Kẻ Áo Bèo Nơ Basic Dễ Mặc Dành Cho Nữ",
+   "shop": "The Blue Muse",
+   "cat": "Bộ set",
+   "price": 147060,
+   "total": 384,
+   "days": [
+    0,
+    0,
+    283,
+    44,
+    0,
+    0,
+    0
+   ],
+   "prev": 4,
+   "found": "29/10",
+   "creators": 3,
+   "vids": 9,
+   "ads": "Có chạy ads: 3/5 video top, chưa ghi nhận đơn từ ads",
+   "insight": "Chỉ có 2 ngày bán (283 và 44 đơn) rồi về 0 từ 19/11. Đột biến một lần, không phải xu hướng ổn định. Nên loại.",
+   "videos": [
+    {
+     "handle": "68loinguyen",
+     "name": "68loinguyen",
+     "id": "7702991805700132102",
+     "url": "https://www.tiktok.com/@68loinguyen/video/7702991805700132102",
+     "views": 71,
+     "orders": 0,
+     "date": "2026-11-01",
+     "followers": 1908,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    },
+    {
+     "handle": "motmodongu",
+     "name": "motmodongu",
+     "id": "7705473504908692744",
+     "url": "https://www.tiktok.com/@motmodongu/video/7705473504908692744",
+     "views": 123,
+     "orders": 0,
+     "date": "2026-11-08",
+     "followers": 2668,
+     "adCost": 2105,
+     "ads": true,
+     "roas": 0
+    },
+    {
+     "handle": "cattienmacgi",
+     "name": "cattienmacgi",
+     "id": "7706391535352352021",
+     "url": "https://www.tiktok.com/@cattienmacgi/video/7706391535352352021",
+     "views": 832,
+     "orders": 0,
+     "date": "2026-11-10",
+     "followers": 56771,
+     "adCost": 12105,
+     "ads": true,
+     "roas": 0
+    },
+    {
+     "handle": "cattienmacgi",
+     "name": "cattienmacgi",
+     "id": "7706391776411553045",
+     "url": "https://www.tiktok.com/@cattienmacgi/video/7706391776411553045",
+     "views": 240,
+     "orders": 0,
+     "date": "2026-11-10",
+     "followers": 56771,
+     "adCost": 6053,
+     "ads": true,
+     "roas": 0
+    },
+    {
+     "handle": "141290td",
+     "name": "141290td",
+     "id": "7707092308373589269",
+     "url": "https://www.tiktok.com/@141290td/video/7707092308373589269",
+     "views": 127,
+     "orders": 0,
+     "date": "2026-11-12",
+     "followers": 4621,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    }
+   ],
+   "img": "img/1738188027509179732.jpg",
+   "videoTotal": 9,
+   "refund": null
+  },
+  {
+   "id": "1737979950169883719",
+   "title": "[ TULANDUT ] Áo lót phản trọng lực- Tulandut, không gọng, thoáng khí, thoải mái, nâng đỡ tốt 62298",
+   "shop": "TULANDUT-Woman",
+   "cat": "Đồ lót",
+   "price": 534652,
+   "total": 2723,
+   "days": [
+    0,
+    97,
+    163,
+    305,
+    262,
+    210,
+    120
+   ],
+   "prev": 15,
+   "found": "15/10",
+   "creators": 0,
+   "vids": 0,
+   "ads": "Không có video, không có creator",
+   "insight": "Đơn đạt đỉnh 305 ngày 18/11 rồi giảm dần còn 120. Hoàn toàn không có creator hay video, shop bán qua trang sản phẩm và quảng cáo của shop.",
+   "videos": [],
+   "img": "img/1737979950169883719.jpg",
+   "videoTotal": 0,
+   "refund": null
+  },
+  {
+   "id": "1737638480021849980",
+   "title": "( ÁO KIỂU RỜI ) Áo thiết kế CRAZYTEEN A0014 kiểu sơ mi tay dài để phối đồ áo nữ áo kiểu nữ",
+   "shop": "THỜI TRANG CRAZYTEEN",
+   "cat": "Áo kiểu",
+   "price": 125999,
+   "total": 778,
+   "days": [
+    211,
+    161,
+    57,
+    22,
+    137,
+    24,
+    0
+   ],
+   "prev": 11,
+   "found": "02/11",
+   "creators": 7,
+   "vids": 2,
+   "ads": "Có chạy ads: 1/2 video, chưa ghi nhận đơn từ ads",
+   "insight": "Đỉnh 211 đơn ngày 15/11 rồi giảm, ngày 21/11 về 0. Đang tắt dần, ít đáng làm.",
+   "videos": [
+    {
+     "handle": "conchua35",
+     "name": "conchua35",
+     "id": "7705283886548274450",
+     "url": "https://www.tiktok.com/@conchua35/video/7705283886548274450",
+     "views": 761,
+     "orders": 1,
+     "date": "2026-11-07",
+     "followers": 1109,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    },
+    {
+     "handle": "usernglkylqxsf",
+     "name": "usernglkylqxsf",
+     "id": "7708727900274478344",
+     "url": "https://www.tiktok.com/@usernglkylqxsf/video/7708727900274478344",
+     "views": 181,
+     "orders": 0,
+     "date": "2026-11-16",
+     "followers": 1513,
+     "adCost": 2105,
+     "ads": true,
+     "roas": 0
+    }
+   ],
+   "img": "img/1737638480021849980.jpg",
+   "videoTotal": 2,
+   "refund": null
+  },
+  {
+   "id": "1738303884505548673",
+   "title": "COMBO 3 ÁO NÂNG 3CM, KHÔNG GỌNG, ÁO LÓT SU GẤM HOA ĐẸP MẮT, CHẤT ĐẸP, MÚT MỀM, CO DÃN TỐT",
+   "shop": "Tiệm Nhà Ben Dừa",
+   "cat": "Đồ lót",
+   "price": 137461,
+   "total": 920,
+   "days": [
+    0,
+    116,
+    124,
+    75,
+    111,
+    241,
+    224
+   ],
+   "prev": 25,
+   "found": "08/11",
+   "creators": 4,
+   "vids": 1,
+   "ads": "Chưa thấy video chạy ads",
+   "insight": "Hai ngày gần nhất cao nhất (241 và 224 đơn), xu hướng đang lên. Shop mới, chỉ có 1 video gắn link.",
+   "videos": [
+    {
+     "handle": "lahang06",
+     "name": "lahang06",
+     "id": "7709697428999441716",
+     "url": "https://www.tiktok.com/@lahang06/video/7709697428999441716",
+     "views": 59,
+     "orders": 0,
+     "date": "2026-11-19",
+     "followers": 2254,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    }
+   ],
+   "img": "img/1738303884505548673.jpg",
+   "videoTotal": 1,
+   "refund": null
+  },
+  {
+   "id": "1738334195812828492",
+   "title": "T2 - 2615 | Áo Vintage Tăm Thỏ, Cổ Bèo Dây Nơ, Có Túi Ngực, Kiểu Dáng Thanh Lịch",
+   "shop": "T2-Fashion",
+   "cat": "Áo kiểu",
+   "price": 139150,
+   "total": 343,
+   "days": [
+    0,
+    0,
+    187,
+    0,
+    0,
+    0,
+    135
+   ],
+   "prev": 10,
+   "found": "10/11",
+   "creators": 6,
+   "vids": 8,
+   "ads": "Có chạy ads: 1/5 video top, chưa ghi nhận đơn từ ads",
+   "insight": "Chỉ có đơn vào 2 ngày (187 ngày 17/11 và 135 ngày 21/11), các ngày còn lại bằng 0. Số liệu đứt quãng, cần xem lại sau vài ngày.",
+   "videos": [
+    {
+     "handle": "nhungnhonhan.95",
+     "name": "nhungnhonhan.95",
+     "id": "7709145293870173492",
+     "url": "https://www.tiktok.com/@nhungnhonhan.95/video/7709145293870173492",
+     "views": 985,
+     "orders": 1,
+     "date": "2026-11-17",
+     "followers": 297200,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    },
+    {
+     "handle": "nguyenphuongthuy.tiktok",
+     "name": "nguyenphuongthuy.tiktok",
+     "id": "7706719172440411399",
+     "url": "https://www.tiktok.com/@nguyenphuongthuy.tiktok/video/7706719172440411399",
+     "views": 44,
+     "orders": 0,
+     "date": "2026-11-11",
+     "followers": 2155,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    },
+    {
+     "handle": "kg.ngan2412",
+     "name": "kg.ngan2412",
+     "id": "7706823213900238101",
+     "url": "https://www.tiktok.com/@kg.ngan2412/video/7706823213900238101",
+     "views": 83,
+     "orders": 0,
+     "date": "2026-11-11",
+     "followers": 2539,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    },
+    {
+     "handle": "bunny.revieww",
+     "name": "bunny.revieww",
+     "id": "7707568238447693077",
+     "url": "https://www.tiktok.com/@bunny.revieww/video/7707568238447693077",
+     "views": 80,
+     "orders": 0,
+     "date": "2026-11-13",
+     "followers": 2191,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    },
+    {
+     "handle": "truongthithao20",
+     "name": "truongthithao20",
+     "id": "7707989299362401554",
+     "url": "https://www.tiktok.com/@truongthithao20/video/7707989299362401554",
+     "views": 3317,
+     "orders": 0,
+     "date": "2026-11-14",
+     "followers": 152016,
+     "adCost": 30263,
+     "ads": true,
+     "roas": 0
+    }
+   ],
+   "img": "img/1738334195812828492.jpg",
+   "videoTotal": 8,
+   "refund": null
+  },
+  {
+   "id": "1738526139560855310",
+   "title": "(BẢN NÂNG CẤP) Áo khoác trần bông 3 lớp nữ có mũ bản mới siêu xinh",
+   "shop": "TÍT SSHOP",
+   "cat": "Áo khoác",
+   "price": 129000,
+   "total": 596,
+   "days": [
+    69,
+    138,
+    171,
+    93,
+    47,
+    29,
+    27
+   ],
+   "prev": 20,
+   "found": "13/11",
+   "creators": 5,
+   "vids": 0,
+   "ads": "Chưa có video",
+   "insight": "Đỉnh 171 đơn ngày 17/11 rồi giảm còn 27. Đang nguội, nhưng chưa có video nào.",
+   "videos": [],
+   "img": "img/1738526139560855310.jpg",
+   "videoTotal": 0,
+   "refund": null
+  },
+  {
+   "id": "1738173466710869551",
+   "title": "Áo thun nữ tay dài, cổ vuông, vai phải, màu cam bí ngô, bộ sưu tập mới thu đông 2026, thiết kế dành cho những người có vóc dáng hơi đầy đặn",
+   "shop": "Ellas Daily Fit",
+   "cat": "Áo thun",
+   "price": 114447,
+   "total": 388,
+   "days": [
+    16,
+    9,
+    92,
+    62,
+    122,
+    36,
+    25
+   ],
+   "prev": 16,
+   "found": "12/11",
+   "creators": 12,
+   "vids": 9,
+   "ads": "Có chạy ads: 4/5 video top, 1 video có ROAS 10,4",
+   "insight": "Đơn lên từ 17/11 nhờ nhiều video (9 video, 12 creator), 2 video top đang chạy ads. Đang giảm sau đỉnh 122 đơn ngày 19/11.",
+   "videos": [
+    {
+     "handle": "shopdodep46",
+     "name": "shopdodep46",
+     "id": "7709111000905157908",
+     "url": "https://www.tiktok.com/@shopdodep46/video/7709111000905157908",
+     "views": 427,
+     "orders": 1,
+     "date": "2026-11-17",
+     "followers": 5036,
+     "adCost": 263,
+     "ads": true,
+     "roas": 0
+    },
+    {
+     "handle": "mie2k6min",
+     "name": "mie2k6min",
+     "id": "7709407996580809991",
+     "url": "https://www.tiktok.com/@mie2k6min/video/7709407996580809991",
+     "views": 512,
+     "orders": 1,
+     "date": "2026-11-18",
+     "followers": 1540,
+     "adCost": 11053,
+     "ads": true,
+     "roas": 10.44
+    },
+    {
+     "handle": "minhthu94ngohoang",
+     "name": "minhthu94ngohoang",
+     "id": "7706947685722508564",
+     "url": "https://www.tiktok.com/@minhthu94ngohoang/video/7706947685722508564",
+     "views": 632,
+     "orders": 0,
+     "date": "2026-11-11",
+     "followers": 2463,
+     "adCost": 0,
+     "ads": false,
+     "roas": 0
+    },
+    {
+     "handle": "hoangngan.1998",
+     "name": "hoangngan.1998",
+     "id": "7708786152450346261",
+     "url": "https://www.tiktok.com/@hoangngan.1998/video/7708786152450346261",
+     "views": 106,
+     "orders": 0,
+     "date": "2026-11-16",
+     "followers": 19000,
+     "adCost": 3158,
+     "ads": true,
+     "roas": 0
+    },
+    {
+     "handle": "shopcuadi22",
+     "name": "shopcuadi22",
+     "id": "7708918872816274696",
+     "url": "https://www.tiktok.com/@shopcuadi22/video/7708918872816274696",
+     "views": 266,
+     "orders": 0,
+     "date": "2026-11-17",
+     "followers": 1377,
+     "adCost": 3947,
+     "ads": true,
+     "roas": 0
+    }
+   ],
+   "img": "img/1738173466710869551.jpg",
+   "videoTotal": 9,
+   "refund": null
+  }
+ ]
+};
