@@ -4,8 +4,8 @@
 'use strict';
 
 var D = window.APP_DATA, P = D.products, DAYS = D.days;
-var TABS = ['tong-quan', 'hang-mau', 'win-video', 'menu'];
-var VIEW = { 'tong-quan': 'v-home', 'hang-mau': 'v-sample', 'win-video': 'v-win', 'menu': 'v-menu' };
+var TABS = ['tong-quan', 'hang-mau', 'win-video', 'kenh', 'menu'];
+var VIEW = { 'tong-quan': 'v-home', 'hang-mau': 'v-sample', 'win-video': 'v-win', 'kenh': 'v-kenh', 'menu': 'v-menu' };
 var ST = ['Mới quét', 'Đã nhận mẫu', 'KOCs đang quay', 'Đã quay xong'];
 var KEY = 'qlmau-v2';
 var S = {}, tab = 'tong-quan', openId = null, lastUndo = null, toastT = null;
@@ -239,6 +239,64 @@ function renderBadge() {
   b.hidden = !n; b.textContent = n;
 }
 
+/* ---------- Kênh của tôi (đơn affiliate xuất từ Trung tâm Affiliate) ---------- */
+var CKEY = 'qlmau-kenh', CH = null, chSort = 'gmv', chMsg = '';
+function num(v) { if (typeof v === 'number') return v; var t = String(v == null ? '' : v).replace(/\./g, '').replace(',', '.'); return parseFloat(t) || 0; }
+function loadCh() {
+  var r = null; try { r = JSON.parse(lsGet(CKEY) || 'null'); } catch (e) { r = null; }
+  CH = (r && r.rows && r.rows.length) ? r : window.CHANNEL_SAMPLE || { name: '', rows: [] };
+}
+function typeOf(t) { t = norm(t || ''); return t.indexOf('live') >= 0 ? 'l' : (t.indexOf('video') >= 0 ? 'v' : 'c'); }
+function aggCh(rows) {
+  var M = {}, T = { o: 0, qty: 0, ref: 0, gmv: 0, got: 0, v: { o: 0, g: 0 }, l: { o: 0, g: 0 }, c: { o: 0, g: 0 }, open: 0 }, seen = {};
+  rows.forEach(function (r) {
+    var p = M[r.pid] || (M[r.pid] = { pid: r.pid, name: r.name, shop: r.shop, o: 0, qty: 0, ref: 0, gmv: 0, got: 0, v: { o: 0, g: 0 }, l: { o: 0, g: 0 }, c: { o: 0, g: 0 }, open: 0, last: '' });
+    var k = typeOf(r.type), settled = norm(r.st || '').indexOf('a quyet toan') >= 0 || !r.st;
+    [p, T].forEach(function (x) {
+      x.o++; x.qty += r.qty; x.ref += r.ref; x.gmv += r.gmv; x.got += r.got; x[k].o++; x[k].g += r.gmv; if (!settled) x.open++;
+    });
+    p.last = r.date > p.last ? r.date : p.last;
+  });
+  return { list: Object.keys(M).map(function (k) { return M[k]; }), tot: T };
+}
+function refTagCh(x, has) {
+  if (x.ref > 0) return '<span class="tg risk ' + (x.ref / x.qty >= 0.15 ? 'high' : (x.ref / x.qty >= 0.08 ? 'mid' : 'low')) + '">↩ Hoàn ' + x.ref + '/' + x.qty + ' (' + pct(x.ref / x.qty * 100) + ')</span>';
+  return has ? '<span class="tg risk low">↩ Hoàn 0/' + x.qty + '</span>' : '<span class="tg nowin">↩ Chưa có dữ liệu hoàn</span>';
+}
+function renderKenh() {
+  var a = aggCh(CH.rows), T = a.tot, has = T.ref > 0 || T.open > 0;
+  var d = CH.rows.map(function (r) { return r.date; }).sort(function (x, y) { return x.slice(6) + x.slice(3, 5) + x.slice(0, 2) < y.slice(6) + y.slice(3, 5) + y.slice(0, 2) ? -1 : 1; });
+  $('chSub').textContent = (CH.name || 'Chưa có file') + (d.length ? ' · ' + d[0].slice(0, 5) + '–' + d[d.length - 1].slice(0, 5) : '');
+  $('chMsg').textContent = chMsg;
+  $('chKpi').innerHTML = [[nf(T.o), 'đơn'], [tr(T.gmv), 'doanh thu (GMV)'], [nf(T.v.o) + ' · ' + tr(T.v.g), 'từ video (đơn · tiền)'], [nf(T.l.o) + ' · ' + tr(T.l.g), 'từ live (đơn · tiền)'], [nf(Math.round(T.got)) + '₫', 'hoa hồng đã nhận'], [has ? nf(T.ref) + ' món' : '—', has ? 'đã hoàn tiền' : 'chưa có dữ liệu hoàn']]
+    .map(function (k) { return '<div><b>' + k[0] + '</b><span>' + k[1] + '</span></div>'; }).join('');
+  $('chNote').hidden = has;
+  var list = a.list.slice().sort(function (x, y) { return chSort === 'vo' ? (y.v.o - x.v.o || y.gmv - x.gmv) : chSort === 'ref' ? (y.ref / y.qty - x.ref / x.qty || y.gmv - x.gmv) : chSort === 'o' ? y.o - x.o : y.gmv - x.gmv; });
+  $('chCnt').textContent = list.length + ' sản phẩm đã bán';
+  $('chList').innerHTML = list.map(function (p) {
+    return '<article class="krow"><a class="knm" href="https://www.tiktok.com/view/product/' + esc(p.pid) + '" target="_blank" rel="noopener">' + esc(p.name) + ' ↗</a>' +
+      '<p class="shopn">' + esc(p.shop) + '</p>' +
+      '<div class="kn"><div><b>' + nf(p.o) + '</b><span>đơn</span></div><div><b>' + tr(p.gmv) + '</b><span>doanh thu</span></div><div class="vv"><b>' + nf(p.v.o) + '</b><span>đơn video</span></div><div><b>' + nf(p.l.o) + '</b><span>đơn live</span></div></div>' +
+      '<div class="tags">' + refTagCh(p, has) + '<span class="tg grow">Hoa hồng ' + nf(Math.round(p.got)) + '₫</span></div></article>';
+  }).join('') || empty('Chưa có đơn. Bấm “Tải file đơn affiliate” để thêm.');
+}
+function importCh(file) {
+  if (!window.XLSX) { chMsg = 'Chưa tải được bộ đọc Excel (cần internet). Thử lại sau.'; renderKenh(); return; }
+  var fr = new FileReader();
+  fr.onload = function () {
+    try {
+      var wb = XLSX.read(fr.result, { type: 'array' }), ws = wb.Sheets[wb.SheetNames[0]], js = XLSX.utils.sheet_to_json(ws, { raw: false, defval: '' });
+      var rows = js.filter(function (r) { return r['ID sản phẩm']; }).map(function (r) {
+        return { oid: r['ID đơn hàng'], pid: String(r['ID sản phẩm']), name: r['Tên sản phẩm'], shop: r['Tên cửa hàng'], qty: num(r['Số món bán ra']), ref: num(r['Số món đã hoàn tiền']), st: r['Trạng thái quyết toán đơn hàng'], type: r['Loại nội dung'], cid: r['Id nội dung'], gmv: num(r['GMV']), got: num(r['Tổng số tiền nhận được cuối cùng']), date: String(r['Ngày đặt hàng'] || '').slice(0, 10) };
+      });
+      if (!rows.length) { chMsg = 'File không có dòng đơn hàng hợp lệ. Cần file “affiliate_orders” từ Trung tâm Affiliate.'; renderKenh(); return; }
+      CH = { name: file.name, rows: rows }; lsSet(CKEY, JSON.stringify(CH)); chMsg = 'Đã nạp ' + rows.length + ' dòng đơn từ ' + file.name;
+    } catch (e) { chMsg = 'Không đọc được file này.'; }
+    renderKenh();
+  };
+  fr.readAsArrayBuffer(file);
+}
+
 /* ---------- chi tiết ---------- */
 function videoRows(p) {
   if (!p.videos.length) return '<div class="empty">Chưa có video nào gắn link sản phẩm này.</div>';
@@ -322,7 +380,7 @@ function route() {
 }
 function render() {
   renderBadge();
-  if (tab === 'tong-quan') renderHome(); else if (tab === 'hang-mau') renderSample(); else if (tab === 'win-video') renderWin();
+  if (tab === 'tong-quan') renderHome(); else if (tab === 'hang-mau') renderSample(); else if (tab === 'win-video') renderWin(); else if (tab === 'kenh') renderKenh();
   if (openId) renderSheet();
 }
 
@@ -352,6 +410,8 @@ document.addEventListener('keydown', function (e) {
 });
 $('q').addEventListener('input', function (e) { query = e.target.value; renderSample(); });
 $('sortA').addEventListener('change', function (e) { sortA = e.target.value; renderSample(); });
+$('chFile').addEventListener('change', function (e) { if (e.target.files[0]) importCh(e.target.files[0]); e.target.value = ''; });
+$('chSort').addEventListener('change', function (e) { chSort = e.target.value; renderKenh(); });
 $('tundo').addEventListener('click', undoLast);
 $('back').addEventListener('click', function () {
   if (location.hash.indexOf('#sp-') === 0) { if (history.length > 1) history.back(); else location.hash = 'tong-quan'; }
@@ -370,5 +430,5 @@ $('reset').addEventListener('click', function () {
 });
 window.addEventListener('hashchange', route);
 
-loadV(); load(); route();
+loadV(); load(); loadCh(); route();
 })();

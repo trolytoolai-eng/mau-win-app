@@ -64,3 +64,9 @@ Ads/ROAS chỉ có cho vài sản phẩm cũ; sản phẩm mới ghi "Chưa qué
 - Mỗi sản phẩm có `mix`: `{v, l, c, g}` = doanh thu 7 ngày (15–21/11) từ video, live, thẻ sản phẩm (đơn không qua video/live) và tổng. Mỗi nguồn có `r` (tỉ lệ), `o` (đơn), `g` (₫). Nguồn: Topview `td_item_v2_sales_mode_distribution`.
 - App chỉ hiển thị sản phẩm có doanh thu video >= ngưỡng (mặc định 5tr, chọn 10tr / 20tr / Tất cả ở Hàng mẫu và Win Video).
 - 32 sản phẩm trong dữ liệu, 12 sản phẩm đạt ngưỡng 5tr. Ảnh lấy 640px từ Tabcut (nguồn tối đa 500px).
+
+## Tab Kênh (đơn affiliate của bạn)
+- Tab "Kênh" đọc file `affiliate_orders_*.xlsx` xuất từ Trung tâm Affiliate (nút "Tải file đơn affiliate"). File được đọc ngay trên trình duyệt (SheetJS từ cdnjs), lưu trong localStorage, không gửi đi đâu.
+- Hiển thị theo sản phẩm: tên + link TikTok Shop, doanh thu (GMV), số đơn, đơn từ video, đơn từ live, số món hoàn tiền, hoa hồng đã nhận.
+- Hoàn hủy chỉ tính được khi file có đơn hoàn/hủy. Nếu file chỉ gồm đơn "Đã quyết toán" thì app báo "chưa có dữ liệu hoàn".
+- `data/channel.js` là dữ liệu mẫu (73 đơn, 01-14/11/2026).
