@@ -305,24 +305,10 @@ function renderKenh() {
       '<p class="shopn">' + (isShop ? Object.keys(p.ps).length + ' sản phẩm' : esc(p.shop)) + '</p>' + tag + '</div>' +
       '<div class="kbar" role="img" aria-label="' + (d - p.lost) + ' đơn nhận hoa hồng, ' + p.lost + ' đơn mất"><i class="ok" style="flex:' + (d - p.lost) + '"></i><i class="bad" style="flex:' + p.lost + '"></i></div>' +
       '<div class="kn"><div><b>' + tr(p.gmv) + '</b><span>doanh thu</span></div><div><b>' + nf(p.o) + '</b><span>đơn</span></div><div class="vv"><b>' + nf(p.rf) + '</b><span>hoàn tiền</span></div><div class="vv"><b>' + nf(p.cn) + '</b><span>hủy/loại</span></div></div>' +
-      '<div class="ksp"><span>🎬 Video: ' + nf(p.v.o) + ' đơn' + rateTxt(p.v) + '</span><span>🔴 Live: ' + nf(p.l.o) + ' đơn' + rateTxt(p.l) + '</span>' + (p.pend ? '<span class="pd">⏳ Chờ quyết toán: ' + nf(p.pend) + '</span>' : '') + '</div>' +
+      '<div class="ksp"><div class="sv"><span class="sl">🎬 Video</span><b>' + nf(p.v.o) + ' đơn</b><span class="sr' + (vden(p.v) && p.v.x / vden(p.v) >= 0.3 ? ' hi' : '') + '">' + (vden(p.v) ? 'mất ' + pct(p.v.x / vden(p.v) * 100) : '—') + '</span></div><div class="sv"><span class="sl">🔴 Live</span><b>' + nf(p.l.o) + ' đơn</b><span class="sr' + (vden(p.l) && p.l.x / vden(p.l) >= 0.3 ? ' hi' : '') + '">' + (vden(p.l) ? 'mất ' + pct(p.l.x / vden(p.l) * 100) : '—') + '</span></div></div>' + (p.pend ? '<p class="pd">⏳ ' + nf(p.pend) + ' đơn chờ quyết toán, chưa tính vào tỉ lệ</p>' : '') +
       '<div class="kf"><span>Hoa hồng nhận ' + nf(Math.round(p.got)) + '₫</span>' + (p.lost ? '<span>Mất ~' + tr(p.lgmv) + ' doanh thu</span>' : '') + '</div></article>';
   }).join('') || empty('Chưa có đơn. Bấm “Thêm file đơn affiliate” để nạp.');
   buildOwn();
-}
-function exportAvoid() {
-  var a = aggCh(CH.rows, 'sp').list.filter(function (p) { return den(p) >= 10 && p.lost / den(p) >= 0.3; }).sort(function (x, y) { return y.lost / den(y) - x.lost / den(x); });
-  if (!a.length) { chMsg = 'Chưa có sản phẩm nào mất từ 30% (tối thiểu 10 đơn đã chốt).'; renderKenh(); return; }
-  var q = function (v) { return '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"'; };
-  var csv = '﻿ID sản phẩm,Tên sản phẩm,Shop,Đơn đã chốt,Đơn mất,Tỉ lệ mất %,Hoàn tiền,Hủy/loại,Link\n' + a.map(function (p) {
-    return [p.pid, q(p.name), q(p.shop), den(p), p.lost, Math.round(p.lost / den(p) * 100), p.rf, p.cn, 'https://www.tiktok.com/view/product/' + p.pid].join(',');
-  }).join('\n');
-  try {
-    var u = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' })), l = document.createElement('a');
-    l.href = u; l.download = 'san-pham-nen-tranh.csv'; document.body.appendChild(l); l.click(); l.remove(); setTimeout(function () { URL.revokeObjectURL(u); }, 3000);
-    chMsg = 'Đã xuất ' + a.length + ' sản phẩm nên tránh.';
-  } catch (e) { chMsg = 'Trình duyệt chưa cho tải file.'; }
-  renderKenh();
 }
 function readFile(file) {
   return new Promise(function (res) {
@@ -468,7 +454,6 @@ $('q').addEventListener('input', function (e) { query = e.target.value; renderSa
 $('sortA').addEventListener('change', function (e) { sortA = e.target.value; renderSample(); });
 $('chFile').addEventListener('change', function (e) { if (e.target.files.length) importCh(Array.prototype.slice.call(e.target.files), true); e.target.value = ''; });
 $('chMinBtn').addEventListener('click', function () { chMin = !chMin; renderKenh(); });
-$('chAvoid').addEventListener('click', exportAvoid);
 [].forEach.call(document.querySelectorAll('[data-chby]'), function (b) { b.addEventListener('click', function () { chBy = b.getAttribute('data-chby'); renderKenh(); }); });
 $('chSort').addEventListener('change', function (e) { chSort = e.target.value; renderKenh(); });
 $('tundo').addEventListener('click', undoLast);

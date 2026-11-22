@@ -283,7 +283,23 @@ main{padding-bottom:118px}
 .kf{display:flex;flex-wrap:wrap;gap:2px 12px;font:500 12.5px/1.4 var(--sans);color:#6b6578}.kf .bad{color:#a31515;font-weight:700}
 .tg.risk.na{background:#ececf1;color:#4a4757}
 
-.ksp{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 0;font-size:12px}.ksp span{background:var(--bg2,#f3f3f5);border-radius:999px;padding:3px 9px}
 
-.ownw{margin:8px 0 0;padding:6px 10px;border-radius:8px;background:#fdecea;color:#b3261e;font-size:12px;font-weight:600}.ksp .pd{background:#fff4d6;color:#7a5b00}
-#chAvoid{margin-left:auto}
+.ownw{margin:8px 0 0;padding:6px 10px;border-radius:8px;background:#fdecea;color:#b3261e;font-size:12px;font-weight:600}
+
+/* Kênh: giao diện điện thoại */
+.krow .ksp,.krow .pd{grid-column:1/-1}
+.ksp{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.sv{background:#f7f3f6;border-radius:12px;padding:8px 10px;display:flex;flex-direction:column;gap:1px;min-width:0}
+.sv .sl{font:600 12px var(--sans);color:#6b6578}.sv b{font:700 15px var(--sans)}
+.sv .sr{font:600 12.5px var(--sans);color:#6b6578}.sv .sr.hi{color:#a31515}
+.krow .pd{margin:0;padding:8px 10px;border-radius:10px;background:#fff4d6;color:#7a5b00;font:600 12.5px/1.35 var(--sans)}
+.kk>div:nth-child(3){grid-column:1/-1;background:#fdf0f4;border-color:#e9a9c2}
+.kk>div:nth-child(3) b{font-size:24px;color:#a31515}
+.kk>div:last-child:nth-child(odd){grid-column:auto}
+.segs .seg,.opts .seg,.opts select{min-height:44px}
+.krow{box-shadow:0 1px 3px rgba(60,20,40,.08)}
+.kimg{width:64px;height:64px}.krow{grid-template-columns:64px minmax(0,1fr)}
+.kn b{font-size:17px}.kn span{font-size:12px}
+.kf{font-size:12.5px}
+#v-kenh{padding-bottom:96px}
+.sv .sr:empty{color:#6b6578}
