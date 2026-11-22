@@ -283,7 +283,7 @@ function renderKenh() {
       '<div class="kbar" role="img" aria-label="' + (p.o - p.lost) + ' đơn nhận hoa hồng, ' + p.lost + ' đơn mất"><i class="ok" style="flex:' + (p.o - p.lost) + '"></i><i class="bad" style="flex:' + p.lost + '"></i></div>' +
       '<div class="kn"><div><b>' + tr(p.gmv) + '</b><span>doanh thu</span></div><div><b>' + nf(p.o) + '</b><span>đơn</span></div><div class="vv"><b>' + nf(p.rf) + '</b><span>hoàn tiền</span></div><div class="vv"><b>' + nf(p.cn) + '</b><span>hủy/loại</span></div></div>' +
       '<div class="ksp"><span>🎬 Video: ' + nf(p.v.o) + ' đơn' + (p.v.o ? ' · mất ' + pct(p.v.x / p.v.o * 100) : '') + '</span><span>🔴 Live: ' + nf(p.l.o) + ' đơn' + (p.l.o ? ' · mất ' + pct(p.l.x / p.l.o * 100) : '') + '</span></div>' +
-      '<div class="kf"><span>Hoa hồng nhận ' + nf(Math.round(p.got)) + '₫</span>' +  + (p.lost ? '<span>Mất ~' + tr(p.lgmv) + ' doanh thu</span>' : '') + '</div></article>';
+      '<div class="kf"><span>Hoa hồng nhận ' + nf(Math.round(p.got)) + '₫</span>' + (p.lost ? '<span>Mất ~' + tr(p.lgmv) + ' doanh thu</span>' : '') + '</div></article>';
   }).join('') || empty('Chưa có đơn. Bấm “Thêm file đơn affiliate” để nạp.');
 }
 function readFile(file) {
