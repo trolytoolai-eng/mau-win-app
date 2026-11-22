@@ -230,11 +230,21 @@ function renderBadge() {
 }
 
 /* ---------- Kênh của tôi (đơn affiliate xuất từ Trung tâm Affiliate) ---------- */
-var CKEY = 'qlmau-kenh', CH = null, chSort = 'lost', chMin = true, chMsg = '';
+var CKEY = 'qlmau-kenh', CKEY2 = 'qlmau-kenh2', CH = null, CHS = null, chSort = 'lost', chMin = true, chMsg = '', chForm = null, chDel = false;
 function num(v) { if (typeof v === 'number') return v; var t = String(v == null ? '' : v).replace(/\./g, '').replace(',', '.'); return parseFloat(t) || 0; }
+var DEF_LOGO = 'https://p16-common-sign.tiktokcdn.com/tos-alisg-avt-0068/6fb26d5793237e87945fc1b81be603de~tplv-tiktokx-cropcenter:168:168.jpeg?dr=14577&refresh_token=228fc550&x-expires=1795532400&x-signature=DutOciLyggcbQl38Sp%2BND%2F2UdrY%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=8aecc5ac&idc=my';
+function defChannel() { return { id: 'tudohanna', name: 'Nami Unbox Đồ Xịn 🌸', handle: 'tudohanna', logo: DEF_LOGO, followers: 27763, fAt: '22/11', rows: null, label: '2 file mẫu', sample: true }; }
+function saveCh() { lsSet(CKEY2, JSON.stringify(CHS)); }
+function curCh() { return CHS.list.filter(function (c) { return c.id === CHS.act; })[0] || CHS.list[0]; }
+function setCur() { var c = curCh(); CH = { name: c.label || 'Chưa có file', rows: c.rows || (c.sample && window.CHANNEL_SAMPLE ? window.CHANNEL_SAMPLE.rows : []) }; }
 function loadCh() {
-  var r = null; try { r = JSON.parse(lsGet(CKEY) || 'null'); } catch (e) { r = null; }
-  CH = (r && r.rows && r.rows.length) ? r : window.CHANNEL_SAMPLE || { name: '', rows: [] };
+  var r = null; try { r = JSON.parse(lsGet(CKEY2) || 'null'); } catch (e) { r = null; }
+  if (!(r && r.list && r.list.length)) {
+    r = { act: 'tudohanna', list: [defChannel()] };
+    var o = null; try { o = JSON.parse(lsGet(CKEY) || 'null'); } catch (e) { o = null; }
+    if (o && o.rows && o.rows.length) { r.list[0].rows = o.rows; r.list[0].label = o.name; r.list[0].sample = false; }
+  }
+  CHS = r; setCur();
 }
 function typeOf(t) { t = norm(t || ''); return t.indexOf('live') >= 0 ? 'l' : (t.indexOf('video') >= 0 ? 'v' : 'c'); }
 function cls(r) { var t = norm(r.st || ''); return (!t || t.indexOf('a quyet toan') >= 0) ? 'ok' : (t.indexOf('khong du') >= 0 ? 'bad' : 'pend'); }
@@ -279,8 +289,75 @@ function shopLoss() {
   var m = {}; aggCh(CH.rows, 'shop').list.forEach(function (p) { if (den(p) >= 20) m[p.name] = p.lost / den(p); }); return m;
 }
 function rateTxt(x) { var d = vden(x); return d ? ' · mất ' + x.x + '/' + d + ' (' + pct(x.x / d * 100) + ')' : ''; }
+function esc2(t) { return esc(t == null ? '' : t); }
+function av(c, cls) {
+  var l = esc2((c.name || '?').replace(/^[^A-Za-zÀ-ỹ0-9]+/, '').charAt(0).toUpperCase() || '?');
+  return '<span class="av ' + (cls || '') + '"><em>' + l + '</em>' + (c.logo ? '<img alt="" src="' + esc2(c.logo) + '" referrerpolicy="no-referrer" onerror="this.remove()">' : '') + '</span>';
+}
+function fk(n) { return n >= 1e6 ? (n / 1e6).toLocaleString('vi-VN', { maximumFractionDigits: 1 }) + 'tr' : (n >= 1e3 ? (n / 1e3).toLocaleString('vi-VN', { maximumFractionDigits: 1 }) + 'K' : String(n)); }
+function renderChBar() {
+  var c = curCh();
+  $('chBar').innerHTML = CHS.list.map(function (x) {
+    return '<button type="button" class="chip" role="tab" data-ch="' + esc2(x.id) + '" aria-selected="' + (x.id === c.id) + '">' + av(x, 'sm') + '<span>' + esc2(x.name) + '</span></button>';
+  }).join('') + '<button type="button" class="chip add" id="chNew">＋ Thêm kênh</button>';
+  var link = c.handle ? 'https://www.tiktok.com/@' + encodeURIComponent(c.handle) : '';
+  $('chCard').innerHTML = '<label class="avbtn" title="Đổi logo">' + av(c, 'lg') + '<input type="file" id="chLogo" accept="image/*" hidden><small>Đổi logo</small></label>' +
+    '<div class="cinfo"><h2>' + esc2(c.name) + '</h2>' + (link ? '<a href="' + link + '" target="_blank" rel="noopener">@' + esc2(c.handle) + ' ↗</a>' : '<span class="nohd">Chưa có @handle</span>') +
+    (c.followers ? '<p>' + fk(c.followers) + ' follow' + (c.fAt ? ' · ' + esc2(c.fAt) : '') + '</p>' : '') + '</div>' +
+    '<div class="cact"><button type="button" class="seg" id="chEdit">Sửa</button></div>';
+  var f = $('chForm'); f.hidden = !chForm; if (!chForm) f.innerHTML = '';
+  if (chForm) {
+    var e = chForm.mode === 'edit' ? c : { name: '', handle: '', followers: '' };
+    f.innerHTML = '<h3>' + (chForm.mode === 'edit' ? 'Sửa kênh' : 'Thêm kênh') + '</h3>' +
+      '<label>Tên kênh<input id="fName" value="' + esc2(e.name) + '" placeholder="VD: Nami Unbox Đồ Xịn" maxlength="60"></label>' +
+      '<label>@handle TikTok<input id="fHandle" value="' + esc2(e.handle) + '" placeholder="tudohanna" autocapitalize="none" autocomplete="off" maxlength="40"></label>' +
+      '<label>Số follow (tuỳ chọn)<input id="fFol" inputmode="numeric" value="' + esc2(e.followers || '') + '" placeholder="27763" maxlength="9"></label>' +
+      '<div class="frow"><button type="button" class="btn pri" id="fSave">Lưu</button><button type="button" class="seg" id="fCancel">Hủy</button>' +
+      (chForm.mode === 'edit' && CHS.list.length > 1 ? '<button type="button" class="seg dang" id="fDel">' + (chDel ? 'Bấm lần nữa để xóa kênh' : 'Xóa kênh') + '</button>' : '') + '</div>';
+  }
+}
+function readLogo(file, done) {
+  var fr = new FileReader();
+  fr.onload = function () {
+    var im = new Image();
+    im.onload = function () {
+      var c = document.createElement('canvas'), n = 128, m = Math.min(im.width, im.height), cx = c.getContext('2d');
+      c.width = c.height = n; cx.drawImage(im, (im.width - m) / 2, (im.height - m) / 2, m, m, 0, 0, n, n);
+      try { done(c.toDataURL('image/jpeg', 0.82)); } catch (e) { done(null); }
+    };
+    im.onerror = function () { done(null); }; im.src = fr.result;
+  };
+  fr.readAsDataURL(file);
+}
+function chEvents() {
+  document.addEventListener('click', function (e) {
+    var t = e.target.closest ? e.target.closest('button') : null; if (!t || !$('v-kenh') || $('v-kenh').hidden) return;
+    if (t.getAttribute('data-ch')) { CHS.act = t.getAttribute('data-ch'); chForm = null; chDel = false; saveCh(); setCur(); renderKenh(); }
+    else if (t.id === 'chNew') { chForm = { mode: 'new' }; chDel = false; renderKenh(); var i = $('fName'); if (i) i.focus(); }
+    else if (t.id === 'chEdit') { chForm = { mode: 'edit' }; chDel = false; renderKenh(); }
+    else if (t.id === 'fCancel') { chForm = null; chDel = false; renderKenh(); }
+    else if (t.id === 'fSave') {
+      var nm = $('fName').value.trim(), hd = $('fHandle').value.trim().replace(/^@/, ''), fo = parseInt($('fFol').value, 10) || 0;
+      if (!nm && !hd) { chMsg = 'Nhập tên kênh hoặc @handle.'; renderKenh(); return; }
+      var c = chForm.mode === 'edit' ? curCh() : { id: 'c' + Date.now(), rows: null, label: 'Chưa có file' };
+      c.name = nm || hd; c.handle = hd; c.followers = fo; c.fAt = fo ? dm2() : '';
+      if (chForm.mode !== 'edit') { CHS.list.push(c); CHS.act = c.id; }
+      chForm = null; chMsg = 'Đã lưu kênh.'; saveCh(); setCur(); renderKenh();
+    }
+    else if (t.id === 'fDel') {
+      if (!chDel) { chDel = true; renderKenh(); return; }
+      CHS.list = CHS.list.filter(function (x) { return x.id !== CHS.act; }); CHS.act = CHS.list[0].id; chForm = null; chDel = false; chMsg = 'Đã xóa kênh.'; saveCh(); setCur(); renderKenh();
+    }
+  });
+  document.addEventListener('change', function (e) {
+    if (e.target.id !== 'chLogo' || !e.target.files.length) return;
+    readLogo(e.target.files[0], function (d) { if (!d) { chMsg = 'Không đọc được ảnh.'; renderKenh(); return; } curCh().logo = d; saveCh(); chMsg = 'Đã đổi logo.'; renderKenh(); });
+  });
+}
+function dm2() { var d = new Date(); return ('0' + d.getDate()).slice(-2) + '/' + ('0' + (d.getMonth() + 1)).slice(-2); }
 function renderKenh() {
   var a = aggCh(CH.rows, chBy), T = a.tot, td = den(T), ds = CH.rows.map(function (r) { return r.date; }).filter(Boolean).sort(function (x, y) { return ymd(x) < ymd(y) ? -1 : 1; });
+  renderChBar();
   $('chSub').textContent = (CH.name || 'Chưa có file') + (ds.length ? ' · ' + ds[0].slice(0, 5) + '–' + ds[ds.length - 1].slice(0, 5) : '');
   $('chMsg').textContent = chMsg;
   var hasLost = T.lost > 0;
@@ -329,11 +406,11 @@ function importCh(files, add) {
   Promise.all(files.map(readFile)).then(function (all) {
     var bad = all.filter(function (x) { return !x || !x.length; }).length, rows = [].concat.apply([], all.filter(Boolean));
     if (!rows.length) { chMsg = 'Không đọc được đơn hàng nào. Cần file “affiliate_orders” từ Trung tâm Affiliate.'; renderKenh(); return; }
-    var base = add && CH && CH.rows && CH !== window.CHANNEL_SAMPLE ? CH.rows : [], seen = {}, merged = [];
+    var cc = curCh(), base = add && cc.rows ? cc.rows : [], seen = {}, merged = [];
     function key(r) { return r.oid + '|' + r.pid + '|' + r.gmv + '|' + r.st; }
     base.forEach(function (r) { seen[key(r)] = (seen[key(r)] || 0) + 1; merged.push(r); });
     rows.forEach(function (r) { if (seen[key(r)]) { seen[key(r)]--; return; } merged.push(r); });
-    CH = { name: merged.length + ' đơn từ ' + (files.length + (base.length ? 1 : 0)) + ' file', rows: merged }; lsSet(CKEY, JSON.stringify(CH));
+    cc.rows = merged; cc.sample = false; cc.label = merged.length + ' đơn từ ' + (files.length + (base.length ? 1 : 0)) + ' file'; saveCh(); setCur();
     chMsg = 'Đã gộp ' + merged.length + ' đơn (bỏ đơn trùng)' + (bad ? ' · ' + bad + ' file không đọc được' : '');
     renderKenh();
   });
@@ -452,6 +529,7 @@ document.addEventListener('keydown', function (e) {
 });
 $('q').addEventListener('input', function (e) { query = e.target.value; renderSample(); });
 $('sortA').addEventListener('change', function (e) { sortA = e.target.value; renderSample(); });
+chEvents();
 $('chFile').addEventListener('change', function (e) { if (e.target.files.length) importCh(Array.prototype.slice.call(e.target.files), true); e.target.value = ''; });
 $('chMinBtn').addEventListener('click', function () { chMin = !chMin; renderKenh(); });
 [].forEach.call(document.querySelectorAll('[data-chby]'), function (b) { b.addEventListener('click', function () { chBy = b.getAttribute('data-chby'); renderKenh(); }); });

@@ -76,3 +76,8 @@ Ads/ROAS chỉ có cho vài sản phẩm cũ; sản phẩm mới ghi "Chưa qué
 - Đơn có trạng thái khác "Đã quyết toán" / "Không đủ điều kiện" tính là **chờ quyết toán**, hiển thị riêng, không tính vào tỉ lệ.
 - Chế độ **Theo shop**.
 - Thẻ Hàng mẫu / Win Video / chi tiết hiện cảnh báo đỏ nếu sản phẩm hoặc shop đó từng mất >= 30% trên kênh của bạn.
+
+## Chọn kênh
+- Tab Kênh có thanh chọn kênh (logo + tên), nút "＋ Thêm kênh", thẻ thông tin kênh (logo, @handle mở TikTok, số follow) và nút Sửa/Xóa.
+- Mỗi kênh có dữ liệu đơn riêng, lưu trên máy (localStorage `qlmau-kenh2`). Bấm vào logo để đổi logo bằng ảnh từ máy.
+- Kênh mặc định: Nami Unbox Đồ Xịn (@tudohanna), logo lấy từ TikTok (link có hạn, hết hạn thì hiện chữ cái đầu; đổi bằng ảnh tải lên).

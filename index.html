@@ -47,7 +47,10 @@
   </section>
 
   <section class="view" id="v-kenh" hidden>
-    <header class="top"><h1>Kênh của tôi</h1><p id="chSub"></p></header>
+    <header class="top"><h1>Kênh</h1><p id="chSub"></p></header>
+    <div class="chbar" id="chBar" role="tablist" aria-label="Chọn kênh"></div>
+    <div class="chcard" id="chCard"></div>
+    <form class="chform" id="chForm" hidden onsubmit="return false"></form>
     <label class="btn pri upl">Thêm file đơn affiliate (.xlsx)<input type="file" id="chFile" accept=".xlsx,.xls" multiple hidden></label>
     <p class="chmsg" id="chMsg" role="status"></p>
     <div class="kpis kk" id="chKpi"></div>
