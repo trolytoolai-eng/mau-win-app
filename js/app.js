@@ -244,7 +244,11 @@ function loadCh() {
     var o = null; try { o = JSON.parse(lsGet(CKEY) || 'null'); } catch (e) { o = null; }
     if (o && o.rows && o.rows.length) { r.list[0].rows = o.rows; r.list[0].label = o.name; r.list[0].sample = false; }
   }
-  CHS = r; setCur();
+  CHS = r; CHS.removed = CHS.removed || [];
+  [{ id: 'huynhchang00', name: 'Huỳnh Chang', handle: 'huynhchang00', logo: '', followers: 0, fAt: '', rows: null, label: 'Chưa có file' }].forEach(function (d) {
+    if (!CHS.list.some(function (c) { return c.id === d.id; }) && CHS.removed.indexOf(d.id) < 0) { CHS.list.push(d); saveCh(); }
+  });
+  setCur();
 }
 function typeOf(t) { t = norm(t || ''); return t.indexOf('live') >= 0 ? 'l' : (t.indexOf('video') >= 0 ? 'v' : 'c'); }
 function cls(r) { var t = norm(r.st || ''); return (!t || t.indexOf('a quyet toan') >= 0) ? 'ok' : (t.indexOf('khong du') >= 0 ? 'bad' : 'pend'); }
@@ -346,7 +350,7 @@ function chEvents() {
     }
     else if (t.id === 'fDel') {
       if (!chDel) { chDel = true; renderKenh(); return; }
-      CHS.list = CHS.list.filter(function (x) { return x.id !== CHS.act; }); CHS.act = CHS.list[0].id; chForm = null; chDel = false; chMsg = 'Đã xóa kênh.'; saveCh(); setCur(); renderKenh();
+      CHS.removed.push(CHS.act); CHS.list = CHS.list.filter(function (x) { return x.id !== CHS.act; }); CHS.act = CHS.list[0].id; chForm = null; chDel = false; chMsg = 'Đã xóa kênh.'; saveCh(); setCur(); renderKenh();
     }
   });
   document.addEventListener('change', function (e) {
