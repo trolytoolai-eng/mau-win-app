@@ -282,3 +282,5 @@ main{padding-bottom:118px}
 .kbar .ok{background:#2e9e5b}.kbar .bad{background:#d32f2f}.kbar i{display:block;min-width:0}
 .kf{display:flex;flex-wrap:wrap;gap:2px 12px;font:500 12.5px/1.4 var(--sans);color:#6b6578}.kf .bad{color:#a31515;font-weight:700}
 .tg.risk.na{background:#ececf1;color:#4a4757}
+
+.ksp{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 0;font-size:12px}.ksp span{background:var(--bg2,#f3f3f5);border-radius:999px;padding:3px 9px}
