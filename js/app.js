@@ -145,7 +145,7 @@ function info(p, showState) {
   return '<div class="info"><h2 class="nm">' + esc(p.title) + '</h2><p class="shopn">' + esc(p.shop) + ' · ' + esc(p.cat) + '</p>' +
     '<p class="big"><b>' + nf(p.o7) + '</b> đơn · ' + tr(p.rev) + '</p>' + mixBar(p) + mixText(p) +
     (showState ? '<span class="chipst s' + s.s + '">' + ST[s.s] + '</span>' : '<div class="mini">' + spark(p) + '<span>' + p.creators + ' creator · ' + p.vids + ' video</span></div>') +
-    '<div class="tags">' + growTag(p) + refTag(p) + (p.roas ? '<span class="tg roas">ROAS ' + p.roas.toLocaleString('vi-VN', { maximumFractionDigits: 1 }) + '</span>' : '') + '</div></div>';
+    '<div class="tags">' + growTag(p) + refTag(p) + (p.roas ? '<span class="tg roas">ROAS ' + p.roas.toLocaleString('vi-VN', { maximumFractionDigits: 1 }) + '</span>' : '') + '</div>' + ownChip(p) + '</div>';
 }
 function rowHTML(p, mode) {
   var s = st(p), act = '';
@@ -163,7 +163,7 @@ function winRow(p) {
   var num = p.videos.length ? p.vOrders : '—';
   return '<article class="wrow" data-id="' + p.id + '" tabindex="0" role="button" aria-label="' + esc(p.shop) + ': video tốt nhất ' + num + ' đơn. Mở chi tiết">' +
     '<div class="wthumb"><img alt="" src="' + p.img + '" loading="lazy" referrerpolicy="no-referrer"></div>' +
-    '<div class="winfo"><h2 class="nm">' + esc(p.title) + '</h2><p class="shopn">' + esc(p.shop) + '</p>' + mixBar(p) + mixText(p) +
+    '<div class="winfo"><h2 class="nm">' + esc(p.title) + '</h2><p class="shopn">' + esc(p.shop) + '</p>' + mixBar(p) + mixText(p) + ownChip(p) +
     '<div class="tags">' + tag + growTag(p) + refTag(p) + (p.roas ? '<span class="tg roas">ROAS ' + p.roas.toLocaleString('vi-VN', { maximumFractionDigits: 1 }) + '</span>' : '') + '</div></div>' +
     '<div class="wnum"><b>' + num + '</b><span>đơn video</span></div></article>';
 }
@@ -237,54 +237,92 @@ function loadCh() {
   CH = (r && r.rows && r.rows.length) ? r : window.CHANNEL_SAMPLE || { name: '', rows: [] };
 }
 function typeOf(t) { t = norm(t || ''); return t.indexOf('live') >= 0 ? 'l' : (t.indexOf('video') >= 0 ? 'v' : 'c'); }
-function isOk(r) { return !r.st || norm(r.st).indexOf('a quyet toan') >= 0; }
+function cls(r) { var t = norm(r.st || ''); return (!t || t.indexOf('a quyet toan') >= 0) ? 'ok' : (t.indexOf('khong du') >= 0 ? 'bad' : 'pend'); }
 function ymd(d) { return d.slice(6, 10) + d.slice(3, 5) + d.slice(0, 2); }
-function aggCh(rows) {
-  var M = {}, T = { o: 0, lost: 0, qty: 0, ref: 0, gmv: 0, lgmv: 0, got: 0, rf: 0, cn: 0, v: { o: 0, g: 0, x: 0 }, l: { o: 0, g: 0, x: 0 } };
+function z() { return { o: 0, lost: 0, pend: 0, qty: 0, ref: 0, gmv: 0, lgmv: 0, got: 0, rf: 0, cn: 0, v: { o: 0, g: 0, x: 0, p: 0 }, l: { o: 0, g: 0, x: 0, p: 0 }, ps: {} }; }
+function aggCh(rows, by) {
+  var M = {}, T = z();
   rows.forEach(function (r) {
-    var p = M[r.pid] || (M[r.pid] = { pid: r.pid, name: r.name, shop: r.shop, o: 0, lost: 0, qty: 0, ref: 0, gmv: 0, lgmv: 0, got: 0, rf: 0, cn: 0, v: { o: 0, g: 0, x: 0 }, l: { o: 0, g: 0, x: 0 } });
-    var k = typeOf(r.type), bad = !isOk(r);
+    var key = by === 'shop' ? (r.shop || '?') : r.pid;
+    var p = M[key] || (M[key] = (function () { var q = z(); q.pid = r.pid; q.name = by === 'shop' ? (r.shop || '?') : r.name; q.shop = r.shop; return q; })());
+    var k = typeOf(r.type), c = cls(r);
     [p, T].forEach(function (x) {
-      x.o++; x.qty += r.qty; x.ref += r.ref; x.gmv += r.gmv; x.got += r.got;
-      if (bad) { x.lost++; x.lgmv += r.gmv; if (r.ref > 0) x.rf++; else x.cn++; }
-      if (x[k]) { x[k].o++; x[k].g += r.gmv; if (bad) x[k].x++; }
+      x.o++; x.ps[r.pid] = 1;
+      if (c === 'pend') { x.pend++; if (x[k]) x[k].p++; }
+      else { x.qty += r.qty; x.ref += r.ref; x.got += r.got; }
+      x.gmv += r.gmv;
+      if (c === 'bad') { x.lost++; x.lgmv += r.gmv; if (r.ref > 0) x.rf++; else x.cn++; }
+      if (x[k]) { x[k].o++; x[k].g += r.gmv; if (c === 'bad') x[k].x++; }
     });
   });
   return { list: Object.keys(M).map(function (k) { return M[k]; }), tot: T };
 }
-function lvl(p) { var r = p.lost / p.o; return p.o < 20 ? 'na' : (r >= 0.3 ? 'high' : (r >= 0.15 ? 'mid' : 'low')); }
+function den(p) { return p.o - p.pend; }
+function lvl(p) { var d = den(p), r = d ? p.lost / d : 0; return d < 20 ? 'na' : (r >= 0.3 ? 'high' : (r >= 0.15 ? 'mid' : 'low')); }
+function vden(x) { return x.o - x.p; }
 function chImg(p) {
   var own = byId(p.pid);
   var src = own ? own.img : 'https://cdn.tabcut.com/dataservice/media/item/' + p.pid + '/' + p.pid + '0.webp?x-oss-process=image/resize,w_240,h_240/format,jpg';
   return '<div class="kimg"><span>' + esc((p.shop || '?').charAt(0).toUpperCase()) + '</span><img alt="" src="' + src + '" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></div>';
 }
+var OWN = {}, SHL = {}, chBy = 'sp';
+function buildOwn() {
+  OWN = {}; SHL = shopLoss();
+  aggCh(CH.rows, 'sp').list.forEach(function (p) { if (den(p) >= 10) OWN[p.pid] = { r: p.lost / den(p), n: den(p), lost: p.lost }; });
+}
+function ownChip(p) {
+  var o = OWN[p.id], sh = SHL[p.shop];
+  if (!o || o.r < 0.3) return sh >= 0.3 ? '<p class="ownw">⚠ Shop này mất ' + pct(sh * 100) + ' đơn trên kênh bạn. Cẩn thận.</p>' : '';
+  return '<p class="ownw">⚠ Kênh bạn từng bán: mất ' + pct(o.r * 100) + ' (' + o.lost + '/' + o.n + ' đơn). Cân nhắc không nhận.</p>';
+}
+function shopLoss() {
+  var m = {}; aggCh(CH.rows, 'shop').list.forEach(function (p) { if (den(p) >= 20) m[p.name] = p.lost / den(p); }); return m;
+}
+function rateTxt(x) { var d = vden(x); return d ? ' · mất ' + pct(x.x / d * 100) : ''; }
 function renderKenh() {
-  var a = aggCh(CH.rows), T = a.tot, ds = CH.rows.map(function (r) { return r.date; }).filter(Boolean).sort(function (x, y) { return ymd(x) < ymd(y) ? -1 : 1; });
+  var a = aggCh(CH.rows, chBy), T = a.tot, td = den(T), ds = CH.rows.map(function (r) { return r.date; }).filter(Boolean).sort(function (x, y) { return ymd(x) < ymd(y) ? -1 : 1; });
   $('chSub').textContent = (CH.name || 'Chưa có file') + (ds.length ? ' · ' + ds[0].slice(0, 5) + '–' + ds[ds.length - 1].slice(0, 5) : '');
   $('chMsg').textContent = chMsg;
   var hasLost = T.lost > 0;
-  $('chKpi').innerHTML = [[nf(T.o), 'đơn trong file'], [tr(T.gmv), 'doanh thu (GMV)'], [hasLost ? pct(T.lost / T.o * 100) : '—', hasLost ? 'đơn mất (' + nf(T.lost) + '): hoàn ' + nf(T.rf) + ' · hủy ' + nf(T.cn) : 'chưa có đơn bị loại'], [nf(Math.round(T.got)) + '₫', 'hoa hồng thực nhận'], [nf(T.v.o) + ' · ' + tr(T.v.g), 'video' + (T.v.o ? ': mất ' + pct(T.v.x / T.v.o * 100) : '')], [nf(T.l.o) + ' · ' + tr(T.l.g), 'live' + (T.l.o ? ': mất ' + pct(T.l.x / T.l.o * 100) : '')]]
+  $('chKpi').innerHTML = [[nf(T.o), 'đơn trong file'], [tr(T.gmv), 'doanh thu (GMV)'], [hasLost ? pct(T.lost / td * 100) : '—', hasLost ? 'đơn mất (' + nf(T.lost) + '): hoàn ' + nf(T.rf) + ' · hủy ' + nf(T.cn) : 'chưa có đơn bị loại'], [nf(T.pend), 'chờ quyết toán (không tính vào tỉ lệ)'], [nf(Math.round(T.got)) + '₫', 'hoa hồng thực nhận'], [nf(T.v.o) + ' · ' + tr(T.v.g), 'video' + rateTxt(T.v)], [nf(T.l.o) + ' · ' + tr(T.l.g), 'live' + rateTxt(T.l)]]
     .map(function (k) { return '<div><b>' + k[0] + '</b><span>' + k[1] + '</span></div>'; }).join('');
   $('chNote').hidden = hasLost;
   $('chMinBtn').setAttribute('aria-pressed', String(chMin));
-  var list = a.list.filter(function (p) { return !chMin || p.o >= 20; });
+  [].forEach.call(document.querySelectorAll('[data-chby]'), function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-chby') === chBy)); });
+  var list = a.list.filter(function (p) { return !chMin || den(p) >= 20; }), rt = function (p) { return den(p) ? p.lost / den(p) : 0; };
   list.sort(function (x, y) {
     if (chSort === 'gmv') return y.gmv - x.gmv;
     if (chSort === 'vo') return y.v.o - x.v.o || y.gmv - x.gmv;
     if (chSort === 'got') return y.got - x.got;
-    return y.lost / y.o - x.lost / x.o || y.gmv - x.gmv;
+    return rt(y) - rt(x) || y.gmv - x.gmv;
   });
-  $('chCnt').textContent = list.length + '/' + a.list.length + ' sản phẩm' + (chMin ? ' (từ 20 đơn trở lên)' : '');
+  $('chCnt').textContent = list.length + '/' + a.list.length + (chBy === 'shop' ? ' shop' : ' sản phẩm') + (chMin ? ' (từ 20 đơn đã chốt trở lên)' : '');
   $('chList').innerHTML = list.map(function (p) {
-    var l = lvl(p), rate = p.lost / p.o, w = Math.round(rate * 100);
-    var tag = l === 'na' ? '<span class="tg nowin">Chưa đủ mẫu (' + p.o + ' đơn)</span>' : '<span class="tg risk ' + l + '">' + (l === 'high' ? 'Mất nhiều' : l === 'mid' ? 'Khá cao' : 'Thấp') + ': ' + pct(rate * 100) + ' đơn mất</span>';
-    return '<article class="krow">' + chImg(p) + '<div class="kbody"><a class="knm" href="https://www.tiktok.com/view/product/' + esc(p.pid) + '" target="_blank" rel="noopener">' + esc(p.name) + ' ↗</a>' +
-      '<p class="shopn">' + esc(p.shop) + '</p>' + tag + '</div>' +
-      '<div class="kbar" role="img" aria-label="' + (p.o - p.lost) + ' đơn nhận hoa hồng, ' + p.lost + ' đơn mất"><i class="ok" style="flex:' + (p.o - p.lost) + '"></i><i class="bad" style="flex:' + p.lost + '"></i></div>' +
+    var l = lvl(p), rate = rt(p), w = Math.round(rate * 100), d = den(p), isShop = chBy === 'shop';
+    var tag = l === 'na' ? '<span class="tg nowin">Chưa đủ mẫu (' + d + ' đơn chốt)</span>' : '<span class="tg risk ' + l + '">' + (l === 'high' ? 'Mất nhiều' : l === 'mid' ? 'Khá cao' : 'Thấp') + ': ' + pct(w) + ' đơn mất</span>';
+    var title = isShop ? '<span class="knm">' + esc(p.name) + '</span>' : '<a class="knm" href="https://www.tiktok.com/view/product/' + esc(p.pid) + '" target="_blank" rel="noopener">' + esc(p.name) + ' ↗</a>';
+    return '<article class="krow">' + chImg(p) + '<div class="kbody">' + title +
+      '<p class="shopn">' + (isShop ? Object.keys(p.ps).length + ' sản phẩm' : esc(p.shop)) + '</p>' + tag + '</div>' +
+      '<div class="kbar" role="img" aria-label="' + (d - p.lost) + ' đơn nhận hoa hồng, ' + p.lost + ' đơn mất"><i class="ok" style="flex:' + (d - p.lost) + '"></i><i class="bad" style="flex:' + p.lost + '"></i></div>' +
       '<div class="kn"><div><b>' + tr(p.gmv) + '</b><span>doanh thu</span></div><div><b>' + nf(p.o) + '</b><span>đơn</span></div><div class="vv"><b>' + nf(p.rf) + '</b><span>hoàn tiền</span></div><div class="vv"><b>' + nf(p.cn) + '</b><span>hủy/loại</span></div></div>' +
-      '<div class="ksp"><span>🎬 Video: ' + nf(p.v.o) + ' đơn' + (p.v.o ? ' · mất ' + pct(p.v.x / p.v.o * 100) : '') + '</span><span>🔴 Live: ' + nf(p.l.o) + ' đơn' + (p.l.o ? ' · mất ' + pct(p.l.x / p.l.o * 100) : '') + '</span></div>' +
+      '<div class="ksp"><span>🎬 Video: ' + nf(p.v.o) + ' đơn' + rateTxt(p.v) + '</span><span>🔴 Live: ' + nf(p.l.o) + ' đơn' + rateTxt(p.l) + '</span>' + (p.pend ? '<span class="pd">⏳ Chờ quyết toán: ' + nf(p.pend) + '</span>' : '') + '</div>' +
       '<div class="kf"><span>Hoa hồng nhận ' + nf(Math.round(p.got)) + '₫</span>' + (p.lost ? '<span>Mất ~' + tr(p.lgmv) + ' doanh thu</span>' : '') + '</div></article>';
   }).join('') || empty('Chưa có đơn. Bấm “Thêm file đơn affiliate” để nạp.');
+  buildOwn();
+}
+function exportAvoid() {
+  var a = aggCh(CH.rows, 'sp').list.filter(function (p) { return den(p) >= 10 && p.lost / den(p) >= 0.3; }).sort(function (x, y) { return y.lost / den(y) - x.lost / den(x); });
+  if (!a.length) { chMsg = 'Chưa có sản phẩm nào mất từ 30% (tối thiểu 10 đơn đã chốt).'; renderKenh(); return; }
+  var q = function (v) { return '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"'; };
+  var csv = '﻿ID sản phẩm,Tên sản phẩm,Shop,Đơn đã chốt,Đơn mất,Tỉ lệ mất %,Hoàn tiền,Hủy/loại,Link\n' + a.map(function (p) {
+    return [p.pid, q(p.name), q(p.shop), den(p), p.lost, Math.round(p.lost / den(p) * 100), p.rf, p.cn, 'https://www.tiktok.com/view/product/' + p.pid].join(',');
+  }).join('\n');
+  try {
+    var u = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' })), l = document.createElement('a');
+    l.href = u; l.download = 'san-pham-nen-tranh.csv'; document.body.appendChild(l); l.click(); l.remove(); setTimeout(function () { URL.revokeObjectURL(u); }, 3000);
+    chMsg = 'Đã xuất ' + a.length + ' sản phẩm nên tránh.';
+  } catch (e) { chMsg = 'Trình duyệt chưa cho tải file.'; }
+  renderKenh();
 }
 function readFile(file) {
   return new Promise(function (res) {
@@ -349,7 +387,7 @@ function detailHTML(p) {
     '<div class="chips"><span class="chip shop">' + SHOPICON + esc(p.shop) + '</span><span class="chip cat">' + CATICON + esc(p.cat) + '</span></div>' +
     '<p class="sum">7 ngày: <b>' + nf(p.o7) + ' đơn</b> · ' + tr(p.rev) + '</p>' +
     '<div><div class="bars" role="img" aria-label="Đơn mỗi ngày: ' + p.days.join(', ') + '">' + bars + '</div><div class="labels">' + labels + '</div></div>' +
-    mixHTML(p) +
+    ownChip(p) + mixHTML(p) +
     '<section class="mix"><h3>Chỉ số lọc</h3>' + kpi + '<p class="ads" style="margin-top:10px"><b>Ads:</b> ' + esc(p.ads) + '<br><b>ROAS:</b> ' + (p.roas ? p.roas.toLocaleString('vi-VN', { maximumFractionDigits: 1 }) : 'chưa có') + ' · Ra mắt ' + esc(p.found) + '</p></section>' +
     '<section class="riskbox ' + k.lv + '"><h3>Rủi ro hoàn hủy: ' + k.label + ' <small>(' + k.score + ' điểm)</small></h3><ul>' + k.f.map(function (x) { return '<li class="' + (x.pts ? 'bad' : 'ok') + '"><b>' + (x.pts ? '+' + x.pts : '0') + '</b><span>' + esc(x.t) + '</span></li>'; }).join('') + '</ul><small>Ước tính từ chỉ số Topview, không phải số hoàn hủy thật của TikTok. Dùng để ưu tiên chọn mẫu.</small></section>' +
     '<section><h3 class="sec" style="margin:4px 0 8px">Video ra đơn (' + p.videos.length + '/' + p.videoTotal + ' video)</h3>' + videoRows(p) + '</section>' +
@@ -430,6 +468,8 @@ $('q').addEventListener('input', function (e) { query = e.target.value; renderSa
 $('sortA').addEventListener('change', function (e) { sortA = e.target.value; renderSample(); });
 $('chFile').addEventListener('change', function (e) { if (e.target.files.length) importCh(Array.prototype.slice.call(e.target.files), true); e.target.value = ''; });
 $('chMinBtn').addEventListener('click', function () { chMin = !chMin; renderKenh(); });
+$('chAvoid').addEventListener('click', exportAvoid);
+[].forEach.call(document.querySelectorAll('[data-chby]'), function (b) { b.addEventListener('click', function () { chBy = b.getAttribute('data-chby'); renderKenh(); }); });
 $('chSort').addEventListener('change', function (e) { chSort = e.target.value; renderKenh(); });
 $('tundo').addEventListener('click', undoLast);
 $('back').addEventListener('click', function () {
@@ -449,5 +489,5 @@ $('reset').addEventListener('click', function () {
 });
 window.addEventListener('hashchange', route);
 
-loadV(); load(); loadCh(); route();
+loadV(); load(); loadCh(); buildOwn(); route();
 })();

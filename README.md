@@ -70,3 +70,9 @@ Ads/ROAS chỉ có cho vài sản phẩm cũ; sản phẩm mới ghi "Chưa qué
 - Hiển thị theo sản phẩm: tên + link TikTok Shop, doanh thu (GMV), số đơn, đơn từ video, đơn từ live, số món hoàn tiền, hoa hồng đã nhận.
 - Nạp được nhiều file cùng lúc (gộp, bỏ đơn trùng). "Đơn mất" = đơn có trạng thái khác "Đã quyết toán" (ví dụ "Không đủ điều kiện": hủy, hoàn, hoặc chưa hợp lệ). Tỉ lệ đơn mất = đơn mất / tổng đơn; sản phẩm dưới 20 đơn ghi "chưa đủ mẫu".
 - `data/channel.js` là dữ liệu mẫu (73 đơn, 01-14/11/2026).
+
+## Tab Kênh (cập nhật)
+- Tách **hoàn tiền** (số món hoàn >= 1) và **hủy/loại** (không đủ điều kiện, hoàn = 0). Tỉ lệ mất riêng cho Video và Live.
+- Đơn có trạng thái khác "Đã quyết toán" / "Không đủ điều kiện" tính là **chờ quyết toán**, hiển thị riêng, không tính vào tỉ lệ.
+- Chế độ **Theo shop**; nút **Xuất danh sách nên tránh** (CSV, sản phẩm mất >= 30%, tối thiểu 10 đơn chốt).
+- Thẻ Hàng mẫu / Win Video / chi tiết hiện cảnh báo đỏ nếu sản phẩm hoặc shop đó từng mất >= 30% trên kênh của bạn.

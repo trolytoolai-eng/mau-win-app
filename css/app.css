@@ -284,3 +284,6 @@ main{padding-bottom:118px}
 .tg.risk.na{background:#ececf1;color:#4a4757}
 
 .ksp{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 0;font-size:12px}.ksp span{background:var(--bg2,#f3f3f5);border-radius:999px;padding:3px 9px}
+
+.ownw{margin:8px 0 0;padding:6px 10px;border-radius:8px;background:#fdecea;color:#b3261e;font-size:12px;font-weight:600}.ksp .pd{background:#fff4d6;color:#7a5b00}
+#chAvoid{margin-left:auto}

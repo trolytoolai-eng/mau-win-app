@@ -51,7 +51,8 @@
     <label class="btn pri upl">Thêm file đơn affiliate (.xlsx)<input type="file" id="chFile" accept=".xlsx,.xls" multiple hidden></label>
     <p class="chmsg" id="chMsg" role="status"></p>
     <div class="kpis kk" id="chKpi"></div>
-    <div class="note" id="chNote" hidden>Chưa có đơn bị loại (không đủ điều kiện) trong dữ liệu này. Hãy xuất thêm file đơn “Không đủ điều kiện” từ Trung tâm Affiliate rồi thêm vào để tính tỉ lệ đơn mất.</div>
+    <div class="note" id="chNote" hidden>Chưa có đơn bị loại (không đủ điều kiện) trong dữ liệu này. Hãy xuất thêm file đơn “Không đủ điều kiện” (và file đơn chờ quyết toán nếu muốn thấy đơn đang chờ) từ Trung tâm Affiliate rồi thêm vào.</div>
+    <div class="segs"><button type="button" class="seg" data-chby="sp" aria-pressed="true">Theo sản phẩm</button><button type="button" class="seg" data-chby="shop" aria-pressed="false">Theo shop</button><button type="button" class="seg" id="chAvoid">⬇ Xuất danh sách nên tránh</button></div>
     <div class="opts"><button type="button" class="seg" id="chMinBtn" aria-pressed="true">Từ 20 đơn</button><select id="chSort" aria-label="Sắp xếp"><option value="lost">Tỉ lệ đơn mất cao nhất</option><option value="gmv">Doanh thu cao nhất</option><option value="vo">Đơn từ video</option><option value="got">Hoa hồng nhận</option></select></div>
     <p class="cnt" id="chCnt"></p>
     <div class="klist" id="chList"></div>
