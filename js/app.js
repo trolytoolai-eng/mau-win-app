@@ -236,7 +236,10 @@ var DEF_LOGO = 'https://p16-common-sign.tiktokcdn.com/tos-alisg-avt-0068/6fb26d5
 function defChannel() { return { id: 'tudohanna', name: 'Nami Unbox Đồ Xịn 🌸', handle: 'tudohanna', logo: DEF_LOGO, followers: 27763, fAt: '22/11', rows: null, label: '2 file mẫu', sample: true }; }
 function saveCh() { lsSet(CKEY2, JSON.stringify(CHS)); }
 function curCh() { return CHS.list.filter(function (c) { return c.id === CHS.act; })[0] || CHS.list[0]; }
-function setCur() { var c = curCh(); CH = { name: c.label || 'Chưa có file', rows: c.rows || (c.sample && window.CHANNEL_SAMPLE ? window.CHANNEL_SAMPLE.rows : []) }; }
+function setCur() {
+  var c = curCh(), hc = !c.rows && c.id === 'huynhchang00' && window.CHANNEL_HC;
+  CH = { name: hc ? CHANNEL_HC.label : (c.label || 'Chưa có file'), rows: c.rows || (c.sample && window.CHANNEL_SAMPLE ? window.CHANNEL_SAMPLE.rows : (hc ? CHANNEL_HC.rows : [])) };
+}
 function loadCh() {
   var r = null; try { r = JSON.parse(lsGet(CKEY2) || 'null'); } catch (e) { r = null; }
   if (!(r && r.list && r.list.length)) {
@@ -261,14 +264,14 @@ function aggCh(rows, by) {
   rows.forEach(function (r) {
     var key = by === 'shop' ? (r.shop || '?') : r.pid;
     var p = M[key] || (M[key] = (function () { var q = z(); q.pid = r.pid; q.name = by === 'shop' ? (r.shop || '?') : r.name; q.shop = r.shop; return q; })());
-    var k = typeOf(r.type), c = cls(r);
+    var k = typeOf(r.type), c = cls(r), w = r.n || 1, rw = r.rn != null ? r.rn : (r.ref > 0 ? 1 : 0);
     [p, T].forEach(function (x) {
-      x.o++; x.ps[r.pid] = 1;
-      if (c === 'pend') { x.pend++; if (x[k]) x[k].p++; }
+      x.o += w; x.ps[r.pid] = 1;
+      if (c === 'pend') { x.pend += w; if (x[k]) x[k].p += w; }
       else { x.qty += r.qty; x.ref += r.ref; x.got += r.got; }
       x.gmv += r.gmv;
-      if (c === 'bad') { x.lost++; x.lgmv += r.gmv; if (r.ref > 0) x.rf++; else x.cn++; }
-      if (x[k]) { x[k].o++; x[k].g += r.gmv; if (c === 'bad') x[k].x++; }
+      if (c === 'bad') { x.lost += w; x.lgmv += r.gmv; x.rf += rw; x.cn += w - rw; }
+      if (x[k]) { x[k].o += w; x[k].g += r.gmv; if (c === 'bad') x[k].x += w; }
     });
   });
   return { list: Object.keys(M).map(function (k) { return M[k]; }), tot: T };
