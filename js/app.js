@@ -245,8 +245,10 @@ function loadCh() {
     if (o && o.rows && o.rows.length) { r.list[0].rows = o.rows; r.list[0].label = o.name; r.list[0].sample = false; }
   }
   CHS = r; CHS.removed = CHS.removed || [];
-  [{ id: 'huynhchang00', name: 'Huỳnh Chang', handle: 'huynhchang00', logo: '', followers: 0, fAt: '', rows: null, label: 'Chưa có file' }].forEach(function (d) {
-    if (!CHS.list.some(function (c) { return c.id === d.id; }) && CHS.removed.indexOf(d.id) < 0) { CHS.list.push(d); saveCh(); }
+  [{ id: 'huynhchang00', name: 'Huỳnh Chang', handle: 'huynhchang00', logo: 'https://p16-common-sign.tiktokcdn.com/tos-useast2a-avt-0068-euttp/7318384964448288800~tplv-tiktokx-cropcenter:1080:1080.jpeg?dr=14579&refresh_token=2e1e16a1&x-expires=1795536000&x-signature=Dk%2FxNMA%2BfK6OwRn7g%2BpiJNEva1o%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=81f88b70&idc=my2', followers: 0, fAt: '', rows: null, label: 'Chưa có file' }].forEach(function (d) {
+    var ex = CHS.list.filter(function (c) { return c.id === d.id; })[0];
+    if (!ex && CHS.removed.indexOf(d.id) < 0) { CHS.list.push(d); saveCh(); }
+    else if (ex && !ex.logo && d.logo) { ex.logo = d.logo; saveCh(); }
   });
   setCur();
 }
@@ -299,8 +301,23 @@ function av(c, cls) {
   return '<span class="av ' + (cls || '') + '"><em>' + l + '</em>' + (c.logo ? '<img alt="" src="' + esc2(c.logo) + '" referrerpolicy="no-referrer" onerror="this.remove()">' : '') + '</span>';
 }
 function fk(n) { return n >= 1e6 ? (n / 1e6).toLocaleString('vi-VN', { maximumFractionDigits: 1 }) + 'tr' : (n >= 1e3 ? (n / 1e3).toLocaleString('vi-VN', { maximumFractionDigits: 1 }) + 'K' : String(n)); }
+function cacheLogo(c) {
+  if (!c.logo || c.logo.indexOf('http') !== 0 || c.tried) return;
+  c.tried = true;
+  try {
+    var im = new Image(); im.crossOrigin = 'anonymous';
+    im.onload = function () {
+      try {
+        var k = document.createElement('canvas'), n = 128, m = Math.min(im.width, im.height); k.width = k.height = n;
+        k.getContext('2d').drawImage(im, (im.width - m) / 2, (im.height - m) / 2, m, m, 0, 0, n, n);
+        c.logo = k.toDataURL('image/jpeg', 0.82); saveCh(); renderChBar();
+      } catch (e) { /* bị chặn CORS: giữ link gốc */ }
+    };
+    im.src = c.logo;
+  } catch (e) { /* bỏ qua */ }
+}
 function renderChBar() {
-  var c = curCh();
+  var c = curCh(); CHS.list.forEach(cacheLogo);
   $('chBar').innerHTML = CHS.list.map(function (x) {
     return '<button type="button" class="chip" role="tab" data-ch="' + esc2(x.id) + '" aria-selected="' + (x.id === c.id) + '">' + av(x, 'sm') + '<span>' + esc2(x.name) + '</span></button>';
   }).join('') + '<button type="button" class="chip add" id="chNew">＋ Thêm kênh</button>';
