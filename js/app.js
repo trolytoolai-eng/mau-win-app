@@ -278,7 +278,7 @@ function ownChip(p) {
 function shopLoss() {
   var m = {}; aggCh(CH.rows, 'shop').list.forEach(function (p) { if (den(p) >= 20) m[p.name] = p.lost / den(p); }); return m;
 }
-function rateTxt(x) { var d = vden(x); return d ? ' · mất ' + pct(x.x / d * 100) : ''; }
+function rateTxt(x) { var d = vden(x); return d ? ' · mất ' + x.x + '/' + d + ' (' + pct(x.x / d * 100) + ')' : ''; }
 function renderKenh() {
   var a = aggCh(CH.rows, chBy), T = a.tot, td = den(T), ds = CH.rows.map(function (r) { return r.date; }).filter(Boolean).sort(function (x, y) { return ymd(x) < ymd(y) ? -1 : 1; });
   $('chSub').textContent = (CH.name || 'Chưa có file') + (ds.length ? ' · ' + ds[0].slice(0, 5) + '–' + ds[ds.length - 1].slice(0, 5) : '');
@@ -299,13 +299,13 @@ function renderKenh() {
   $('chCnt').textContent = list.length + '/' + a.list.length + (chBy === 'shop' ? ' shop' : ' sản phẩm') + (chMin ? ' (từ 20 đơn đã chốt trở lên)' : '');
   $('chList').innerHTML = list.map(function (p) {
     var l = lvl(p), rate = rt(p), w = Math.round(rate * 100), d = den(p), isShop = chBy === 'shop';
-    var tag = l === 'na' ? '<span class="tg nowin">Chưa đủ mẫu (' + d + ' đơn chốt)</span>' : '<span class="tg risk ' + l + '">' + (l === 'high' ? 'Mất nhiều' : l === 'mid' ? 'Khá cao' : 'Thấp') + ': ' + pct(w) + ' đơn mất</span>';
+    var tag = l === 'na' ? '<span class="tg nowin">Chưa đủ mẫu (' + d + ' đơn chốt)</span>' : '<span class="tg risk ' + l + '">' + (l === 'high' ? 'Mất nhiều' : l === 'mid' ? 'Khá cao' : 'Thấp') + ': ' + p.lost + '/' + d + ' đơn mất (' + pct(w) + ')</span>';
     var title = isShop ? '<span class="knm">' + esc(p.name) + '</span>' : '<a class="knm" href="https://www.tiktok.com/view/product/' + esc(p.pid) + '" target="_blank" rel="noopener">' + esc(p.name) + ' ↗</a>';
     return '<article class="krow">' + chImg(p) + '<div class="kbody">' + title +
       '<p class="shopn">' + (isShop ? Object.keys(p.ps).length + ' sản phẩm' : esc(p.shop)) + '</p>' + tag + '</div>' +
       '<div class="kbar" role="img" aria-label="' + (d - p.lost) + ' đơn nhận hoa hồng, ' + p.lost + ' đơn mất"><i class="ok" style="flex:' + (d - p.lost) + '"></i><i class="bad" style="flex:' + p.lost + '"></i></div>' +
       '<div class="kn"><div><b>' + tr(p.gmv) + '</b><span>doanh thu</span></div><div><b>' + nf(p.o) + '</b><span>đơn</span></div><div class="vv"><b>' + nf(p.rf) + '</b><span>hoàn tiền</span></div><div class="vv"><b>' + nf(p.cn) + '</b><span>hủy/loại</span></div></div>' +
-      '<div class="ksp"><div class="sv"><span class="sl">🎬 Video</span><b>' + nf(p.v.o) + ' đơn</b><span class="sr' + (vden(p.v) && p.v.x / vden(p.v) >= 0.3 ? ' hi' : '') + '">' + (vden(p.v) ? 'mất ' + pct(p.v.x / vden(p.v) * 100) : '—') + '</span></div><div class="sv"><span class="sl">🔴 Live</span><b>' + nf(p.l.o) + ' đơn</b><span class="sr' + (vden(p.l) && p.l.x / vden(p.l) >= 0.3 ? ' hi' : '') + '">' + (vden(p.l) ? 'mất ' + pct(p.l.x / vden(p.l) * 100) : '—') + '</span></div></div>' + (p.pend ? '<p class="pd">⏳ ' + nf(p.pend) + ' đơn chờ quyết toán, chưa tính vào tỉ lệ</p>' : '') +
+      '<div class="ksp"><div class="sv"><span class="sl">🎬 Video</span><b>' + nf(p.v.o) + ' đơn</b><span class="sr' + (vden(p.v) && p.v.x / vden(p.v) >= 0.3 ? ' hi' : '') + '">' + (vden(p.v) ? 'mất ' + p.v.x + '/' + vden(p.v) + ' đơn (' + pct(p.v.x / vden(p.v) * 100) + ')' : '—') + '</span></div><div class="sv"><span class="sl">🔴 Live</span><b>' + nf(p.l.o) + ' đơn</b><span class="sr' + (vden(p.l) && p.l.x / vden(p.l) >= 0.3 ? ' hi' : '') + '">' + (vden(p.l) ? 'mất ' + p.l.x + '/' + vden(p.l) + ' đơn (' + pct(p.l.x / vden(p.l) * 100) + ')' : '—') + '</span></div></div>' + (p.pend ? '<p class="pd">⏳ ' + nf(p.pend) + ' đơn chờ quyết toán, chưa tính vào tỉ lệ</p>' : '') +
       '<div class="kf"><span>Hoa hồng nhận ' + nf(Math.round(p.got)) + '₫</span>' + (p.lost ? '<span>Mất ~' + tr(p.lgmv) + ' doanh thu</span>' : '') + '</div></article>';
   }).join('') || empty('Chưa có đơn. Bấm “Thêm file đơn affiliate” để nạp.');
   buildOwn();
