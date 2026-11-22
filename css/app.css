@@ -220,8 +220,9 @@ main{padding-bottom:118px}
 .tg{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:4px 11px;font:700 12.5px/1.2 var(--sans)}
 .tg.win{background:linear-gradient(135deg,#f06292,#d81b60);color:#fff}
 .tg.nowin{background:#ececf1;color:#4a4757}
-.tg.ref{background:#fff0cc;color:#7a4a00}
-.tg.ref.none{background:#f4f3f7;color:#7d7888;font-weight:600}
+.tg.risk.low{background:#e3f6e8;color:#1b6b34}
+.tg.risk.mid{background:#fff0cc;color:#7a4a00}
+.tg.risk.high{background:#ffe0e0;color:#a31515}
 .tg.roas{background:#d9f4e1;color:#0f5a2c}
 .wlist{display:grid;background:var(--card);border-radius:24px;box-shadow:0 6px 20px rgba(190,60,110,.12);overflow:hidden}
 .wrow{display:grid;grid-template-columns:76px minmax(0,1fr) auto;gap:12px;align-items:center;padding:12px 14px;border-bottom:1px solid var(--line);cursor:pointer;-webkit-tap-highlight-color:transparent}
@@ -236,11 +237,11 @@ main{padding-bottom:118px}
 .wnum{text-align:right;min-width:52px}
 .wnum b{display:block;font:700 24px/1.1 var(--sans);color:var(--cat-ink);font-variant-numeric:tabular-nums}
 .wnum span{display:block;font:500 12px/1.3 var(--sans);color:var(--muted)}
-.refbox{background:#fff8e6;border:1px solid #f3dca4;border-radius:14px;padding:12px 14px;display:grid;gap:8px}
-.refbox label{font:700 14px var(--sans);color:#7a4a00}
-.refbox .line{display:flex;gap:8px;align-items:center}
-.refbox input{flex:1;min-width:0;min-height:48px;border:1px solid #e8cf8a;border-radius:12px;padding:0 12px;font:600 17px var(--sans);background:#fff;color:var(--ink)}
-.refbox span.u{font:700 17px var(--sans);color:#7a4a00}
-.refbox small{font-size:12.5px;line-height:1.45;color:#7a5a1a}
-.vid .o.win{color:var(--good)}
-.vid .roas{color:var(--good);font-weight:700}
+.riskbox{border-radius:14px;padding:12px 14px;display:grid;gap:8px;border:1px solid}
+.riskbox.low{background:#f0fbf3;border-color:#bfe6ca}.riskbox.mid{background:#fff8e6;border-color:#f3dca4}.riskbox.high{background:#fff0f0;border-color:#f2b9b9}
+.riskbox h3{margin:0;font:700 15px var(--sans)}.riskbox h3 small{font-weight:600;opacity:.75}
+.riskbox ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.riskbox li{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;line-height:1.4}
+.riskbox li b{flex:none;min-width:26px;text-align:center;border-radius:8px;padding:1px 0;background:#fff}
+.riskbox li.bad b{color:#a31515}.riskbox li.ok b{color:#1b6b34}
+.riskbox small{font-size:12.5px;line-height:1.45;color:#6d5a3a}

@@ -33,11 +33,11 @@ vercel.json       cấu hình Vercel (static)
 | `days` | đơn 7 ngày 15/11-21/11 |
 | `prev` | đơn 7 ngày trước đó (suy ra từ tỷ lệ tăng trưởng) |
 | `videos[]` | video gắn link: `orders`, `views`, `date`, `adCost`, `roas` |
-| `refund` | tỉ lệ hoàn hủy (%). **Topview không có**, để `null`; nhập tay trong trang chi tiết (lưu ở trình duyệt) |
+| `rating`, `reviews` | sao và số review (từ `td_item_basic`). App dùng chúng, cùng danh mục và giá, để ước tính **rủi ro hoàn hủy** (Thấp/Vừa/Cao). Topview không có tỉ lệ hoàn hủy thật |
 
 ## Giới hạn của bản demo
 
-- Trạng thái mẫu (và hoàn hủy nhập tay) chỉ lưu trong `localStorage` của từng trình duyệt, chưa dùng chung giữa các máy.
+- Trạng thái mẫu chỉ lưu trong `localStorage` của từng trình duyệt, chưa dùng chung giữa các máy.
 - Một số trạng thái ban đầu là giả lập. Menu có nút "Đặt lại dữ liệu demo".
 - Chưa có job quét tự động.
 
@@ -50,4 +50,4 @@ vercel.json       cấu hình Vercel (static)
 
 - Job quét 00:00 (Vercel Cron + hàm `api/scan`) gọi Tabcut API, ghi ra `data/products.js` hoặc DB.
 - Lưu trạng thái dùng chung (Google Sheet qua Apps Script, hoặc Supabase/Firebase).
-- Nguồn tỉ lệ hoàn hủy (ví dụ Kalodata API) để điền `refund` tự động.
+- Khi có nguồn tỉ lệ hoàn hủy thật (Seller Center/Open API hoặc Kalodata), hiệu chỉnh công thức rủi ro theo ~20 sản phẩm có số thật.

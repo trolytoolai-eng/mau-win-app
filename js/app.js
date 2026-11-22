@@ -1,5 +1,5 @@
 /* Quản Lý Mẫu Win - webapp mobile demo (không cần build).
-   Dữ liệu: data/products.js. Trạng thái và hoàn hủy nhập tay lưu trong localStorage của trình duyệt. */
+   Dữ liệu: data/products.js. Trạng thái lưu trong localStorage của trình duyệt. */
 (function () {
 'use strict';
 
@@ -7,8 +7,8 @@ var D = window.APP_DATA, P = D.products, DAYS = D.days;
 var TABS = ['tong-quan', 'hang-mau', 'win-video', 'menu'];
 var VIEW = { 'tong-quan': 'v-home', 'hang-mau': 'v-sample', 'win-video': 'v-win', 'menu': 'v-menu' };
 var ST = ['Mới quét', 'Đã nhận mẫu', 'KOCs đang quay', 'Đã quay xong'];
-var KEY = 'qlmau-v2', RKEY = 'qlmau-refund-v1';
-var S = {}, R = {}, tab = 'tong-quan', openId = null, lastUndo = null, toastT = null;
+var KEY = 'qlmau-v2';
+var S = {}, tab = 'tong-quan', openId = null, lastUndo = null, toastT = null;
 var segSample = 'chua', todayOnly = true, sortA = 'rev', query = '';
 
 var I = 'fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"';
@@ -61,13 +61,23 @@ function load() {
   var r = null;
   try { r = JSON.parse(lsGet(KEY) || 'null'); } catch (e) { r = null; }
   S = (r && typeof r === 'object') ? r : seed();
-  try { R = JSON.parse(lsGet(RKEY) || '{}') || {}; } catch (e) { R = {}; }
 }
 function save() { lsSet(KEY, JSON.stringify(S)); }
-function saveR() { lsSet(RKEY, JSON.stringify(R)); }
 function st(p) { return S[p.id] || { s: 0 }; }
-function refund(p) { return (R[p.id] !== undefined && R[p.id] !== null) ? R[p.id] : p.refund; }
-
+/* Ước tính rủi ro hoàn hủy từ rating, review, danh mục, giá (Topview không có số hoàn hủy thật). 0-1 Thấp, 2-3 Vừa, 4+ Cao */
+function risk(p) {
+  var f = [], sc = 0, rv = p.total > 0 ? p.reviews / p.total * 100 : 0, rt = p.rating.toLocaleString('vi-VN', { minimumFractionDigits: 1 });
+  function add(pts, t) { sc += pts; f.push({ pts: pts, t: t }); }
+  if (p.rating < 4.3) add(2, 'Rating thấp: ' + rt + ' sao');
+  else if (p.rating < 4.6) add(1, 'Rating trung bình: ' + rt + ' sao');
+  else add(0, 'Rating tốt: ' + rt + ' sao' + (p.reviews < 10 ? ' (mới ' + p.reviews + ' review, chưa chắc)' : ''));
+  add(1, 'Thời trang nữ: hoàn hủy nền cao (sai size, lệch màu)');
+  if (p.price < 100000 && p.o7 >= 300) add(1, 'Giá dưới 100k và bán rất nhanh: dễ đơn bom, đơn hủy');
+  if (rv < 1) add(1, 'Chỉ ' + p.reviews + ' review trên ' + nf(p.total) + ' đơn (' + pct(rv) + '): chưa đủ dữ liệu chất lượng');
+  else f.push({ pts: 0, t: p.reviews + ' review trên ' + nf(p.total) + ' đơn (' + pct(rv) + '): ổn' });
+  var lv = sc >= 4 ? 'high' : (sc >= 2 ? 'mid' : 'low');
+  return { score: sc, lv: lv, label: { low: 'Thấp', mid: 'Vừa', high: 'Cao' }[lv], f: f };
+}
 function trend(p) {
   var pk = Math.max.apply(null, p.days), nz = p.days.filter(function (v) { return v > 0; }).length, l = p.days[6], l2 = (p.days[5] + p.days[6]) / 2;
   if (nz <= 2) return { c: 'spike', tx: '⚡ Đột biến', full: '⚡ Đột biến, chưa ổn định' };
@@ -115,8 +125,8 @@ function undoLast() {
 
 /* ---------- HTML từng phần ---------- */
 function refTag(p) {
-  var r = refund(p);
-  return (r === null || r === undefined) ? '<span class="tg ref none">Hoàn hủy: chưa có</span>' : '<span class="tg ref">↩ Hoàn hủy ' + pct(r) + '</span>';
+  var k = risk(p);
+  return '<span class="tg risk ' + k.lv + '">↩ Rủi ro hoàn hủy: ' + k.label + '</span>';
 }
 function thumb(p) {
   var t = trend(p);
@@ -226,7 +236,7 @@ function detailHTML(p) {
   var mult = (p.o7 / Math.max(p.prev, 1)).toLocaleString('vi-VN', { maximumFractionDigits: 0 });
   var kpi = '<div class="kpis"><div><b>' + p.creators + '</b><span>creator</span></div><div><b>' + p.vids + '</b><span>video gắn link</span></div><div><b>' + (p.prev <= 5 ? 'Mới' : '×' + mult) + '</b><span>kỳ trước chỉ ~' + nf(p.prev) + ' đơn</span></div></div>';
   var line = ST[s.s] + (s.s >= 1 && s.rcv ? ' · nhận ' + when(s.rcv) : '');
-  var r = refund(p), rv = (r === null || r === undefined) ? '' : String(r).replace('.', ',');
+  var k = risk(p);
   return '<div class="photos one"><img alt="Ảnh sản phẩm" src="' + p.img + '"><span class="badge ' + t.c + '">' + t.full + '</span></div>' +
     '<span class="stat s' + s.s + '">' + esc(line) + '</span>' +
     '<h2 class="t">' + esc(p.title) + '</h2>' +
@@ -234,7 +244,7 @@ function detailHTML(p) {
     '<p class="sum">7 ngày: <b>' + nf(p.o7) + ' đơn</b> · ' + tr(p.rev) + '</p>' +
     '<div><div class="bars" role="img" aria-label="Đơn mỗi ngày: ' + p.days.join(', ') + '">' + bars + '</div><div class="labels">' + labels + '</div></div>' +
     '<section class="mix"><h3>Chỉ số lọc</h3>' + kpi + '<p class="ads" style="margin-top:10px"><b>Ads:</b> ' + esc(p.ads) + '<br><b>ROAS:</b> ' + (p.roas ? p.roas.toLocaleString('vi-VN', { maximumFractionDigits: 1 }) : 'chưa có') + ' · Ra mắt ' + esc(p.found) + '</p></section>' +
-    '<div class="refbox"><label for="refin">Tỉ lệ hoàn hủy</label><div class="line"><input id="refin" type="text" inputmode="decimal" placeholder="VD 17,1" value="' + rv + '" aria-describedby="refnote"><span class="u">%</span></div><small id="refnote">Topview không có số này. Nhập tay từ Kalodata hoặc Seller Center, sẽ hiện trên mọi danh sách.</small></div>' +
+    '<section class="riskbox ' + k.lv + '"><h3>Rủi ro hoàn hủy: ' + k.label + ' <small>(' + k.score + ' điểm)</small></h3><ul>' + k.f.map(function (x) { return '<li class="' + (x.pts ? 'bad' : 'ok') + '"><b>' + (x.pts ? '+' + x.pts : '0') + '</b><span>' + esc(x.t) + '</span></li>'; }).join('') + '</ul><small>Ước tính từ chỉ số Topview, không phải số hoàn hủy thật của TikTok. Dùng để ưu tiên chọn mẫu.</small></section>' +
     '<section><h3 class="sec" style="margin:4px 0 8px">Video ra đơn (' + p.videos.length + '/' + p.videoTotal + ' video)</h3>' + videoRows(p) + '</section>' +
     '<p class="insight">' + esc(p.insight) + '</p>' +
     '<div class="meta"><span>Giá ₫' + nf(p.price) + ' · tổng ' + nf(p.total) + ' đơn</span><a class="open" href="https://www.tiktok.com/view/product/' + p.id + '" target="_blank" rel="noopener">Mở trên TikTok Shop ↗</a></div>';
@@ -247,11 +257,10 @@ function sheetActHTML(p) {
   return '<button type="button" class="btn ghost" data-a="back" data-id="' + p.id + '">Hoàn tác</button>';
 }
 var sheet = $('sheet'), sheetBody = $('sheetbody');
-function renderSheet(keepInput) {
+function renderSheet() {
   var p = openId && byId(openId); if (!p) return;
   var sc = sheet.scrollTop;
-  if (keepInput) { /* chỉ cập nhật thanh hành động, không vẽ lại ô nhập */ }
-  else sheetBody.innerHTML = detailHTML(p);
+  sheetBody.innerHTML = detailHTML(p);
   $('sheetact').innerHTML = sheetActHTML(p);
   sheet.scrollTop = sc;
 }
@@ -283,7 +292,7 @@ function route() {
 function render() {
   renderBadge();
   if (tab === 'tong-quan') renderHome(); else if (tab === 'hang-mau') renderSample(); else if (tab === 'win-video') renderWin();
-  if (openId) renderSheet(document.activeElement && document.activeElement.id === 'refin');
+  if (openId) renderSheet();
 }
 
 /* ---------- sự kiện ---------- */
@@ -316,14 +325,6 @@ $('back').addEventListener('click', function () {
   if (location.hash.indexOf('#sp-') === 0) { if (history.length > 1) history.back(); else location.hash = 'tong-quan'; }
   else hideSheet();
 });
-sheetBody.addEventListener('change', function (e) {
-  if (e.target.id !== 'refin' || !openId) return;
-  var raw = e.target.value.trim().replace(',', '.'), v = parseFloat(raw);
-  if (raw === '') { delete R[openId]; toast('Đã xoá tỉ lệ hoàn hủy'); }
-  else if (isNaN(v) || v < 0 || v > 100) { toast('Nhập số từ 0 đến 100'); return; }
-  else { R[openId] = v; toast('Đã lưu hoàn hủy ' + pct(v)); }
-  saveR(); lastUndo = null; render();
-});
 var resetArmed = false, resetT = null;
 $('reset').addEventListener('click', function () {
   var b = this;
@@ -333,7 +334,7 @@ $('reset').addEventListener('click', function () {
     return;
   }
   resetArmed = false; b.textContent = 'Đặt lại dữ liệu demo';
-  S = seed(); R = {}; save(); saveR(); lastUndo = null; render(); toast('Đã đặt lại dữ liệu demo');
+  S = seed(); save(); lastUndo = null; render(); toast('Đã đặt lại dữ liệu demo');
 });
 window.addEventListener('hashchange', route);
 

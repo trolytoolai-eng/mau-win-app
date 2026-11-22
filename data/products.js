@@ -1,5 +1,5 @@
 /* Dữ liệu demo lấy từ Topview (Tabcut) ngày 22/11/2026. Cửa sổ 7 ngày: 15/11-21/11.
-   Doanh thu = số đơn x giá niêm yết. "refund" (hoàn hủy) Topview không trả về nên để null. */
+   Doanh thu = số đơn x giá niêm yết. rating/reviews lấy từ td_item_basic; hoàn hủy Topview không có nên app tự ước tính mức rủi ro từ các chỉ số này. */
 window.APP_DATA = {
  "asOf": "2026-11-22",
  "days": [
@@ -124,7 +124,8 @@ window.APP_DATA = {
    ],
    "img": "img/1738367783340639579.jpg",
    "videoTotal": 7,
-   "refund": null
+   "rating": 4.1,
+   "reviews": 21
   },
   {
    "id": "1738384433092986077",
@@ -178,7 +179,8 @@ window.APP_DATA = {
    ],
    "img": "img/1738384433092986077.jpg",
    "videoTotal": 2,
-   "refund": null
+   "rating": 5.0,
+   "reviews": 1
   },
   {
    "id": "1738338776050141167",
@@ -205,7 +207,8 @@ window.APP_DATA = {
    "videos": [],
    "img": "img/1738338776050141167.jpg",
    "videoTotal": 0,
-   "refund": null
+   "rating": 5.0,
+   "reviews": 20
   },
   {
    "id": "1738188027509179732",
@@ -298,7 +301,8 @@ window.APP_DATA = {
    ],
    "img": "img/1738188027509179732.jpg",
    "videoTotal": 9,
-   "refund": null
+   "rating": 4.6,
+   "reviews": 0
   },
   {
    "id": "1737979950169883719",
@@ -325,7 +329,8 @@ window.APP_DATA = {
    "videos": [],
    "img": "img/1737979950169883719.jpg",
    "videoTotal": 0,
-   "refund": null
+   "rating": 4.5,
+   "reviews": 62
   },
   {
    "id": "1737638480021849980",
@@ -379,7 +384,8 @@ window.APP_DATA = {
    ],
    "img": "img/1737638480021849980.jpg",
    "videoTotal": 2,
-   "refund": null
+   "rating": 5.0,
+   "reviews": 15
   },
   {
    "id": "1738303884505548673",
@@ -420,7 +426,8 @@ window.APP_DATA = {
    ],
    "img": "img/1738303884505548673.jpg",
    "videoTotal": 1,
-   "refund": null
+   "rating": 4.3,
+   "reviews": 37
   },
   {
    "id": "1738334195812828492",
@@ -513,7 +520,8 @@ window.APP_DATA = {
    ],
    "img": "img/1738334195812828492.jpg",
    "videoTotal": 8,
-   "refund": null
+   "rating": 5.0,
+   "reviews": 0
   },
   {
    "id": "1738526139560855310",
@@ -540,7 +548,8 @@ window.APP_DATA = {
    "videos": [],
    "img": "img/1738526139560855310.jpg",
    "videoTotal": 0,
-   "refund": null
+   "rating": 4.4,
+   "reviews": 33
   },
   {
    "id": "1738173466710869551",
@@ -633,7 +642,8 @@ window.APP_DATA = {
    ],
    "img": "img/1738173466710869551.jpg",
    "videoTotal": 9,
-   "refund": null
+   "rating": 4.6,
+   "reviews": 5
   }
  ]
 };
