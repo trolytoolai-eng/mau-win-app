@@ -48,13 +48,14 @@ P.forEach(function (p) {
 
 /* ---------- trạng thái (demo có seed) ---------- */
 function seed() {
-  var now = Date.now(), m = 60000, h = 3600000, o = {};
-  o['1738303884505548673'] = { s: 1, rcv: now - 50 * m };
-  o['1738338776050141167'] = { s: 1, rcv: now - 35 * m };
-  o['1738384433092986077'] = { s: 1, rcv: now - 20 * m };
-  o['1738173466710869551'] = { s: 1, rcv: now - 26 * h };
-  o['1738367783340639579'] = { s: 2, rcv: now - 3 * h, asg: now - 2 * h };
-  o['1737979950169883719'] = { s: 3, rcv: now - 5 * h, asg: now - 4 * h, done: now - h };
+  var now = Date.now(), m = 60000, h = 3600000, o = {}, ids = P.slice().sort(function (x, y) { return y.rev - x.rev; }).map(function (p) { return p.id; });
+  /* demo: 5 mẫu đã nhận (3 hôm nay, 1 hôm qua), 1 đang quay, 1 đã quay xong; còn lại là mới quét */
+  o[ids[3]] = { s: 1, rcv: now - 50 * m };
+  o[ids[5]] = { s: 1, rcv: now - 35 * m };
+  o[ids[8]] = { s: 1, rcv: now - 20 * m };
+  o[ids[11]] = { s: 1, rcv: now - 26 * h };
+  o[ids[1]] = { s: 2, rcv: now - 3 * h, asg: now - 2 * h };
+  o[ids[0]] = { s: 3, rcv: now - 5 * h, asg: now - 4 * h, done: now - h };
   return o;
 }
 function load() {
@@ -66,9 +67,10 @@ function save() { lsSet(KEY, JSON.stringify(S)); }
 function st(p) { return S[p.id] || { s: 0 }; }
 /* Ước tính rủi ro hoàn hủy từ rating, review, danh mục, giá (Topview không có số hoàn hủy thật). 0-1 Thấp, 2-3 Vừa, 4+ Cao */
 function risk(p) {
-  var f = [], sc = 0, rv = p.total > 0 ? p.reviews / p.total * 100 : 0, rt = p.rating.toLocaleString('vi-VN', { minimumFractionDigits: 1 });
+  var f = [], sc = 0, rv = p.total > 0 ? p.reviews / p.total * 100 : 0, rt = p.rating ? p.rating.toLocaleString('vi-VN', { minimumFractionDigits: 1 }) : '';
   function add(pts, t) { sc += pts; f.push({ pts: pts, t: t }); }
-  if (p.rating < 4.3) add(2, 'Rating thấp: ' + rt + ' sao');
+  if (!p.rating) add(1, 'Chưa có rating: chưa đủ dữ liệu chất lượng');
+  else if (p.rating < 4.3) add(2, 'Rating thấp: ' + rt + ' sao');
   else if (p.rating < 4.6) add(1, 'Rating trung bình: ' + rt + ' sao');
   else add(0, 'Rating tốt: ' + rt + ' sao' + (p.reviews < 10 ? ' (mới ' + p.reviews + ' review, chưa chắc)' : ''));
   add(1, 'Thời trang nữ: hoàn hủy nền cao (sai size, lệch màu)');
@@ -124,6 +126,9 @@ function undoLast() {
 }
 
 /* ---------- HTML từng phần ---------- */
+function growTag(p) {
+  return '<span class="tg grow">' + (p.prev <= 5 ? '🆕 Mới bán' : '📈 ×' + (p.o7 / Math.max(p.prev, 1)).toLocaleString('vi-VN', { maximumFractionDigits: p.o7 / Math.max(p.prev, 1) < 10 ? 1 : 0 })) + '</span>';
+}
 function refTag(p) {
   var k = risk(p);
   return '<span class="tg risk ' + k.lv + '">↩ Rủi ro hoàn hủy: ' + k.label + '</span>';
@@ -137,7 +142,7 @@ function info(p, showState) {
   return '<div class="info"><h2 class="nm">' + esc(p.title) + '</h2><p class="shopn">' + esc(p.shop) + ' · ' + esc(p.cat) + '</p>' +
     '<p class="big"><b>' + nf(p.o7) + '</b> đơn · ' + tr(p.rev) + '</p>' +
     (showState ? '<span class="chipst s' + s.s + '">' + ST[s.s] + '</span>' : '<div class="mini">' + spark(p) + '<span>' + p.creators + ' creator · ' + p.vids + ' video</span></div>') +
-    '<div class="tags">' + refTag(p) + (p.roas ? '<span class="tg roas">ROAS ' + p.roas.toLocaleString('vi-VN', { maximumFractionDigits: 1 }) + '</span>' : '') + '</div></div>';
+    '<div class="tags">' + growTag(p) + refTag(p) + (p.roas ? '<span class="tg roas">ROAS ' + p.roas.toLocaleString('vi-VN', { maximumFractionDigits: 1 }) + '</span>' : '') + '</div></div>';
 }
 function rowHTML(p, mode) {
   var s = st(p), act = '';
@@ -156,7 +161,7 @@ function winRow(p) {
   return '<article class="wrow" data-id="' + p.id + '" tabindex="0" role="button" aria-label="' + esc(p.shop) + ': video tốt nhất ' + num + ' đơn. Mở chi tiết">' +
     '<div class="wthumb"><img alt="" src="' + p.img + '" loading="lazy"></div>' +
     '<div class="winfo"><h2 class="nm">' + esc(p.title) + '</h2><p class="shopn">' + esc(p.shop) + '</p>' +
-    '<div class="tags">' + tag + refTag(p) + (p.roas ? '<span class="tg roas">ROAS ' + p.roas.toLocaleString('vi-VN', { maximumFractionDigits: 1 }) + '</span>' : '') + '</div></div>' +
+    '<div class="tags">' + tag + growTag(p) + refTag(p) + (p.roas ? '<span class="tg roas">ROAS ' + p.roas.toLocaleString('vi-VN', { maximumFractionDigits: 1 }) + '</span>' : '') + '</div></div>' +
     '<div class="wnum"><b>' + num + '</b><span>đơn video</span></div></article>';
 }
 function empty(msg) { return '<div class="empty">' + msg + '</div>'; }
@@ -167,7 +172,7 @@ function renderHome() {
   var c = [0, 0, 0, 0], wait = 0;
   P.forEach(function (p) { var s = st(p); c[s.s]++; if (s.s === 1 && isToday(s.rcv)) wait++; });
   var d = new Date();
-  $('homesub').textContent = 'Demo · ' + P.length + ' sản phẩm · ' + p2(d.getDate()) + '/' + p2(d.getMonth() + 1);
+  $('homesub').textContent = 'Demo · ' + P.length + ' sản phẩm tăng trưởng ≥ ×2 · ' + p2(d.getDate()) + '/' + p2(d.getMonth() + 1);
   var tiles = [['Mới quét', c[0], '', 'chua'], ['Đã nhận mẫu', c[1], wait + ' nhận hôm nay', 'cho'], ['KOCs đang quay', c[2], '', 'quay'], ['Đã quay xong', c[3], '', 'xong']];
   $('stats').innerHTML = tiles.map(function (t) {
     return '<button type="button" class="tile" data-go="hang-mau" data-seg="' + t[3] + '"><b>' + t[1] + '</b><span>' + t[0] + '</span>' + (t[2] ? '<small>' + t[2] + '</small>' : '') + '</button>';

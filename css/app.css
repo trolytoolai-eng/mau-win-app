@@ -220,6 +220,7 @@ main{padding-bottom:118px}
 .tg{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:4px 11px;font:700 12.5px/1.2 var(--sans)}
 .tg.win{background:linear-gradient(135deg,#f06292,#d81b60);color:#fff}
 .tg.nowin{background:#ececf1;color:#4a4757}
+.tg.grow{background:#ffe4ef;color:#a3134f}
 .tg.risk.low{background:#e3f6e8;color:#1b6b34}
 .tg.risk.mid{background:#fff0cc;color:#7a4a00}
 .tg.risk.high{background:#ffe0e0;color:#a31515}

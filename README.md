@@ -51,3 +51,11 @@ vercel.json       cấu hình Vercel (static)
 - Job quét 00:00 (Vercel Cron + hàm `api/scan`) gọi Tabcut API, ghi ra `data/products.js` hoặc DB.
 - Lưu trạng thái dùng chung (Google Sheet qua Apps Script, hoặc Supabase/Firebase).
 - Khi có nguồn tỉ lệ hoàn hủy thật (Seller Center/Open API hoặc Kalodata), hiệu chỉnh công thức rủi ro theo ~20 sản phẩm có số thật.
+
+## Bộ lọc danh sách demo
+Danh sách là 27 sản phẩm thời trang nữ (Topview, VN, 22/11/2026) qua các bước:
+1. Mới phát hiện từ 01/11, bán ≥ 300 đơn trong 7 ngày, ≤ 25 creator.
+2. **Tăng trưởng đơn 7 ngày ≥ ×2** so với 7 ngày trước (sản phẩm chưa có đơn kỳ trước hiện là "Mới bán").
+3. Loại sản phẩm đã nguội (đơn 2 ngày gần nhất < 35% đỉnh) hoặc chỉ có 1-3 ngày có đơn.
+4. Loại sản phẩm giá dưới 30.000đ.
+Ads/ROAS chỉ có cho vài sản phẩm cũ; sản phẩm mới ghi "Chưa quét ads".
